@@ -47,8 +47,10 @@ configure-stamp: patch
 	touch configure-stamp
 
 
-build: configure-stamp build-stamp
-build-stamp:
+build: build-arch build-indep
+build-arch: build-stamp
+build-indep: build-stamp
+build-stamp: configure-stamp
 	dh_testdir
 	dh_clean
 	$(MAKE) $(MAKE_FLAG) -C $(BUILD_DIR)
@@ -94,13 +96,9 @@ install-stamp: build-stamp
 	cp scribus.desktop $(INSTALL_DIR)/usr/share/applications/scribus.desktop
 	touch install-stamp
 
-build-indep: binary-indep
-
 binary-indep: build install
 	dh_testdir
 	dh_testroot
-
-build-arch: binary-arch
 
 binary-arch: build install
 	dh_testdir

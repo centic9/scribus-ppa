@@ -1,3 +1,31 @@
+scribus (1.4.0.dfsg+r17300-1.1ubuntu1) quantal; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Add call to dh_python2 in debian/rules, version build-dep for
+      python-all-dev, and remove hard coded python dependency.
+    - Recommend icc-profiles-free.
+    - Build-depend on libtiff-dev rather than libtiff4-dev.
+  * Now that scribus is in universe, restore build-dependency on
+    libpodofo-dev.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 10 Sep 2012 12:49:07 +0100
+
+scribus (1.4.0.dfsg+r17300-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix "FTBFS: dh_testroot: You must run this as root (or use
+    fakeroot).":
+    debian/rules: fix build{,-arch,-indep} targets and their dependencies.
+    (Closes: #666373)
+
+ -- gregor herrmann <gregoa@debian.org>  Mon, 04 Jun 2012 18:02:54 +0200
+
+scribus (1.4.0.dfsg+r17300-1ubuntu2) quantal; urgency=low
+
+  * Build-depend on libtiff-dev rather than libtiff4-dev.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 10 Sep 2012 11:32:48 +0100
+
 scribus (1.4.0.dfsg+r17300-1ubuntu1) precise; urgency=low
 
   * Merge with Debian (LP: #932962); remaining changes:
@@ -1664,4 +1692,3 @@ scribus (0.4.6-1) unstable; urgency=low
   * Initial release. (closes: #117793)
 
  -- Wolfgang Sourdeau <was@debian.org>  Wed, 31 Oct 2001 18:25:15 -0500
-
