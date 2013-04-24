@@ -1,7 +1,6 @@
---- scribus-1.4.0.dfsg+r17287.orig/scribus/profiles/CMakeLists.txt
-+++ scribus-1.4.0.dfsg+r17287/scribus/profiles/CMakeLists.txt
-@@ -5,8 +5,6 @@
- INSTALL(FILES
+--- scribus-1.4.2.dfsg+r18267.orig/scribus/profiles/CMakeLists.txt
++++ scribus-1.4.2.dfsg+r18267/scribus/profiles/CMakeLists.txt
+@@ -6,7 +6,5 @@
  GenericCMYK.icm
  GenericCMYK.txt
  Readme

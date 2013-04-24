@@ -202,17 +202,14 @@ void BibView::checkAndChange(QString &text, QString nam, QString dir)
 				QString Pfile = pg.attribute("PFILE");
 				if (!Pfile.isEmpty())
 				{
-					if (static_cast<bool>(pg.attribute("relativePaths", "0").toInt()))
+					QFileInfo fi(Pfile);
+					if (fi.isAbsolute())
+						source = QDir::cleanPath(QDir::toNativeSeparators(Pfile));
+					else
 					{
 						QFileInfo pfi2(QDir::cleanPath(QDir::toNativeSeparators(dir+"/"+Pfile)));
 						source = pfi2.absoluteFilePath();
 					}
-					else
-					{
-						QFileInfo fi(Pfile);
-						source = QDir::cleanPath(QDir::toNativeSeparators(QDir::homePath()+"/"+Pfile));
-					}
-					QFileInfo fi(Pfile);
 					QString target = QDir::cleanPath(QDir::toNativeSeparators(dir + "/" + fid.baseName() + "/" + fi.fileName()));
 					copyFile(source, target);
 					pg.setAttribute("PFILE", fid.baseName() + "/" + fi.fileName());
@@ -220,17 +217,14 @@ void BibView::checkAndChange(QString &text, QString nam, QString dir)
 				QString Pfile2 = pg.attribute("PFILE2","");
 				if (!Pfile2.isEmpty())
 				{
-					if (static_cast<bool>(pg.attribute("relativePaths", "0").toInt()))
+					QFileInfo fi(Pfile2);
+					if (fi.isAbsolute())
+						source = QDir::cleanPath(QDir::toNativeSeparators(Pfile2));
+					else
 					{
 						QFileInfo pfi2(QDir::cleanPath(QDir::toNativeSeparators(dir+"/"+Pfile2)));
 						source = pfi2.absoluteFilePath();
 					}
-					else
-					{
-						QFileInfo fi(Pfile2);
-						source = QDir::cleanPath(QDir::toNativeSeparators(QDir::homePath()+"/"+Pfile));
-					}
-					QFileInfo fi(Pfile2);
 					QString target = QDir::cleanPath(QDir::toNativeSeparators(dir + "/" + fid.baseName() + "/" + fi.fileName()));
 					copyFile(source, target);
 					pg.setAttribute("PFILE2", fid.baseName() + "/" + fi.fileName());
@@ -238,17 +232,14 @@ void BibView::checkAndChange(QString &text, QString nam, QString dir)
 				QString Pfile3 = pg.attribute("PFILE3","");
 				if (!Pfile3.isEmpty())
 				{
-					if (static_cast<bool>(pg.attribute("relativePaths", "0").toInt()))
+					QFileInfo fi(Pfile3);
+					if (fi.isAbsolute())
+						source = QDir::cleanPath(QDir::toNativeSeparators(Pfile3));
+					else
 					{
 						QFileInfo pfi2(QDir::cleanPath(QDir::toNativeSeparators(dir+"/"+Pfile3)));
 						source = pfi2.absoluteFilePath();
 					}
-					else
-					{
-						QFileInfo fi(Pfile3);
-						source = QDir::cleanPath(QDir::toNativeSeparators(QDir::homePath()+"/"+Pfile3));
-					}
-					QFileInfo fi(Pfile3);
 					QString target = QDir::cleanPath(QDir::toNativeSeparators(dir + "/" + fid.baseName() + "/" + fi.fileName()));
 					copyFile(source, target);
 					pg.setAttribute("PFILE3", fid.baseName() + "/" + fi.fileName());
@@ -926,6 +917,7 @@ bool Biblio::copyObj(int id)
 	if (bv->objectMap.contains(nam))
 	{
 		Query dia(this, "tt", 1, 0, tr("&Name:"), tr("New Entry"));
+		dia.setValidator(QRegExp("[\\w()]+"));
 		dia.setEditText(nam, true);
 		dia.setTestList(activeBView->objectMap.keys());
 		if (dia.exec())
@@ -1112,6 +1104,7 @@ void Biblio::renameObj()
 	QListWidgetItem *ite = actItem;
 	QString OldName = ite->text();
 	Query dia(this, "tt", 1, 0, tr("&Name:"), tr("New Name"));
+	dia.setValidator(QRegExp("[\\w()]+"));
 	dia.setEditText(ite->text(), true);
 	dia.setTestList(activeBView->objectMap.keys());
 	if (dia.exec())
@@ -1253,6 +1246,7 @@ void Biblio::ObjFromMenu(QString text)
 	}
 	qApp->changeOverrideCursor(QCursor(Qt::ArrowCursor));
 	Query dia(this, "tt", 1, 0, tr("&Name:"), tr("New Entry"));
+	dia.setValidator(QRegExp("[\\w()]+"));
 	dia.setEditText(nam, true);
 	dia.setTestList(activeBView->objectMap.keys());
 	if (dia.exec())
@@ -1402,6 +1396,7 @@ void Biblio::ObjFromMainMenu(QString text, int scrapID)
 		nam += "("+ tmp.setNum(tempCount) + ")";
 	qApp->changeOverrideCursor(QCursor(Qt::ArrowCursor));
 	Query dia(this, "tt", 1, 0, tr("&Name:"), tr("New Entry"));
+	dia.setValidator(QRegExp("[\\w()]+"));
 	dia.setEditText(nam, true);
 	dia.setTestList(activeBView->objectMap.keys());
 	if (dia.exec())

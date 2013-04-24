@@ -35,7 +35,7 @@ class SCRIBUS_API ScrAction : public QAction
 	Q_OBJECT
 
 public:
-	typedef enum {Normal, DataInt, DataDouble, DataQString, RecentFile, DLL, Window, RecentScript, UnicodeChar, Layer, ActionDLL, RecentPaste } ActionType;
+	typedef enum {Normal, DataInt, DataDouble, DataQString, RecentFile, DLL, Window, RecentScript, UnicodeChar, Layer, ActionDLL, RecentPaste, ActionDLLSE } ActionType;
 	
 	/*!
 		\author Craig Bradney
@@ -113,6 +113,8 @@ public:
 	*/
 	QString cleanMenuText();
 
+	void setToolTipFromTextAndShortcut();
+
 	/*!
 		\author Craig Bradney
 		\date Jan 2005
@@ -177,6 +179,7 @@ signals:
 	void triggeredData(double);
 	void triggeredData(QString);
 	void triggeredData(ScribusDoc*);
+	void triggeredData(QWidget*, ScribusDoc*);
 	void toggledData(bool, int);
 	void toggledData(bool, double);
 	void toggledData(bool, QString);

@@ -1,17 +1,16 @@
 Source: scribus
 Section: graphics
 Priority: optional
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-XSBC-Original-Maintainer: Oleksandr Moskalenko <malex@debian.org>
-Build-Depends: debhelper (>= 7), cmake (>= 2.4.3), gcc (>=3.3.5), libqt4-dev (>= 4.6), libcairo2-dev, zlib1g-dev, liblcms1-dev (>= 1.13), libtiff-dev, libcups2-dev, libxml2-dev (>= 2.6.16), gettext, python-all-dev (>= 2.6.6-3~), libaspell-dev,  quilt, libpodofo-dev (>= 0.9.0), libboost-python-dev
-Standards-Version: 3.9.2
+Maintainer: Oleksandr Moskalenko <malex@debian.org>
+Build-Depends: debhelper (>= 7), cmake (>= 2.4.3), gcc (>=3.3.5), libqt4-dev (>= 4.6), libcairo2-dev, zlib1g-dev, liblcms1-dev (>= 1.13), libtiff4-dev, libcups2-dev, libxml2-dev (>= 2.6.16), gettext, python-all-dev, libhunspell-dev, quilt, libpodofo-dev (>= 0.9.0), libboost-python-dev, libhyphen-dev
+Standards-Version: 3.9.3
 Vcs-Git: git://git.debian.org/git/collab-maint/scribus.git
 Vcs-Browser: http://git.debian.org/?p=collab-maint/scribus.git
 
 Package: scribus
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}, python-tk, ghostscript (>= 8.61)
-Recommends: xfonts-scalable | gsfonts-x11, cups-bsd, icc-profiles-free
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}, python, python-tk, ghostscript (>= 8.61)
+Recommends: xfonts-scalable | gsfonts-x11, cups-bsd
 Suggests: scribus-template, icc-profiles
 Provides: ${python:Provides}
 XB-Python-Version: ${python:Versions}

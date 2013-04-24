@@ -80,7 +80,17 @@ void CreateMode::drawControls(QPainter* p)
 
 	if (createObjectMode != modeDrawLine)
 	{
-		QRectF bounds = QRectF(topLeft, btRight).normalized();
+		QRectF bounds=QRectF(topLeft, btRight).normalized();
+		//Lock Height to Width for Control Modifier for region drawing
+		if (modifiers==Qt::ControlModifier)
+		{
+			bounds.setHeight(bounds.width());
+			if (btRight.y()<topLeft.y())
+				bounds.moveBottom(topLeft.y());
+			if (btRight.x()<topLeft.x() && btRight.y()>topLeft.y())
+				bounds.moveTop(topLeft.y());
+		}
+
 		QRect localRect = m_canvas->canvasToLocal(bounds);
 		if (localRect.width() <= 0 || localRect.height() <= 0)
 			return;
@@ -218,7 +228,7 @@ void CreateMode::mouseMoveEvent(QMouseEvent *m)
 {
 	const FPoint mousePointDoc = m_canvas->globalToCanvas(m->globalPos());
 	modifiers = m->modifiers();
-	
+
 	double newX, newY;
 	PageItem *currItem;
 	QPoint np, np2, mop;
@@ -359,7 +369,6 @@ void CreateMode::mousePressEvent(QMouseEvent *m)
 
 void CreateMode::mouseReleaseEvent(QMouseEvent *m)
 {
-	const FPoint mousePointDoc = m_canvas->globalToCanvas(m->globalPos());
 	modifiers = m->modifiers();
 
 	PageItem *currItem;
@@ -464,11 +473,25 @@ void CreateMode::selectPage(QMouseEvent *m)
 void CreateMode::SetupDrawNoResize(int nr)
 {
 	PageItem* currItem = m_doc->Items->at(nr);
-	//	currItem->setFont(Doc->toolSettings.defFont);
-	//	currItem->setFontSize(Doc->toolSettings.defSize);
 	m_doc->m_Selection->delaySignalsOn();
 	m_doc->m_Selection->clear();
 	m_doc->m_Selection->addItem(currItem);
+	// #10618 : Select table items if needed otherwise
+	// a crash will be triggered if user tries to ungroup
+	if (currItem->Groups.count() > 0)
+	{
+		for (int i = 0; i < m_doc->Items->count(); ++i)
+		{
+			PageItem* item = m_doc->Items->at(i);
+			if (item->Groups.count() == 0)
+				continue;
+			if (item->Groups.top() != currItem->Groups.top())
+				continue;
+			if (item->ItemNr != currItem->ItemNr)
+				m_doc->m_Selection->addItem(item, true);
+			item->isSingleSel = false;
+		}
+	}
 	m_doc->m_Selection->delaySignalsOff();
 //	emit DocChanged();
 	currItem->Sizing =  false /*currItem->asLine() ? false : true*/;
@@ -542,6 +565,7 @@ PageItem* CreateMode::doCreateNewObject(void)
 
 	double wSize = canvasCurrCoord.x() - createObjectPos.x();
 	double hSize = canvasCurrCoord.y() - createObjectPos.y();
+
 	bool   skipOneClick = (modifiers == Qt::ShiftModifier);
 	if ((createObjectMode == modeDrawLine) || (createObjectMode == modeDrawTable) ||
 		(createObjectMode == modeInsertPDFButton) || (createObjectMode == modeInsertPDFTextfield) ||
@@ -564,11 +588,32 @@ PageItem* CreateMode::doCreateNewObject(void)
 
 	wSize = canvasCurrCoord.x() - createObjectPos.x();
 	hSize = canvasCurrCoord.y() - createObjectPos.y();
+	if (createObjectMode != modeDrawLine)
+	{
+		//Lock Height to Width for Control Modifier for final item creation
+		if (modifiers == Qt::ControlModifier)
+			hSize = wSize;
+	}
+
 	PageItem *newObject = NULL, *currItem = NULL;
 	// FIXME for modeDrawLine
 	QRectF createObjectRect(createObjectPos.x(), createObjectPos.y(), wSize, hSize);
 	if (createObjectMode != modeDrawLine)
+	{
 		createObjectRect = createObjectRect.normalized();
+		if (modifiers==Qt::ControlModifier)
+		{
+			//bottom right and upper left are ok
+			//upper right
+			if (canvasCurrCoord.y() < createObjectPos.y() && createObjectPos.x()<canvasCurrCoord.x())
+				createObjectRect.translate(0.0, -createObjectRect.height());
+			//bottom left
+			if (canvasCurrCoord.x()<createObjectPos.x() && canvasCurrCoord.y()>createObjectPos.y())
+				createObjectRect.translate(0.0, createObjectRect.height());
+		}
+	}
+
+
 	double Rxp  = createObjectRect.x();
 	double Ryp  = createObjectRect.y();
 	double Rxpd = createObjectRect.width();
@@ -756,23 +801,25 @@ PageItem* CreateMode::doCreateNewObject(void)
 
 		if ((m_doc->m_Selection->count() == 0) && (m_view->HaveSelRect) && (!m_view->MidButt))
 		{
+			int    Cols, Rows;
+			double Tx, Ty, Tw, Th;
+			double deltaX, deltaY, offX, offY;
 			UndoTransaction * activeTransaction = NULL;
 			m_view->HaveSelRect = false;
-			double Tx, Ty, Tw, Th;
 			FPoint np2 = m_doc->ApplyGridF(canvasPressCoord);
-			Tx = np2.x();
-			Ty = np2.y();
-			m_doc->ApplyGuides(&Tx, &Ty);
-			canvasPressCoord.setXY(qRound(Tx), qRound(Ty));
+			double Tx1 = np2.x();
+			double Ty1 = np2.y();
+			m_doc->ApplyGuides(&Tx1, &Ty1);
+			canvasPressCoord.setXY(qRound(Tx1), qRound(Ty1));
 			np2 = m_doc->ApplyGridF(canvasCurrCoord);
-			Tw = np2.x();
-			Th = np2.y();
-			m_doc->ApplyGuides(&Tw, &Th);
-			canvasCurrCoord.setXY(qRound(Tw), qRound(Th));
-			Tw = Tw - Tx;
-			Th = Th - Ty;
-			int Cols, Rows;
-			double deltaX, deltaY, offX, offY;
+			double Tx2 = np2.x();
+			double Ty2 = np2.y();
+			m_doc->ApplyGuides(&Tx2, &Ty2);
+			canvasCurrCoord.setXY(qRound(Tx2), qRound(Ty2));
+			Tx = qMin(Tx1, Tx2);
+			Ty = qMin(Ty1, Ty2);
+			Tw = qAbs(Tx2 - Tx1);
+			Th = qAbs(Ty2 - Ty1);
 			if ((Th < 6) || (Tw < 6))
 			{
 				m_view->requestMode(submodePaintingDone);

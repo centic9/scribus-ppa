@@ -1,5 +1,5 @@
---- scribus-1.4.0.dfsg+r17287.orig/scribus/CMakeLists.txt
-+++ scribus-1.4.0.dfsg+r17287/scribus/CMakeLists.txt
+--- scribus-1.4.2.dfsg+r18267.orig/scribus/CMakeLists.txt
++++ scribus-1.4.2.dfsg+r18267/scribus/CMakeLists.txt
 @@ -2,7 +2,6 @@
    ADD_DEFINITIONS(-DQT_DLL)
  ENDIF(WIN32)

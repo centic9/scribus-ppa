@@ -15,7 +15,7 @@
 	</Platforms>
 	<ToolFiles>
 		<ToolFile
-			RelativePath="..\Scribus-build.rules"
+			RelativePath="..\Scribus-build-rules.rules"
 		/>
 	</ToolFiles>
 	<Configurations>
@@ -24,26 +24,26 @@
 			OutputDirectory="..\..\..\..\Scribus-builds\Scribus-vc9-$(ConfigurationName)\scribus"
 			IntermediateDirectory="..\..\..\..\Scribus-builds\Build-objs-vc9\$(ConfigurationName)\$(TargetName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC70.vsprops;..\Scribus-build.vsprops"
+			InheritedPropertySheets="..\Scribus-build-props.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="uic.exe"
+				Name="uic"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="moc.exe"
+				Name="moc"
 			/>
 			<Tool
-				Name="rcc.exe"
+				Name="rcc"
 			/>
 			<Tool
-				Name="lrelease.exe"
+				Name="lrelease"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -61,7 +61,7 @@
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="false"
 				AdditionalIncludeDirectories="..\..\vc9;..\..\..\scribus;..\..\..\scribus\fonts;..\..\..\scribus\text;..\..\..\scribus\styles;..\..\..\scribus\simpletreemodel;..\..\..\scribus\ui;&quot;$(QT4_DIR)\include\QtCore&quot;;&quot;$(QT4_DIR)\include\QtGui&quot;;&quot;$(QT4_DIR)\include\QtNetwork&quot;;&quot;$(QT4_DIR)\include\QtXml&quot;;&quot;$(QT4_DIR)\include&quot;;&quot;$(QT4_DIR)\src\3rdparty\zlib&quot;;&quot;$(LCMS_DIR)\include&quot;;&quot;$(CAIRO_DIR)\include&quot;;&quot;$(FREETYPE_DIR)\include&quot;;&quot;$(LIBJPEG_DIR)\include&quot;;&quot;$(LIBTIFF_DIR)\include&quot;;&quot;$(PODOFO_DIR)\include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_EDITION=QT_EDITION_DESKTOP;QT_DLL;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;HAVE_CAIRO;HAVE_CONFIG_H;AVOID_WIN32_FILEIO;COMPILE_SCRIBUS_MAIN_APP;DOCDIR=\&quot;doc/\&quot;;ICONDIR=\&quot;icons/\&quot;;SAMPLESDIR=\&quot;samples/\&quot;;SCRIPTSDIR=\&quot;scripts/\&quot;;SHAREDIR=\&quot;share/\&quot;;TEMPLATEDIR=\&quot;templates/\&quot;;LIBDIR=\&quot;libs/\&quot;;PLUGINDIR=\&quot;plugins\&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_USE_MATH_DEFINES;QT_LARGEFILE_SUPPORT;QT_EDITION=QT_EDITION_DESKTOP;QT_DLL;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;HAVE_CAIRO;HAVE_CONFIG_H;AVOID_WIN32_FILEIO;COMPILE_SCRIBUS_MAIN_APP;DOCDIR=\&quot;doc/\&quot;;ICONDIR=\&quot;icons/\&quot;;SAMPLESDIR=\&quot;samples/\&quot;;SCRIPTSDIR=\&quot;scripts/\&quot;;SHAREDIR=\&quot;share/\&quot;;TEMPLATEDIR=\&quot;templates/\&quot;;LIBDIR=\&quot;libs/\&quot;;PLUGINDIR=\&quot;plugins\&quot;"
 				IgnoreStandardIncludePath="false"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
@@ -88,7 +88,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="QtCored4.lib QtGuid4.lib QtNetworkd4.lib QtXmld4.lib freetypeD.lib cairo2d.lib libjpeg.a libtiff.lib lcms2_staticd.lib mscms.lib PoDoFoLibD.lib WSock32.Lib"
+				AdditionalDependencies="QtCored4.lib QtGuid4.lib QtNetworkd4.lib QtXmld4.lib $(FREETYPE_DEBUG_LIB) $(CAIRO_DEBUG_LIB) $(LIBJPEG_DEBUG_LIB) $(LIBTIFF_DEBUG_LIB) $(LCMS_DEBUG_LIB) mscms.lib $(PODOFO_DEBUG_LIB) WSock32.Lib"
 				OutputFile="$(OutDir)\Scribus.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(QT4_DIR)\lib&quot;;&quot;$(LCMS_DIR)\lib&quot;;&quot;$(FREETYPE_DIR)\lib&quot;;&quot;$(CAIRO_DIR)\lib&quot;;&quot;$(LIBJPEG_DIR)\lib&quot;;&quot;$(LIBTIFF_DIR)\lib&quot;;&quot;$(PODOFO_DIR)\lib&quot;"
@@ -129,7 +129,7 @@
 			OutputDirectory="..\..\..\..\Scribus-builds\Scribus-vc9-$(ConfigurationName)\scribus"
 			IntermediateDirectory="..\..\..\..\Scribus-builds\Build-objs-vc9\$(ConfigurationName)\$(TargetName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC70.vsprops;..\Scribus-build.vsprops"
+			InheritedPropertySheets="..\Scribus-build-props.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -137,19 +137,19 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="uic.exe"
+				Name="uic"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="moc.exe"
+				Name="moc"
 			/>
 			<Tool
-				Name="rcc.exe"
+				Name="rcc"
 			/>
 			<Tool
-				Name="lrelease.exe"
+				Name="lrelease"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -167,7 +167,7 @@
 				InlineFunctionExpansion="1"
 				OmitFramePointers="true"
 				AdditionalIncludeDirectories="..\..\vc9;..\..\..\scribus;..\..\..\scribus\fonts;..\..\..\scribus\text;..\..\..\scribus\styles;..\..\..\scribus\simpletreemodel;..\..\..\scribus\ui;&quot;$(QT4_DIR)\include\QtCore&quot;;&quot;$(QT4_DIR)\include\QtGui&quot;;&quot;$(QT4_DIR)\include\QtNetwork&quot;;&quot;$(QT4_DIR)\include\QtXml&quot;;&quot;$(QT4_DIR)\include&quot;;&quot;$(QT4_DIR)\src\3rdparty\zlib&quot;;&quot;$(LCMS_DIR)\include&quot;;&quot;$(CAIRO_DIR)\include&quot;;&quot;$(FREETYPE_DIR)\include&quot;;&quot;$(LIBJPEG_DIR)\include&quot;;&quot;$(LIBTIFF_DIR)\include&quot;;&quot;$(PODOFO_DIR)\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;QT_LARGEFILE_SUPPORT;QT_EDITION=QT_EDITION_DESKTOP;QT_DLL;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;;HAVE_CAIRO;HAVE_CONFIG_H;AVOID_WIN32_FILEIO;COMPILE_SCRIBUS_MAIN_APP;DOCDIR=\&quot;doc/\&quot;;ICONDIR=\&quot;icons/\&quot;;SAMPLESDIR=\&quot;samples/\&quot;;SCRIPTSDIR=\&quot;scripts/\&quot;;SHAREDIR=\&quot;share/\&quot;;TEMPLATEDIR=\&quot;templates/\&quot;;LIBDIR=\&quot;libs/\&quot;;PLUGINDIR=\&quot;plugins\&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_USE_MATH_DEFINES;_WINDOWS;QT_LARGEFILE_SUPPORT;QT_EDITION=QT_EDITION_DESKTOP;QT_DLL;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;;HAVE_CAIRO;HAVE_CONFIG_H;AVOID_WIN32_FILEIO;COMPILE_SCRIBUS_MAIN_APP;DOCDIR=\&quot;doc/\&quot;;ICONDIR=\&quot;icons/\&quot;;SAMPLESDIR=\&quot;samples/\&quot;;SCRIPTSDIR=\&quot;scripts/\&quot;;SHAREDIR=\&quot;share/\&quot;;TEMPLATEDIR=\&quot;templates/\&quot;;LIBDIR=\&quot;libs/\&quot;;PLUGINDIR=\&quot;plugins\&quot;"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				BufferSecurityCheck="true"
@@ -193,7 +193,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="QtCore4.lib QtGui4.lib QtNetwork4.lib QtXml4.lib qtmain.lib freetype.lib cairo2.lib libjpeg.a libtiff.lib lcms2_static.lib mscms.lib PoDoFoLib.lib WSock32.Lib"
+				AdditionalDependencies="QtCore4.lib QtGui4.lib QtNetwork4.lib QtXml4.lib qtmain.lib $(FREETYPE_RELEASE_LIB) $(CAIRO_RELEASE_LIB) $(LIBJPEG_RELEASE_LIB) $(LIBTIFF_RELEASE_LIB) $(LCMS_RELEASE_LIB) mscms.lib $(PODOFO_RELEASE_LIB) WSock32.Lib"
 				OutputFile="$(OutDir)\Scribus.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(QT4_DIR)\lib&quot;;&quot;$(LCMS_DIR)\lib&quot;;&quot;$(FREETYPE_DIR)\lib&quot;;&quot;$(CAIRO_DIR)\lib&quot;;&quot;$(LIBJPEG_DIR)\lib&quot;;&quot;$(LIBTIFF_DIR)\lib&quot;;&quot;$(PODOFO_DIR)\lib&quot;"
@@ -235,26 +235,26 @@
 			OutputDirectory="..\..\..\..\Scribus-builds\Scribus-vc9-$(ConfigurationName)\scribus"
 			IntermediateDirectory="..\..\..\..\Scribus-builds\Build-objs-vc9\$(ConfigurationName)\$(TargetName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC70.vsprops;..\Scribus-build.vsprops"
+			InheritedPropertySheets="..\Scribus-build-props.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="uic.exe"
+				Name="uic"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="moc.exe"
+				Name="moc"
 			/>
 			<Tool
-				Name="rcc.exe"
+				Name="rcc"
 			/>
 			<Tool
-				Name="lrelease.exe"
+				Name="lrelease"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -272,7 +272,7 @@
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="false"
 				AdditionalIncludeDirectories="..\..\vc9;..\..\..\scribus;..\..\..\scribus\fonts;..\..\..\scribus\text;..\..\..\scribus\styles;..\..\..\scribus\simpletreemodel;..\..\..\scribus\ui;&quot;$(QT4_DIR)\include\QtCore&quot;;&quot;$(QT4_DIR)\include\QtGui&quot;;&quot;$(QT4_DIR)\include\QtNetwork&quot;;&quot;$(QT4_DIR)\include\QtXml&quot;;&quot;$(QT4_DIR)\include&quot;;&quot;$(QT4_DIR)\src\3rdparty\zlib&quot;;&quot;$(LCMS_DIR)\include&quot;;&quot;$(CAIRO_DIR)\include&quot;;&quot;$(FREETYPE_DIR)\include&quot;;&quot;$(LIBJPEG_DIR)\include&quot;;&quot;$(LIBTIFF_DIR)\include&quot;;&quot;$(PODOFO_DIR)\include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;QT_LARGEFILE_SUPPORT;QT_EDITION=QT_EDITION_DESKTOP;QT_DLL;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;HAVE_CONFIG_H;AVOID_WIN32_FILEIO;COMPILE_SCRIBUS_MAIN_APP;DOCDIR=\&quot;doc/\&quot;;ICONDIR=\&quot;icons/\&quot;;SAMPLESDIR=\&quot;samples/\&quot;;SCRIPTSDIR=\&quot;scripts/\&quot;;SHAREDIR=\&quot;share/\&quot;;TEMPLATEDIR=\&quot;templates/\&quot;;LIBDIR=\&quot;libs/\&quot;;PLUGINDIR=\&quot;plugins\&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_USE_MATH_DEFINES;QT_LARGEFILE_SUPPORT;QT_EDITION=QT_EDITION_DESKTOP;QT_DLL;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;HAVE_CONFIG_H;AVOID_WIN32_FILEIO;COMPILE_SCRIBUS_MAIN_APP;DOCDIR=\&quot;doc/\&quot;;ICONDIR=\&quot;icons/\&quot;;SAMPLESDIR=\&quot;samples/\&quot;;SCRIPTSDIR=\&quot;scripts/\&quot;;SHAREDIR=\&quot;share/\&quot;;TEMPLATEDIR=\&quot;templates/\&quot;;LIBDIR=\&quot;libs/\&quot;;PLUGINDIR=\&quot;plugins\&quot;"
 				IgnoreStandardIncludePath="false"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
@@ -299,7 +299,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="QtCored4.lib QtGuid4.lib QtNetworkd4.lib QtXmld4.lib freetypeD.lib cairo2d.lib libjpeg.a libtiff.lib lcms2_staticd.lib mscms.lib PoDoFoLibD.lib WSock32.Lib"
+				AdditionalDependencies="QtCored4.lib QtGuid4.lib QtNetworkd4.lib QtXmld4.lib $(FREETYPE_DEBUG_LIB) $(CAIRO_DEBUG_LIB) $(LIBJPEG_DEBUG_LIB) $(LIBTIFF_DEBUG_LIB) $(LCMS_DEBUG_LIB) mscms.lib $(PODOFO_DEBUG_LIB) WSock32.Lib"
 				OutputFile="$(OutDir)\Scribus.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(QT4_DIR)\lib&quot;;&quot;$(LCMS_DIR)\lib&quot;;&quot;$(FREETYPE_DIR)\lib&quot;;&quot;$(CAIRO_DIR)\lib&quot;;&quot;$(LIBJPEG_DIR)\lib&quot;;&quot;$(LIBTIFF_DIR)\lib&quot;;&quot;$(PODOFO_DIR)\lib&quot;"
@@ -340,7 +340,7 @@
 			OutputDirectory="..\..\..\..\Scribus-builds\Scribus-vc9-$(ConfigurationName)\scribus"
 			IntermediateDirectory="..\..\..\..\Scribus-builds\Build-objs-vc9\$(ConfigurationName)\$(TargetName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC70.vsprops;..\Scribus-build.vsprops"
+			InheritedPropertySheets="..\Scribus-build-props.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -348,19 +348,19 @@
 				Name="VCPreBuildEventTool"
 			/>
 			<Tool
-				Name="uic.exe"
+				Name="uic"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
-				Name="moc.exe"
+				Name="moc"
 			/>
 			<Tool
-				Name="rcc.exe"
+				Name="rcc"
 			/>
 			<Tool
-				Name="lrelease.exe"
+				Name="lrelease"
 			/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"
@@ -378,7 +378,7 @@
 				InlineFunctionExpansion="1"
 				OmitFramePointers="true"
 				AdditionalIncludeDirectories="..\..\vc9;..\..\..\scribus;..\..\..\scribus\fonts;..\..\..\scribus\text;..\..\..\scribus\styles;..\..\..\scribus\simpletreemodel;..\..\..\scribus\ui;&quot;$(QT4_DIR)\include\QtCore&quot;;&quot;$(QT4_DIR)\include\QtGui&quot;;&quot;$(QT4_DIR)\include\QtNetwork&quot;;&quot;$(QT4_DIR)\include\QtXml&quot;;&quot;$(QT4_DIR)\include&quot;;&quot;$(QT4_DIR)\src\3rdparty\zlib&quot;;&quot;$(LCMS_DIR)\include&quot;;&quot;$(CAIRO_DIR)\include&quot;;&quot;$(FREETYPE_DIR)\include&quot;;&quot;$(LIBJPEG_DIR)\include&quot;;&quot;$(LIBTIFF_DIR)\include&quot;;&quot;$(PODOFO_DIR)\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;QT_LARGEFILE_SUPPORT;QT_EDITION=QT_EDITION_DESKTOP;QT_DLL;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;HAVE_CONFIG_H;AVOID_WIN32_FILEIO;COMPILE_SCRIBUS_MAIN_APP;DOCDIR=\&quot;doc/\&quot;;ICONDIR=\&quot;icons/\&quot;;SAMPLESDIR=\&quot;samples/\&quot;;SCRIPTSDIR=\&quot;scripts/\&quot;;SHAREDIR=\&quot;share/\&quot;;TEMPLATEDIR=\&quot;templates/\&quot;;LIBDIR=\&quot;libs/\&quot;;PLUGINDIR=\&quot;plugins\&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_USE_MATH_DEFINES;_WINDOWS;QT_LARGEFILE_SUPPORT;QT_EDITION=QT_EDITION_DESKTOP;QT_DLL;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;HAVE_CONFIG_H;AVOID_WIN32_FILEIO;COMPILE_SCRIBUS_MAIN_APP;DOCDIR=\&quot;doc/\&quot;;ICONDIR=\&quot;icons/\&quot;;SAMPLESDIR=\&quot;samples/\&quot;;SCRIPTSDIR=\&quot;scripts/\&quot;;SHAREDIR=\&quot;share/\&quot;;TEMPLATEDIR=\&quot;templates/\&quot;;LIBDIR=\&quot;libs/\&quot;;PLUGINDIR=\&quot;plugins\&quot;"
 				StringPooling="true"
 				RuntimeLibrary="2"
 				BufferSecurityCheck="true"
@@ -404,7 +404,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="QtCore4.lib QtGui4.lib QtNetwork4.lib QtXml4.lib qtmain.lib freetype.lib cairo2.lib libjpeg.a libtiff.lib lcms2_static.lib mscms.lib PoDoFoLib.lib WSock32.Lib"
+				AdditionalDependencies="QtCore4.lib QtGui4.lib QtNetwork4.lib QtXml4.lib qtmain.lib $(FREETYPE_RELEASE_LIB) $(CAIRO_RELEASE_LIB) $(LIBJPEG_RELEASE_LIB) $(LIBTIFF_RELEASE_LIB) $(LCMS_RELEASE_LIB) mscms.lib $(PODOFO_RELEASE_LIB) WSock32.Lib"
 				OutputFile="$(OutDir)\Scribus.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(QT4_DIR)\lib&quot;;&quot;$(LCMS_DIR)\lib&quot;;&quot;$(FREETYPE_DIR)\lib&quot;;&quot;$(CAIRO_DIR)\lib&quot;;&quot;$(LIBJPEG_DIR)\lib&quot;;&quot;$(LIBTIFF_DIR)\lib&quot;;&quot;$(PODOFO_DIR)\lib&quot;"
@@ -827,6 +827,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\scribus\documentinformation.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\scribus\ui\downloaddictionaries.cpp"
 				>
 			</File>
 			<File
@@ -1554,11 +1558,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\scribus\downloadmanager\scdlmgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\scribus\downloadmanager\scdlthread.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\scribus\scdocoutput.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\scribus\scdocoutput_ps2.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\scribus\scescapecatcher.cpp"
 				>
 			</File>
 			<File
@@ -2221,28 +2237,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2253,28 +2269,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2285,28 +2301,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2317,28 +2333,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2349,28 +2365,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2381,28 +2397,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2413,28 +2429,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2445,28 +2461,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2481,28 +2497,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2513,28 +2529,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2545,28 +2561,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2577,28 +2593,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2609,28 +2625,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2641,28 +2657,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2673,28 +2689,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2705,28 +2721,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2737,28 +2753,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2789,28 +2805,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2821,28 +2837,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2869,28 +2885,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2913,28 +2929,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2949,28 +2965,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2985,28 +3001,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3029,28 +3045,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3061,28 +3077,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3097,28 +3113,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3129,28 +3145,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3161,28 +3177,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3193,28 +3209,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3233,28 +3249,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3265,28 +3281,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3297,28 +3313,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3365,28 +3381,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3397,28 +3413,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3429,28 +3445,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3461,28 +3477,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3493,28 +3509,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3529,28 +3545,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3561,28 +3577,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3593,28 +3609,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3625,28 +3641,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3657,28 +3673,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3725,28 +3741,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3757,28 +3773,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3789,28 +3805,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3821,28 +3837,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3853,28 +3869,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3885,28 +3901,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3917,28 +3933,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3949,28 +3965,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -3981,28 +3997,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4013,28 +4029,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4047,34 +4063,66 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\scribus\editor.h"
+				RelativePath="..\..\..\scribus\ui\downloaddictionaries.h"
 				>
 				<FileConfiguration
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\..\scribus\editor.h"
+				>
+				<FileConfiguration
+					Name="Debug-cairo|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release-cairo|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug-arthur|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release-arthur|Win32"
+					>
+					<Tool
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4085,28 +4133,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4117,28 +4165,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4153,28 +4201,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4185,28 +4233,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4217,28 +4265,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4249,28 +4297,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4285,28 +4333,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4317,28 +4365,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4349,28 +4397,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4381,28 +4429,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4413,28 +4461,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4445,28 +4493,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4509,28 +4557,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4545,28 +4593,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4577,28 +4625,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4637,28 +4685,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4673,28 +4721,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4705,28 +4753,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4737,28 +4785,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4773,28 +4821,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4805,28 +4853,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4841,28 +4889,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4873,28 +4921,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4909,28 +4957,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4941,28 +4989,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -4973,28 +5021,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5005,28 +5053,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5041,28 +5089,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5077,28 +5125,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5109,28 +5157,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5141,28 +5189,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5185,28 +5233,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5217,28 +5265,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5249,28 +5297,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5281,28 +5329,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5313,28 +5361,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5345,28 +5393,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5377,28 +5425,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5409,28 +5457,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5441,28 +5489,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5473,28 +5521,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5505,28 +5553,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5537,28 +5585,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5569,28 +5617,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5601,28 +5649,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5633,28 +5681,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5665,28 +5713,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5697,28 +5745,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5741,28 +5789,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5773,28 +5821,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5805,28 +5853,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5837,28 +5885,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5869,28 +5917,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5905,28 +5953,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5937,28 +5985,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -5969,28 +6017,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6001,28 +6049,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6033,28 +6081,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6065,28 +6113,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6097,28 +6145,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6129,28 +6177,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6161,28 +6209,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6193,28 +6241,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6225,28 +6273,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6257,28 +6305,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6289,28 +6337,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6333,28 +6381,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6365,28 +6413,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6397,28 +6445,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6437,28 +6485,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6469,28 +6517,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6501,28 +6549,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6533,28 +6581,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6565,28 +6613,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6597,28 +6645,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6629,28 +6677,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6661,28 +6709,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6693,28 +6741,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6725,28 +6773,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6761,28 +6809,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6797,28 +6845,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6829,28 +6877,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6873,28 +6921,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6905,28 +6953,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6937,28 +6985,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -6969,28 +7017,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7001,28 +7049,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7041,28 +7089,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7073,28 +7121,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7105,28 +7153,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7145,28 +7193,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7177,28 +7225,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7225,6 +7273,70 @@
 			<File
 				RelativePath="..\..\..\scribus\scconfig.h"
 				>
+			</File>
+			<File
+				RelativePath="..\..\..\scribus\downloadmanager\scdlmgr.h"
+				>
+				<FileConfiguration
+					Name="Debug-cairo|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release-cairo|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug-arthur|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release-arthur|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\..\scribus\downloadmanager\scdlthread.h"
+				>
+				<FileConfiguration
+					Name="Debug-cairo|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release-cairo|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug-arthur|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release-arthur|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\..\..\scribus\scdocoutput.h"
@@ -7279,6 +7391,38 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\..\..\scribus\scescapecatcher.h"
+				>
+				<FileConfiguration
+					Name="Debug-cairo|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release-cairo|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug-arthur|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release-arthur|Win32"
+					>
+					<Tool
+						Name="moc"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="..\..\..\scribus\fonts\scface.h"
 				>
 			</File>
@@ -7297,28 +7441,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7337,28 +7481,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7377,28 +7521,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7449,28 +7593,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7537,28 +7681,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7569,28 +7713,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7641,28 +7785,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7677,28 +7821,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7717,28 +7861,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7749,28 +7893,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7785,28 +7929,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7821,28 +7965,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7853,28 +7997,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7885,28 +8029,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7925,28 +8069,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -7957,28 +8101,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8037,28 +8181,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8069,28 +8213,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8121,28 +8265,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8157,28 +8301,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8197,28 +8341,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8229,28 +8373,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8265,28 +8409,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8297,28 +8441,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8329,28 +8473,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8361,28 +8505,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8397,28 +8541,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8429,28 +8573,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8461,28 +8605,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8493,28 +8637,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8525,28 +8669,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8557,28 +8701,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8589,28 +8733,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8621,28 +8765,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8653,28 +8797,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8685,28 +8829,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8721,28 +8865,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8753,28 +8897,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8785,28 +8929,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8817,28 +8961,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8849,28 +8993,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8881,28 +9025,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8913,28 +9057,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8945,28 +9089,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -8977,28 +9121,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9009,28 +9153,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9053,28 +9197,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9085,28 +9229,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9129,28 +9273,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9161,28 +9305,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9193,28 +9337,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9229,28 +9373,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9261,28 +9405,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9293,28 +9437,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9325,28 +9469,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9357,28 +9501,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9389,28 +9533,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9421,28 +9565,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9453,28 +9597,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9485,28 +9629,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9517,28 +9661,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9549,28 +9693,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9581,28 +9725,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9613,28 +9757,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9645,28 +9789,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9677,28 +9821,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9709,28 +9853,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9741,28 +9885,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9773,28 +9917,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9857,28 +10001,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9889,28 +10033,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9921,28 +10065,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -9965,28 +10109,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -10009,28 +10153,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -10041,28 +10185,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -10073,28 +10217,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -10153,28 +10297,28 @@
 					Name="Debug-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-cairo|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Debug-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release-arthur|Win32"
 					>
 					<Tool
-						Name="moc.exe"
+						Name="moc"
 					/>
 				</FileConfiguration>
 			</File>
@@ -10233,6 +10377,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\scribus\ui_docsections.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\scribus\ui\ui_downloaddictionaries.h"
 				>
 			</File>
 			<File
@@ -10590,6 +10738,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\scribus\moc_docsections.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\scribus\ui\moc_downloaddictionaries.cpp"
 				>
 			</File>
 			<File
@@ -10965,6 +11117,18 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\scribus\downloadmanager\moc_scdlmgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\scribus\downloadmanager\moc_scdlthread.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\scribus\moc_scescapecatcher.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\scribus\moc_scfilewidget.cpp"
 				>
 			</File>
@@ -11311,6 +11475,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\scribus\docsections.ui"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\scribus\ui\downloaddictionaries.ui"
 				>
 			</File>
 			<File

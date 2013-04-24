@@ -29,7 +29,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 Author: Sebastian Stetter
 
@@ -103,7 +103,7 @@ def writeColorCsvFile(filename, colorlist):
 
 def main(argv):
     """Main method - here we check if we have a doc - else we open one. we get all the colors and write them to a csv file."""
-    if scribus.haveDoc():  #DOC OPEN
+    if scribus.haveDoc() > 0:  #DOC OPEN
     #get colors, get filename, write stuff
         cols = getColorsFromDoc()
         filename = scribus.fileDialog("color2csv: Save csv color file", defaultname="colors.csv",  issave=True ,  haspreview=False)

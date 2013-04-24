@@ -552,7 +552,7 @@ void CanvasMode_Edit::mouseMoveEvent(QMouseEvent *m)
 				int hitTest = m_canvas->frameHitTest(QPointF(mousePointDoc.x(),mousePointDoc.y()), currItem);
 				if(hitTest >= 0)
 				{
-					if((hitTest == Canvas::INSIDE))
+					if(hitTest == Canvas::INSIDE)
 					{
 						if (currItem->asTextFrame())
 							qApp->changeOverrideCursor(QCursor(Qt::IBeamCursor));
@@ -594,8 +594,6 @@ void CanvasMode_Edit::mousePressEvent(QMouseEvent *m)
 	const FPoint mousePointDoc = m_canvas->globalToCanvas(m->globalPos());
 
 	bool inText;
-	double Rxp = 0;
-	double Ryp = 0;
 	PageItem *currItem;
 	m_canvas->PaintSizeRect(QRect());
 	FPoint npf, npf2;
@@ -609,8 +607,6 @@ void CanvasMode_Edit::mousePressEvent(QMouseEvent *m)
 	m_view->registerMousePress(m->globalPos());
 	Mxp = mousePointDoc.x();
 	Myp = mousePointDoc.y();
-	Ryp = Myp;
-	Rxp = Mxp;
 	SeRx = Mxp;
 	SeRy = Myp;
 	if (m->button() == Qt::MidButton)

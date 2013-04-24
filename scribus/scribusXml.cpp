@@ -408,7 +408,11 @@ void ScriXmlDoc::GetItemText(const QXmlStreamAttributes& attrs, StoryText& story
 	CharStyle newStyle;
 	QString pstylename;
 	QString tmp2, tmf, tmpf, tmp3;
-	tmp2 = attrAsString(attrs, "CH", "");
+
+	if (attrs.hasAttribute("Unicode"))
+		tmp2 = QChar(attrAsString(attrs, "Unicode", "").toUInt());
+	else
+		tmp2 = attrAsString(attrs, "CH", "");
 	tmp2.replace(QRegExp("\r"), QChar(5));
 	tmp2.replace(QRegExp("\n"), QChar(5));
 	tmp2.replace(QRegExp("\t"), QChar(4));
@@ -2287,6 +2291,7 @@ void ScriXmlDoc::WriteITEXTs(ScXmlStreamWriter &writer, ScribusDoc *doc, PageIte
 	CharStyle lastStyle;
 	int lastPos = 0;
 	QString text, pstylename;
+	QString tmpnum;
 
 	for( int k = 0; k < item->itemText.length(); ++k)
 	{
@@ -2297,7 +2302,10 @@ void ScriXmlDoc::WriteITEXTs(ScXmlStreamWriter &writer, ScribusDoc *doc, PageIte
 			pstylename = item->itemText.paragraphStyle(k).parent();
 		if (style != lastStyle || ch == SpecialChars::PARSEP ||
 			ch == SpecialChars::PAGENUMBER ||
-			ch == SpecialChars::PAGECOUNT)
+			ch == SpecialChars::PAGECOUNT || 
+			(0xd800 <= ch.unicode() && ch.unicode() < 0xe000) ||
+			ch.unicode() == 0xfffe || ch.unicode() == 0xffff ||
+			ch.unicode() < 32)
 		{
 			if(k - lastPos > 0)
 			{
@@ -2326,6 +2334,16 @@ void ScriXmlDoc::WriteITEXTs(ScXmlStreamWriter &writer, ScribusDoc *doc, PageIte
 		{
 			writer.writeEmptyElement("var");
 			writer.writeAttribute("name", "pgco");
+			WriteLegacyCStyle(writer, lastStyle);
+			lastPos = k + 1;
+		}
+		else if ((0xd800 <= ch.unicode() && ch.unicode() < 0xe000) ||
+				 ch.unicode() == 0xfffe || ch.unicode() == 0xffff ||
+				 ch.unicode() < 32)
+		{
+			tmpnum.setNum(ch.unicode());
+			writer.writeEmptyElement("ITEXT");
+			writer.writeAttribute("Unicode", tmpnum);	
 			WriteLegacyCStyle(writer, lastStyle);
 			lastPos = k + 1;
 		}
@@ -2376,7 +2394,12 @@ void ScriXmlDoc::WriteLegacyCStyle (ScXmlStreamWriter& writer, const CharStyle& 
 		writer.writeAttribute("CSCALE", style.scaleH() / 10.0);
 	if ( ! style.isInhScaleV())
 		writer.writeAttribute("CSALEV", style.scaleV() / 10.0);
-	writer.writeAttribute("CSTYLE", style.effects() & 2047);
+	if ( ! style.isInhBaselineOffset())
+		writer.writeAttribute("CBASE", style.baselineOffset() / 10.0);
+	if ( ! style.isInhTracking())
+		writer.writeAttribute("KERN", style.tracking() / 10.0); 
+	if ( ! style.isInhFeatures())
+		writer.writeAttribute("CSTYLE", style.effects() & 2047);
 }
 
 void ScriXmlDoc::WriteCStyle (ScXmlStreamWriter& writer, const CharStyle& style)
@@ -2599,6 +2622,9 @@ void ScriXmlDoc::ReadLegacyCStyle (const QXmlStreamAttributes& attrs, CharStyle&
 
 	if (attrHasValue(attrs, "CSTW"))
 		newStyle.setStrikethruWidth( qRound(attrAsDbl(attrs, "CSTW", -0.1) * 10) );
+
+	if (attrHasValue(attrs, "KERN"))
+		newStyle.setTracking( qRound(attrAsDbl(attrs, "KERN", 0.0) * 10) );
 
 	if (attrHasValue(attrs, "CSTYLE"))
 	{

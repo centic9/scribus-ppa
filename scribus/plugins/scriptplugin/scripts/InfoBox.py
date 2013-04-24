@@ -14,16 +14,16 @@
 #
 #  You should have received a copy of the GNU General Public License
 #  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 # 
 # ****************************************************************************
 
 
 """
+
 (C) 2005 by Thomas R. Koll, <tomk32@gmx.de>, http://verlag.tomk32.de
 
-(c) 2008, 2010 modifications, additional features, and some repair
-    by Gregory Pittman
+(c) 2008, 2010, 2012 modifications, additional features, and reversion back to using PIL again!    by Gregory Pittman
 
 A simple script for exact placement of a frame (infobox)
 over the current textbox, asking the user for the width
@@ -44,6 +44,8 @@ an image.
 * Infobox has Text Flows Around Frame activated, also
   Scale Image to Frame for images.
 
+* If you load an image with the script, an exactly correct frame height is made.
+
 USAGE
 
 Select a textframe, start the script and have phun
@@ -59,6 +61,13 @@ except ImportError:
     print "Unable to import the 'scribus' module. This script will only run within"
     print "the Python interpreter embedded in Scribus. Try Script->Execute Script."
     sys.exit(1)
+
+pil_found = 1
+
+try:
+    from PIL import Image
+except ImportError:
+    pil_found = 0
 
 def main(argv):
     unit = scribus.getUnit()
@@ -117,7 +126,7 @@ def main(argv):
     while (new_height == 0):
         new_height = scribus.valueDialog('Height','Your frame height is '+ str(o_height) +
                                                  unitlabel +'. How tall\n do you want your ' +
-                                                 'infobox to be in '+ unitlabel +'?\n If you load an image, height will be\n calculated, so the value here does not\n matter.', str(o_height))
+                                                 'infobox to be in '+ unitlabel +'?\n If you load an image and have the PIL module, height will be\n calculated, so the value here will not\n matter in that case.', str(o_height))
     new_top = -1
     while (new_top < 0):
         new_top = scribus.valueDialog('Y-Pos','The top of your infobox is currently\n'+ str(top) +
@@ -136,13 +145,19 @@ def main(argv):
     else:
         if (frametype == 'imageL'):
 	    imageload = scribus.fileDialog('Load image','Images(*.jpg *.png *.tif *.JPG *.PNG *.jpeg *.JPEG *.TIF)',haspreview=1)
-	    new_image = scribus.createImage(new_left, float(new_top), new_width, float(new_height),framename)
+            if (pil_found == 1):
+                im = Image.open(imageload)
+                xsize, ysize = im.size
+                new_height = float(ysize)/float(xsize)*new_width
+	    else:
+                scribus.messageBox('Please Note',"Your frame will be created once you click OK.\n\nUse the Context Menu to Adjust Frame to Image.\n\nIf your image does not fill the width completely,\nstretch the frame vertically first.",scribus.BUTTON_OK)
+            new_image = scribus.createImage(new_left, float(new_top), new_width, float(new_height),framename)
 	    scribus.loadImage(imageload, new_image)
-            scribus.messageBox('Please Note',"Your frame will be created once you click OK.\n\nUse the Context Menu to Adjust Frame to Image.\n\nIf your image does not fill the width completely,\nstretch the frame vertically first.",scribus.BUTTON_OK)
         else:
 	    new_image = scribus.createImage(new_left, float(new_top), new_width, float(new_height),framename)
         scribus.textFlowMode(new_image, 1)
-        scribus.setScaleImageToFrame(scaletoframe=1, proportional=1, name=new_image)
+        scribus.setScaleImageToFrame(1,1,new_image)
+#        scribus.setScaleImageToFrame(scaletoframe=1, proportional=1, name=new_image)
 if __name__ == '__main__':
     # This script makes no sense without a document open
     if not scribus.haveDoc():

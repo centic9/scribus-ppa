@@ -1,14 +1,34 @@
-scribus (1.4.0.dfsg+r17300-1.1ubuntu1) quantal; urgency=low
+scribus (1.4.2.dfsg+r18267-1) unstable; urgency=low
 
-  * Resynchronise with Debian.  Remaining changes:
-    - Add call to dh_python2 in debian/rules, version build-dep for
-      python-all-dev, and remove hard coded python dependency.
-    - Recommend icc-profiles-free.
-    - Build-depend on libtiff-dev rather than libtiff4-dev.
-  * Now that scribus is in universe, restore build-dependency on
-    libpodofo-dev.
+  * Update from the upstream svn, which fixes many bugs.
+  * Merge the upstream archive work and the NMU by gregoa@debian.org.
+    - add the required targets to debian/rules
 
- -- Colin Watson <cjwatson@ubuntu.com>  Mon, 10 Sep 2012 12:49:07 +0100
+ -- Oleksandr Moskalenko <malex@debian.org>  Wed, 24 Apr 2013 11:26:06 -0500
+
+scribus (1.4.2-2) unstable; urgency=low
+
+  * debian/control:
+    - Changed from libaspell-dev to libhunspell-dev as the upstream switched.
+    - Added a libhyphen-dev build-depends to use the system library.
+  * debian/rules: Added a CMAKE stanza for Hunspell.
+
+ -- Oleksandr Moskalenko <malex@debian.org>  Thu, 17 Jan 2013 16:13:19 -0600
+
+scribus (1.4.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/patches: Refreshed the top_cmakelist file to avoid installing
+    unnecessary build-related docs.
+
+ -- Oleksandr Moskalenko <malex@debian.org>  Wed, 16 Jan 2013 22:05:17 -0600
+
+scribus (1.4.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control: Updated standards version to 3.9.3.
+
+ -- Oleksandr Moskalenko <malex@debian.org>  Mon, 30 Apr 2012 19:05:11 -0500
 
 scribus (1.4.0.dfsg+r17300-1.1) unstable; urgency=low
 
@@ -19,22 +39,6 @@ scribus (1.4.0.dfsg+r17300-1.1) unstable; urgency=low
     (Closes: #666373)
 
  -- gregor herrmann <gregoa@debian.org>  Mon, 04 Jun 2012 18:02:54 +0200
-
-scribus (1.4.0.dfsg+r17300-1ubuntu2) quantal; urgency=low
-
-  * Build-depend on libtiff-dev rather than libtiff4-dev.
-
- -- Colin Watson <cjwatson@ubuntu.com>  Mon, 10 Sep 2012 11:32:48 +0100
-
-scribus (1.4.0.dfsg+r17300-1ubuntu1) precise; urgency=low
-
-  * Merge with Debian (LP: #932962); remaining changes:
-    - Drop build-dep on libpodofo-dev (in universe).
-    - Add call to dh_python2 in debian/rules, version build-dep for
-      python-all-dev, and remove hard coded python dependency.
-    - Recommend icc-profiles-free.
-
- -- Bernhard Reiter <ockham@raz.or.at>  Wed, 15 Feb 2012 19:13:04 +0100
 
 scribus (1.4.0.dfsg+r17300-1) unstable; urgency=low
 
@@ -79,17 +83,6 @@ scribus (1.4.0.dfsg-1) unstable; urgency=low
 
  -- Oleksandr Moskalenko <malex@debian.org>  Sun, 01 Jan 2012 14:30:15 -0600
 
-scribus (1.4.0.dfsg~rc3+svn20110401-1.1ubuntu1) oneiric; urgency=low
-
-  * Merge with Debian; remaining changes:
-    - Drop build-dep on libpodofo-dev (in universe).
-    - Add call to dh_python2 in debian/rules, version build-dep for
-      python-all-dev, and remove hard coded python dependency.
-    - Move icc-profiles from Recommends to Suggests since it's in multiverse.
-  * Recommend icc-profiles-free.
-
- -- Matthias Klose <doko@ubuntu.com>  Thu, 15 Sep 2011 19:55:54 +0200
-
 scribus (1.4.0.dfsg~rc3+svn20110401-1.1) unstable; urgency=low
 
   * Non-maintainer upload.
@@ -98,22 +91,6 @@ scribus (1.4.0.dfsg~rc3+svn20110401-1.1) unstable; urgency=low
     Voipio for the pointer.
 
  -- Ana Beatriz Guerrero Lopez <ana@debian.org>  Sun, 11 Sep 2011 22:10:03 +0200
-
-scribus (1.4.0.dfsg~rc3+svn20110401-1ubuntu2) oneiric; urgency=low
-
-  * Drop build-dep on libpodofo-dev (in Universe)
-
- -- Scott Kitterman <scott@kitterman.com>  Wed, 10 Aug 2011 11:26:51 -0400
-
-scribus (1.4.0.dfsg~rc3+svn20110401-1ubuntu1) oneiric; urgency=low
-
-  * Update from Debian Unstable
-  * Add debian/patches/cups_1_5_header.patch to build with cups 1.5
-  * Add call to dh_python2 in debian/rules, version build-dep for
-    python-all-dev, and remove hard coded python dependency
-  * Move icc-profiles from Recommends to Suggests since it's in Multiverse
-
- -- Scott Kitterman <scott@kitterman.com>  Wed, 10 Aug 2011 09:42:00 -0400
 
 scribus (1.4.0.dfsg~rc3+svn20110401-1) unstable; urgency=low
 

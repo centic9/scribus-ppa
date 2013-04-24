@@ -62,6 +62,7 @@ SET(SCRIBUS_UI_SRC
   tocindexprefs.ui
   ui/copypagetomasterpage.ui
   ui/createrange.ui
+  ui/downloaddictionaries.ui
   ui/helpbrowser.ui
   unicodesearch.ui
   useprintermarginsdialog.ui
@@ -118,6 +119,8 @@ SET(SCRIBUS_MOC_CLASSES
   docinfo.h
   docitemattrprefs.h
   docsections.h
+  downloadmanager/scdlmgr.h
+  downloadmanager/scdlthread.h
   editor.h
   effectsdialog.h
   extimageprops.h
@@ -207,6 +210,7 @@ SET(SCRIBUS_MOC_CLASSES
   replaceonecolor.h
   rulermover.h
   sampleitem.h
+  scescapecatcher.h
   scfilewidget.h
   scgtplugin.h
   schelptreemodel.h
@@ -278,6 +282,7 @@ SET(SCRIBUS_MOC_CLASSES
   tt/simpletreemodel/treemodel.h
   ui/copypagetomasterpagedialog.h
   ui/createrange.h
+  ui/downloaddictionaries.h
   ui/edittoolbar.h
   ui/filetoolbar.h  
   ui/modetoolbar.h
@@ -364,6 +369,8 @@ SET(SCRIBUS_SOURCES
   docsections.cpp
   documentchecker.cpp
   documentinformation.cpp
+  downloadmanager/scdlmgr.cpp
+  downloadmanager/scdlthread.cpp
   editor.cpp
   effectsdialog.cpp
   exif.cpp
@@ -494,6 +501,7 @@ SET(SCRIBUS_SOURCES
   sccombobox.cpp
   scdocoutput.cpp
   scdocoutput_ps2.cpp
+  scescapecatcher.cpp
   scfilewidget.cpp
   scfonts.cpp
   scgtplugin.cpp
@@ -602,6 +610,7 @@ SET(SCRIBUS_SOURCES
   tt/simpletreemodel/treemodel.cpp
   ui/copypagetomasterpagedialog.cpp
   ui/createrange.cpp
+  ui/downloaddictionaries.cpp
   ui/edittoolbar.cpp
   ui/filetoolbar.cpp
   ui/modetoolbar.cpp
@@ -758,7 +767,6 @@ MESSAGE("RPATH: ${CMAKE_INSTALL_RPATH}")
 
 TARGET_LINK_LIBRARIES(${EXE_NAME}
   ${QT_LIBRARIES}
-  ${CUPS_LIBRARIES}
   ${FREETYPE_LIBRARIES}
   ${FONTCONFIG_LIBRARIES}
   ${LIBXML2_LIBRARIES}
@@ -769,11 +777,17 @@ TARGET_LINK_LIBRARIES(${EXE_NAME}
   ${WIN32_ONLY_LIBS}
 )
 
+IF(NOT WIN32 AND NOT HAIKU)
+  TARGET_LINK_LIBRARIES(${EXE_NAME}
+    ${CUPS_LIBRARIES}
+  )
+ENDIF(NOT WIN32 AND NOT HAIKU)
+
 # required to resolve symbols from libdl when ld is called with --no-add-needed
 # #9310 for the OpenBSD addition
-IF(UNIX AND NOT CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" AND NOT CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+IF(UNIX AND NOT CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" AND NOT CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" AND NOT HAIKU)
   TARGET_LINK_LIBRARIES(${EXE_NAME} dl)
-ENDIF(UNIX AND NOT CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" AND NOT CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+ENDIF(UNIX AND NOT CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" AND NOT CMAKE_SYSTEM_NAME STREQUAL "FreeBSD" AND NOT HAIKU)
 
 # #9311 for the OpenBSD addition
 IF(CMAKE_SYSTEM_NAME STREQUAL "OpenBSD" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")

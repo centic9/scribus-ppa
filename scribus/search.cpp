@@ -419,25 +419,34 @@ void SearchReplace::slotDoSearch()
 		sSize = qRound(SSizeVal->value() * 10);
 	if (sText.length() > 0)
 		found = false;
-	int inde = 0;
+
 	uint as = Item->itemText.cursorPosition();
 	ReplStart = as;
 	int a;
 	if (SMode)
 	{
+		Qt::CaseSensitivity cs = Qt::CaseSensitive;
+		if (CaseIgnore->isChecked())
+			cs = Qt::CaseInsensitive;
+
 		for (a = as; a < Item->itemText.length(); ++a)
 		{
+			found = true;
 			if (SText->isChecked())
 			{
-				QString chstr = Item->itemText.text(a,1);
-				if (CaseIgnore->isChecked())
-					chstr = chstr.toLower();
-				found = chstr == sText.mid(inde, 1) ? true : false;
-				if ((Word->isChecked()) && (inde == 0) && (chstr[0].isSpace()))
-					found = true;
+				a = Item->itemText.indexOf(sText, a, cs);
+				found = (a >= 0);
+				if (!found) break;
+
+				if (Word->isChecked() && (a > 0) && !Item->itemText.text(a - 1).isSpace())
+					found = false;
+				if (Word->isChecked())
+				{
+					int lastChar = qMin(a + sText.length(), maxChar);
+					found = ((lastChar == maxChar) || Item->itemText.text(lastChar).isSpace());
+				}
+				if (!found) continue;
 			}
-			else
-				found = true;
 			if (SSize->isChecked())
 			{
 				if (Item->itemText.charStyle(a).fontSize() != sSize)
@@ -487,41 +496,20 @@ void SearchReplace::slotDoSearch()
 			}
 			if (found)
 			{
-				Item->itemText.select(a,1);
+				Item->itemText.select(a, sText.length());
 				Item->HasSel = true;
 				if (rep)
 				{
 					DoReplace->setEnabled(true);
 					AllReplace->setEnabled(true);
 				}
-				Item->itemText.setCursorPosition(a+1);
-				if (SText->isChecked())
-				{
-					if (inde == 0)
-						ReplStart = a;
-					inde++;
-					if ((Word->isChecked()) && (inde == 1) && (Item->itemText.text(a).isSpace()))
-					{
-						inde--;
-						Item->itemText.select(a, 1, false);
-					}
-					if ( Word->isChecked()  &&  inde == sText.length()  &&
-						! Item->itemText.text(qMin(a+1, maxChar)).isSpace() )
-					{
-						for (int xx = ReplStart; xx < a+1; ++xx)
-							Item->itemText.select(qMin(xx, maxChar), 1, false);
-						Item->HasSel = false;
-						inde = 0;
-						found = false;
-					}
-					else
-					{
-						if (inde == sText.length())
-							break;
-					}
-				}
-				else
+				Item->itemText.setCursorPosition(a + sText.length());
+
+				if (!SText->isChecked())
 					break;
+
+				ReplStart = a;
+				break;
 			}
 			else
 			{
@@ -531,7 +519,6 @@ void SearchReplace::slotDoSearch()
 						Item->itemText.select(qMin(xx, maxChar), 1, false);
 					Item->HasSel = false;
 				}
-				inde = 0;
 			}
 		}
 		if ((!found) || (a == Item->itemText.length()))
@@ -545,111 +532,124 @@ void SearchReplace::slotDoSearch()
 			NotFound = false;
 		}
 	}
-	else
+	else if (Doc->scMW()->CurrStED != NULL)
 	{
-		if (Doc->scMW()->CurrStED != NULL)
+		found = false;
+		SEditor* storyTextEdit = Doc->scMW()->CurrStED->Editor;
+		if (storyTextEdit->StyledText.length() == 0)
+			return;
+
+		if (SText->isChecked())
 		{
-			found = false;
-			SEditor* storyTextEdit = Doc->scMW()->CurrStED->Editor;
-			if (storyTextEdit->StyledText.length() != 0)
+			QTextDocument::FindFlags flags;
+			if (!CaseIgnore->isChecked())
+				flags |= QTextDocument::FindCaseSensitively;
+			if (Word->isChecked())
+				flags |= QTextDocument::FindWholeWords;
+			do
 			{
-				if (SText->isChecked())
+				found = storyTextEdit->find(sText, flags);
+				if (!found) break;
+				QTextCursor cursor = storyTextEdit->textCursor();
+				int selStart = cursor.selectionStart();
+				for (int ap = 0; ap < sText.length(); ++ap)
 				{
-					QTextDocument::FindFlags flags;
-					if (!CaseIgnore->isChecked())
-						flags |= QTextDocument::FindCaseSensitively;
-					if (Word->isChecked())
-						flags |= QTextDocument::FindWholeWords;
-					do
-					{
-						found = storyTextEdit->find(sText, flags);
-						if (!found) break;
-						QTextCursor cursor = storyTextEdit->textCursor();
-						int selStart = cursor.selectionStart();
-						for (int ap = 0; ap < sText.length(); ++ap)
-						{
-							const ParagraphStyle& parStyle = storyTextEdit->StyledText.paragraphStyle(selStart + ap);
-							const CharStyle& charStyle = storyTextEdit->StyledText.charStyle(selStart + ap);
-							if (SSize->isChecked() && (charStyle.fontSize() != sSize))
-								found = false;
-							if (SFont->isChecked() && (charStyle.font().scName() != sFont))
-								found = false;
-							if (SStyle->isChecked() && (parStyle.parent() != Doc->paragraphStyles()[sStyle].name()))
-								found = false;
-							if (SAlign->isChecked() && (parStyle.alignment() != sAlign))
-								found = false;
-							if (SFill->isChecked() && (charStyle.fillColor() != fCol))
-								found = false;
-							if (SStroke->isChecked() && (charStyle.strokeColor() != sCol))
-								found = false;
-							if (SStrokeS->isChecked() && (charStyle.strokeShade() != sStrokeSh))
-								found = false;
-							if (SFillS->isChecked() && (charStyle.fillShade() != sFillSh))
-								found = false;
-							if (SEffect->isChecked() && ((charStyle.effects() & 1919) != sEff))
-								found = false;
-						}
-					} while(!found);
+					const ParagraphStyle& parStyle = storyTextEdit->StyledText.paragraphStyle(selStart + ap);
+					const CharStyle& charStyle = storyTextEdit->StyledText.charStyle(selStart + ap);
+					if (SSize->isChecked() && (charStyle.fontSize() != sSize))
+						found = false;
+					if (SFont->isChecked() && (charStyle.font().scName() != sFont))
+						found = false;
+					if (SStyle->isChecked() && (parStyle.parent() != Doc->paragraphStyles()[sStyle].name()))
+						found = false;
+					if (SAlign->isChecked() && (parStyle.alignment() != sAlign))
+						found = false;
+					if (SFill->isChecked() && (charStyle.fillColor() != fCol))
+						found = false;
+					if (SStroke->isChecked() && (charStyle.strokeColor() != sCol))
+						found = false;
+					if (SStrokeS->isChecked() && (charStyle.strokeShade() != sStrokeSh))
+						found = false;
+					if (SFillS->isChecked() && (charStyle.fillShade() != sFillSh))
+						found = false;
+					if (SEffect->isChecked() && ((charStyle.effects() & 1919) != sEff))
+						found = false;
 				}
-				else
+			} while(!found);
+		}
+		else
+		{
+			QTextCursor cursor = storyTextEdit->textCursor();
+			int position  = cursor.position();
+			StoryText& styledText = storyTextEdit->StyledText;
+			int firstChar = -1, lastChar = styledText.length();
+			for (int i = position; i < styledText.length(); ++i)
+			{
+				found = true;
+				const ParagraphStyle& parStyle = storyTextEdit->StyledText.paragraphStyle(i);
+				const CharStyle& charStyle = styledText.charStyle(i);
+				if (SSize->isChecked() && (charStyle.fontSize() != sSize))
+					found = false;
+				if (SFont->isChecked() && (charStyle.font().scName() != sFont))
+					found = false;
+				if (SStyle->isChecked() && (parStyle.parent() != Doc->paragraphStyles()[sStyle].name()))
+					found = false;
+				if (SAlign->isChecked() && (parStyle.alignment() != sAlign))
+					found = false;
+				if (SFill->isChecked() && (charStyle.fillColor() != fCol))
+					found = false;
+				if (SFillS->isChecked() && (charStyle.fillShade() != sFillSh))
+					found = false;
+				if (SStroke->isChecked() && (charStyle.strokeColor() != sCol))
+					found = false;
+				if (SStrokeS->isChecked() && (charStyle.strokeShade() != sStrokeSh))
+					found = false;
+				if (SEffect->isChecked() && ((charStyle.effects() & 1919) != sEff))
+					found = false;
+				if (found && (firstChar < 0))
+					firstChar = i;
+				else if ((firstChar >= 0) && !found)
 				{
-					QTextCursor cursor = storyTextEdit->textCursor();
-					int position = cursor.position();
-					StoryText& styledText = storyTextEdit->StyledText;
-					for (int i = position; i < styledText.length(); ++i)
-					{
-						found = true;
-						const ParagraphStyle& parStyle = storyTextEdit->StyledText.paragraphStyle(i);
-						const CharStyle& charStyle = styledText.charStyle(i);
-						if (SSize->isChecked() && (charStyle.fontSize() != sSize))
-							found = false;
-						if (SFont->isChecked() && (charStyle.font().scName() != sFont))
-							found = false;
-						if (SStyle->isChecked() && (parStyle.parent() != Doc->paragraphStyles()[sStyle].name()))
-							found = false;
-						if (SAlign->isChecked() && (parStyle.alignment() != sAlign))
-							found = false;
-						if (SFill->isChecked() && (charStyle.fillColor() != fCol))
-							found = false;
-						if (SFillS->isChecked() && (charStyle.fillShade() != sFillSh))
-							found = false;
-						if (SStroke->isChecked() && (charStyle.strokeColor() != sCol))
-							found = false;
-						if (SStrokeS->isChecked() && (charStyle.strokeShade() != sStrokeSh))
-							found = false;
-						if (SEffect->isChecked() && ((charStyle.effects() & 1919) != sEff))
-							found = false;
-						if (found)
-						{
-							cursor.setPosition(i + 1, QTextCursor::KeepAnchor);
-							storyTextEdit->setTextCursor(cursor);
-							break;
-						}
-					}
+					lastChar = i;
+					break;
 				}
-				if (found)
+				// When searching paragraph styles break at the end of each found paragraph
+				if (SStyle->isChecked() && (firstChar >= 0) && styledText.text(i) == SpecialChars::PARSEP)
 				{
-					// Doc->scMW()->CurrStED->updateProps(); FIXME
-					if (rep)
-					{
-						DoReplace->setEnabled(true);
-						AllReplace->setEnabled(true);
-					}
-					matchesFound++;
-				}
-				else
-				{
-					QMessageBox::information(this, tr("Search/Replace"),
-							tr("Search finished, found %1 matches").arg(matchesFound),
-							CommonStrings::tr_OK);
-					matchesFound = 0;
-					NotFound = false;
-					QTextCursor cursor = storyTextEdit->textCursor();
-					cursor.clearSelection();
-					cursor.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
-					storyTextEdit->setTextCursor(cursor);
+					lastChar = i;
+					break;
 				}
 			}
+
+			found = (firstChar >= 0);
+			if (found)
+			{
+				cursor.setPosition(firstChar);
+				cursor.setPosition(lastChar, QTextCursor::KeepAnchor);
+				storyTextEdit->setTextCursor(cursor);
+			}
+		}
+		if (found)
+		{
+			// Doc->scMW()->CurrStED->updateProps(); FIXME
+			if (rep)
+			{
+				DoReplace->setEnabled(true);
+				AllReplace->setEnabled(true);
+			}
+			matchesFound++;
+		}
+		else
+		{
+			QMessageBox::information(this, tr("Search/Replace"),
+					tr("Search finished, found %1 matches").arg(matchesFound),
+					CommonStrings::tr_OK);
+			matchesFound = 0;
+			NotFound = false;
+			QTextCursor cursor = storyTextEdit->textCursor();
+			cursor.clearSelection();
+			cursor.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
+			storyTextEdit->setTextCursor(cursor);
 		}
 	}
 }
@@ -745,52 +745,56 @@ void SearchReplace::slotDoReplace()
 		}
 		Item->itemText.deselectAll();
 	}
-	else
+	else if (Doc->scMW()->CurrStED != NULL)
 	{
-		if (Doc->scMW()->CurrStED != NULL)
+		StoryEditor* se=Doc->scMW()->CurrStED;
+		if (RText->isChecked())
 		{
-			StoryEditor* se=Doc->scMW()->CurrStED;
-			if (RText->isChecked())
+			disconnect(se->Editor, SIGNAL(cursorPositionChanged()), se, SLOT(updateProps()));
+			int SelStart = se->Editor->textCursor().selectionStart();
+			int SelEnd = se->Editor->textCursor().selectionEnd();
+//			se->Editor->insChars(RTextVal->text());
+			se->Editor->textCursor().setPosition(SelStart);
+			se->Editor->textCursor().setPosition(SelEnd, QTextCursor::KeepAnchor);
+			se->Editor->textCursor().removeSelectedText();
+//FIXME		se->Editor->setEffects(se->Editor->CurrentEffects);
+			QString newText = RTextVal->text();
+			se->Editor->insertPlainText(newText);
+			if (newText.length() > 0)
 			{
-				disconnect(se->Editor, SIGNAL(cursorPositionChanged()), se, SLOT(updateProps()));
-				int SelStart = se->Editor->textCursor().selectionStart();
-				int SelEnd = se->Editor->textCursor().selectionEnd();
-//					se->Editor->insChars(RTextVal->text());
-				se->Editor->textCursor().setPosition(SelStart);
-				se->Editor->textCursor().setPosition(SelEnd, QTextCursor::KeepAnchor);
-				se->Editor->textCursor().removeSelectedText();
-//FIXME				se->Editor->setEffects(se->Editor->CurrentEffects);
-				QString newText = RTextVal->text();
-				se->Editor->insertPlainText(newText);
-				if (newText.length() > 0)
-				{
-					QTextCursor textCursor = se->Editor->textCursor();
-					textCursor.setPosition(SelStart);
-					textCursor.setPosition(SelStart + newText.length(), QTextCursor::KeepAnchor);
-					se->Editor->setTextCursor(textCursor);
-				}
-				connect(se->Editor, SIGNAL(cursorPositionChanged()), se, SLOT(updateProps()));
-//				se->newAlign(se->Editor->currentParaStyle);
+				QTextCursor textCursor = se->Editor->textCursor();
+				textCursor.setPosition(SelStart);
+				textCursor.setPosition(SelStart + newText.length(), QTextCursor::KeepAnchor);
+				se->Editor->setTextCursor(textCursor);
 			}
-			if (RStyle->isChecked())
-				se->newStyle(Doc->paragraphStyles()[RStyleVal->currentIndex()].name());
-			if (RAlign->isChecked())
-				se->newAlign(RAlignVal->currentIndex());
-			if (RFill->isChecked())
-				se->newTxFill(RFillVal->currentIndex(), -1);
-			if (RFillS->isChecked())
-				se->newTxFill(-1, RFillSVal->getValue());
-			if (RStroke->isChecked())
-				se->newTxStroke(RStrokeVal->currentIndex(), -1);
-			if (RStrokeS->isChecked())
-				se->newTxStroke(-1, RStrokeSVal->getValue());
-			if (RFont->isChecked())
-				se->newTxFont(RFontVal->currentText());
-			if (RSize->isChecked())
-				se->newTxSize(RSizeVal->value());
-			if (REffect->isChecked())
-				se->newTxStyle(REffVal->getStyle());
+			connect(se->Editor, SIGNAL(cursorPositionChanged()), se, SLOT(updateProps()));
+//			se->newAlign(se->Editor->currentParaStyle);
 		}
+		if (RStyle->isChecked())
+			se->newStyle(Doc->paragraphStyles()[RStyleVal->currentIndex()].name());
+		if (RAlign->isChecked())
+			se->newAlign(RAlignVal->currentIndex());
+		if (RFill->isChecked())
+			se->newTxFill(RFillVal->currentIndex(), -1);
+		if (RFillS->isChecked())
+			se->newTxFill(-1, RFillSVal->getValue());
+		if (RStroke->isChecked())
+			se->newTxStroke(RStrokeVal->currentIndex(), -1);
+		if (RStrokeS->isChecked())
+			se->newTxStroke(-1, RStrokeSVal->getValue());
+		if (RFont->isChecked())
+			se->newTxFont(RFontVal->currentText());
+		if (RSize->isChecked())
+			se->newTxSize(RSizeVal->value());
+		if (REffect->isChecked())
+			se->newTxStyle(REffVal->getStyle());
+
+		QTextCursor textCursor = se->Editor->textCursor();
+		int selStart = textCursor.selectionStart();
+		int selEnd   = textCursor.selectionEnd();
+		int selPos   = qMax(selStart, selEnd);
+		textCursor.setPosition(selPos);
+		se->Editor->setTextCursor(textCursor);
 	}
 	DoReplace->setEnabled(false);
 	AllReplace->setEnabled(false);

@@ -42,6 +42,7 @@ for which a new license (GPL+exception) is in place.
 #include <QLabel>
 #include <QList>
 #include <QMenu>
+#include <QMessageBox>
 #include <QMimeData>
 #include <QMouseEvent>
 #include <QPaintEvent>
@@ -101,7 +102,6 @@ for which a new license (GPL+exception) is in place.
 #include "propertiespalette.h"
 #include "rulermover.h"
 #include "scclocale.h"
-#include "scmessagebox.h"
 #include "scmimedata.h"
 #include "scpainter.h"
 #include "scpaths.h"
@@ -941,7 +941,7 @@ void ScribusView::contentsDropEvent(QDropEvent *e)
 			else
 			{
 				FileLoader *fileLoader = new FileLoader(url.toLocalFile());
-				int testResult = fileLoader->TestFile();
+				int testResult = fileLoader->testFile();
 				delete fileLoader;
 				if ((testResult != -1) && (testResult >= FORMATID_ODGIMPORT))
 					vectorFile = true;
@@ -1041,7 +1041,7 @@ void ScribusView::contentsDropEvent(QDropEvent *e)
 					else
 					{
 						FileLoader *fileLoader = new FileLoader(url.toLocalFile());
-						int testResult = fileLoader->TestFile();
+						int testResult = fileLoader->testFile();
 						delete fileLoader;
 						if ((testResult != -1) && (testResult >= FORMATID_ODGIMPORT))
 						{

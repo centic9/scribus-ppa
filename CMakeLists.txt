@@ -78,7 +78,7 @@ PROJECT(scribus)
 #where VERSION_SUFFIX is of the form "", "svn" or "Nsvn" (N being the minor patch level)
 SET (VERSION_MAJOR "1")
 SET (VERSION_MINOR "4")
-SET (VERSION_PATCH "1")
+SET (VERSION_PATCH "3")
 SET (VERSION_SUFFIX "svn")
 SET (VERSION ${VERSION_MAJOR})
 IF (VERSION_MINOR GREATER -1)
@@ -406,8 +406,8 @@ IF(APPLE)
   SET( ENV{LD_PREBIND} 1 )
   SET( ENV{LD_PREBIND_ALLOW_OVERLAP} 1 )
   IF (WANT_DEBUG)
-    SET(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3 -fno-inline-functions -Wall -mmacosx-version-min=${OSXMINVER}")
-    SET(CMAKE_C_FLAGS_DEBUG "-O0 -g3 -fno-inline-functions -Wall -mmacosx-version-min=${OSXMINVER}")
+	SET(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3 -fno-inline-functions -Wall -mmacosx-version-min=${OSXMINVER}")
+	SET(CMAKE_C_FLAGS_DEBUG "-O0 -g3 -fno-inline-functions -Wall -mmacosx-version-min=${OSXMINVER}")
   ENDIF (WANT_DEBUG)
   IF (WANT_RELEASEWITHDEBUG)
     SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g3 -fno-inline-functions -Wall -mmacosx-version-min=${OSXMINVER}")
@@ -449,13 +449,10 @@ IF(WIN32)
   ADD_DEFINITIONS(-DWIN32_LEAN_AND_MEAN
                   -DAVOID_WIN32_FILEIO
                   -D_CRT_SECURE_NO_DEPRECATE
+                  -D_USE_MATH_DEFINES
                   -DCOMPILE_PLUGIN_AS_DLL
   )
   SET(BUILD_WINDOWS_VERSION 1)
-  SET(SC_USE_GDI 1)
-  IF(NOT SC_SHOULD_NOT_USE_GDIPLUS)
-    SET(SC_USE_GDIPLUS 1)
-  ENDIF(NOT SC_SHOULD_NOT_USE_GDIPLUS)
   SET(DLL_USE_NATIVE_API 1)
 ENDIF(WIN32)
 
@@ -522,7 +519,7 @@ IF (PNG_FOUND)
 ENDIF(PNG_FOUND)
 #>> ZLIB, PNG
 
-#<< JPEG, TIFF, PYTHON
+#<< JPEG, TIFF
 FIND_PACKAGE(JPEG REQUIRED)
 IF (JPEG_FOUND)
   MESSAGE("JPEG Library Found OK")
@@ -534,13 +531,17 @@ IF (TIFF_FOUND)
 ELSE(TIFF_FOUND)
   MESSAGE(FATAL_ERROR "Could not find the TIFF Library")
 ENDIF(TIFF_FOUND)
+#<< JPEG, TIFF
+
+#<< PYTHON
+SET(PythonLibs_FIND_VERSION 2)
 FIND_PACKAGE(PythonLibs REQUIRED)
 IF (PYTHON_LIBRARY)
   MESSAGE("Python Library Found OK")
   SET(HAVE_PYTHON 1)
   SET(COMPILE_PYTHON 1)
 ENDIF(PYTHON_LIBRARY)
-#>> JPEG, TIFF, PYTHON
+#>> PYTHON
 
 #<< FreeType2
 IF (${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.6)
@@ -611,7 +612,7 @@ ENDIF (OLDRENDERLIBLOST OR WANT_QTARTHUR OR RENDER_LIB STREQUAL "QTARTHUR" OR NO
 #>>Render Library
 
 #<<CUPS
-IF(NOT WIN32)
+IF(NOT WIN32 AND NOT HAIKU)
   IF (${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.5)
     SET(Cups_DIR ${CMAKE_MODULE_PATH})
   ENDIF (${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.5)
@@ -620,10 +621,10 @@ IF(NOT WIN32)
     SET(HAVE_CUPS 1)
     MESSAGE("CUPS Library Found OK")
   ENDIF(CUPS_FOUND)
-ELSE(NOT WIN32)
+ELSE (NOT WIN32 AND NOT HAIKU)
   # Windows doesn't use CUPS
   SET(CUPS_INCLUDE_DIR)
-ENDIF(NOT WIN32)
+ENDIF(NOT WIN32 AND NOT HAIKU)
 #>>CUPS
 
 #<<LibXML2
@@ -675,17 +676,30 @@ ENDIF(NOT WIN32)
 #>>FontConfig
 
 #<<ASPELL for Speelling support
-OPTION(WITH_ASPELL "Enable support for spell checking" ON)
-IF (WITH_ASPELL)
-  FIND_PACKAGE(ASPELL)
-  IF (ASPELL_FOUND)
-    MESSAGE("ASpell Found OK")
-    SET(HAVE_ASPELL 1)
-  ELSE (ASPELL_FOUND)
-    MESSAGE("ASpell or its developer libraries NOT found - Disabling support for spell checking")
-  ENDIF (ASPELL_FOUND)
-ENDIF (WITH_ASPELL)
+#OPTION(WITH_ASPELL "Enable support for spell checking" ON)
+#IF (WITH_ASPELL)
+#  FIND_PACKAGE(ASPELL)
+#  IF (ASPELL_FOUND)
+#    MESSAGE("ASpell Found OK")
+#    SET(HAVE_ASPELL 1)
+#  ELSE (ASPELL_FOUND)
+#    MESSAGE("ASpell or its developer libraries NOT found - Disabling support for spell checking")
+#  ENDIF (ASPELL_FOUND)
+#ENDIF (WITH_ASPELL)
 #>>ASPELL for Speelling support
+
+#<<HUNSPELL for Speelling support
+OPTION(WANT_HUNSPELL "Enable support for spell checking with hunspell" OFF)
+IF (WANT_HUNSPELL)
+  FIND_PACKAGE(HUNSPELL)
+  IF (HUNSPELL_FOUND)
+    MESSAGE("Hunspell Found OK")
+    SET(HAVE_HUNSPELL 1)
+  ELSE (HUNSPELL_FOUND)
+    MESSAGE("HunSpell or its developer libraries NOT found - Disabling support for spell checking")
+  ENDIF (HUNSPELL_FOUND)
+ENDIF (WANT_HUNSPELL)
+#>>HUNSPELL for Speelling support
 
 
 #<<PoDoFo for AI PDF import
@@ -756,7 +770,6 @@ INCLUDE_DIRECTORIES(
   ${CMAKE_BINARY_DIR}
   ${CMAKE_BINARY_DIR}/scribus
   ${QT_INCLUDES}
-  ${CUPS_INCLUDE_DIR}
   ${FREETYPE_INCLUDE_DIR}
   ${FONTCONFIG_INCLUDE_DIR}
   ${JPEG_INCLUDE_DIR}
@@ -766,6 +779,12 @@ INCLUDE_DIRECTORIES(
   ${TIFF_INCLUDE_DIR}
   ${ZLIB_INCLUDE_DIR}
 )
+
+IF(NOT WIN32 AND NOT HAIKU)
+  INCLUDE_DIRECTORIES(
+    ${CUPS_INCLUDE_DIR}
+  )
+ENDIF(NOT WIN32 AND NOT HAIKU)
 
 ##############################################################################################################
 ########## Uninstall Setup                                                                          ##########
@@ -792,7 +811,6 @@ ADD_SUBDIRECTORY(resources/keysets)
 ADD_SUBDIRECTORY(resources/loremipsum)
 ADD_SUBDIRECTORY(resources/swatches)
 ADD_SUBDIRECTORY(resources/templates)
-#ADD_SUBDIRECTORY(resources/translations/qm)
 ADD_SUBDIRECTORY(resources/translations/po)
 
 #Install our READMEs etc.
@@ -806,11 +824,17 @@ INSTALL(FILES
   NEWS
   PACKAGING
   README
-  README.MacOSX
   TODO
   TRANSLATION
   DESTINATION ${DOCDIR}
 )
+
+IF (APPLE)
+  INSTALL(FILES
+	README.MacOSX
+	DESTINATION ${DOCDIR}
+  )
+ENDIF (APPLE)
 
 #Install our MIME data
 INSTALL(FILES
@@ -863,11 +887,12 @@ IF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
   SET(CPACK_TOPLEVEL_TAG "")
   SET(CPACK_SOURCE_IGNORE_FILES
     CMakeCache.txt
-    scribus-1.4.1.tar.gz
-    scribus-1.4.1.tar.Z
-    scribus-1.4.1.tar.xz
-    scribus-1.4.1.gz
-    scribus-1.4.1.tar.bz2
+	scribus-1.4.3.tar.gz
+	scribus-1.4.3.tar.Z
+	scribus-1.4.3.tar.xz
+	scribus-1.4.3.gz
+	scribus-1.4.3.tar.bz2
+	scribus-1.4.3.tar.7z
     "~$"
     "\\\\.cvsignore$"
     "\\\\.o$"

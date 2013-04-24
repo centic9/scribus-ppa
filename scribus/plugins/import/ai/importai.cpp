@@ -200,9 +200,6 @@ bool AIPlug::import(QString fNameIn, const TransactionSettings& trSettings, int 
 			m_Doc->PageColors.insert(it.key(), it.value());
 	}
 	Elements.clear();
-	FPoint minSize = m_Doc->minCanvasCoordinate;
-	FPoint maxSize = m_Doc->maxCanvasCoordinate;
-	FPoint cOrigin = m_Doc->view()->canvasOrigin();
 	m_Doc->view()->Deselect();
 	m_Doc->setLoading(true);
 	m_Doc->DoDrawing = false;
@@ -2010,14 +2007,16 @@ void AIPlug::processGradientData(QString data)
 			else if (colortype == 3)
 			{
 				stopName = parseCustomColor(Cdata, colorShade);
+				int stopShade =  qRound(colorShade);
 				const ScColor& gradC = m_Doc->PageColors[stopName];
-				currentGradient.addStop( ScColorEngine::getRGBColor(gradC, m_Doc), stop, 0.5, 1.0, stopName, qRound(colorShade));
+				currentGradient.addStop( ScColorEngine::getShadeColor(gradC, m_Doc, stopShade), stop, 0.5, 1.0, stopName, stopShade);
 			}
 			else if (colortype == 4)
 			{
 				stopName = parseCustomColorX(Cdata, colorShade, "0");
+				int stopShade =  qRound(colorShade);
 				const ScColor& gradC = m_Doc->PageColors[stopName];
-				currentGradient.addStop( ScColorEngine::getRGBColor(gradC, m_Doc), stop, 0.5, 1.0, stopName, qRound(colorShade));
+				currentGradient.addStop( ScColorEngine::getShadeColor(gradC, m_Doc, stopShade), stop, 0.5, 1.0, stopName, stopShade);
 			}
 		}
 		else if (command == "BD")
