@@ -3593,7 +3593,7 @@ Du må velge et annet navn.</translation>
     <message>
         <source>Name &quot;%1&quot; is not unique.
 Please choose another.</source>
-        <translation>Navnet «%1» er ikke unikt.
+        <translation type="obsolete">Navnet «%1» er ikke unikt.
 Velg et annet.</translation>
     </message>
     <message>
@@ -6810,6 +6810,10 @@ eventuelt fulgt av en bindestrek og en ISO-3166 landskode, f.eks nn-NO, nb-NO, f
         <translation>Språket som dokumentet er skrevet på, vanligvis en ISO-638 språkkode 
 eventuelt fulgt av en bindestrek og en ISO-3166 landskode, f.eks nn-NO, nb-NO, fr-CH eller en-GB</translation>
     </message>
+    <message>
+        <source>&amp;Subject:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DocSections</name>
@@ -7121,6 +7125,37 @@ eventuelt fulgt av en bindestrek og en ISO-3166 landskode, f.eks nn-NO, nb-NO, f
     <message>
         <source>Alt+L</source>
         <translation type="obsolete">Alt + L</translation>
+    </message>
+</context>
+<context>
+    <name>DownloadDictionaries</name>
+    <message>
+        <source>Download Dictionaries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available Dictionary Downloads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update Dictionary List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Lukk</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Språk</translation>
+    </message>
+    <message>
+        <source>Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9143,6 +9178,55 @@ og www.scribus.net for nye versjoner av Scribus.</translation>
     </message>
 </context>
 <context>
+    <name>HunspellDialog</name>
+    <message>
+        <source>Spelling check complete</source>
+        <translation type="unfinished">Stavekontrollen er ferdig</translation>
+    </message>
+</context>
+<context>
+    <name>HunspellDialogBase</name>
+    <message>
+        <source>Check Spelling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Language:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not in dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore Once</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Suggestions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change All</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HunspellPlugin</name>
+    <message>
+        <source>Check Spelling...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>HyAsk</name>
     <message>
         <source>Possible Hyphenation</source>
@@ -9228,6 +9312,26 @@ A value of 0 means unlimited hyphenations.</source>
     <message>
         <source>Exception List</source>
         <translation>Unntaksliste</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished">Språk</translation>
+    </message>
+    <message>
+        <source>Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14516,6 +14620,10 @@ UCR reduserer muligheten for overmetning med CMY farger.</translation>
         <source>No Image Loaded</source>
         <translation>Intet bilde ble lastet</translation>
     </message>
+    <message>
+        <source>missing or corrupt</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PageItem_LatexFrame</name>
@@ -15210,11 +15318,11 @@ The result is a combination of &quot;Intersection&quot; and &quot;Exclusion&quot
     </message>
     <message>
         <source>Qt Version too old</source>
-        <translation>Qt-versjonen er for gammel</translation>
+        <translation type="obsolete">Qt-versjonen er for gammel</translation>
     </message>
     <message>
         <source>This plugin requires at least version 4.3.3 of the Qt library</source>
-        <translation>Dette programtillegget krever minst  versjon 4.3.3 av Qt-biblioteket</translation>
+        <translation type="obsolete">Dette programtillegget krever minst  versjon 4.3.3 av Qt-biblioteket</translation>
     </message>
 </context>
 <context>
@@ -17063,7 +17171,7 @@ UCR reduserer muligheten for overmetning med CMY farger.</translation>
     </message>
     <message>
         <source>Hyphenator</source>
-        <translation>Orddeler …</translation>
+        <translation type="obsolete">Orddeler …</translation>
     </message>
     <message>
         <source>Fonts</source>
@@ -17160,6 +17268,10 @@ UCR reduserer muligheten for overmetning med CMY farger.</translation>
     <message>
         <source>Printer</source>
         <translation>Trykk</translation>
+    </message>
+    <message>
+        <source>Hyphenation and Spelling</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -18877,6 +18989,14 @@ Corners:</source>
         <source>&amp;Group</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This rule determines the &amp;quot;insideness&amp;quot; of a point on the canvas by drawing a ray from that point to infinity in any direction and counting the number of path segments from the given shape that the ray crosses. If this number is odd, the point is inside, if even, the point is outside.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This rule determines the &amp;quot;insideness&amp;quot; of a point on the canvas by drawing a ray from that point to infinity in any direction and then examining the places where a segment of the shape crosses the ray. Starting with a count of zero, add one each time a path segment crosses the ray from left to right and subtract one each time a path segment crosses the ray from right to left. If the result is zero then the point is outside the path. Otherwise, it is inside.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PythonConsole</name>
@@ -18989,6 +19109,19 @@ Scripter documentation for futher information. </source>
         <translation>Dette er et standard Python-skall med noen
 begrensninger. Se dokumentasjonen for
 Scribus Skripter for mer informasjon.</translation>
+    </message>
+    <message>
+        <source>Another script is already running...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please let it finish its task...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+&gt;&gt;&gt; Another script is already running...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -19758,7 +19891,7 @@ Eksterne lenker
     </message>
     <message>
         <source>English (British)</source>
-        <translation>Engelsk (Britisk)</translation>
+        <translation type="obsolete">Engelsk (Britisk)</translation>
     </message>
     <message>
         <source>Esperanto</source>
@@ -21317,7 +21450,7 @@ is not exhaustive due to exceptions from called functions.
     </message>
     <message>
         <source>English (American)</source>
-        <translation> Amerikansk-engelsk</translation>
+        <translation type="obsolete"> Amerikansk-engelsk</translation>
     </message>
     <message>
         <source>%1 may be corrupted : missing or wrong resolution tags</source>
@@ -21756,6 +21889,50 @@ is not exhaustive due to exceptions from called functions.
 </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Hunspell Plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aragonese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Belarusian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>English (Canadian)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>English (UK)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>English (New Zealand)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>English (USA)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>English (South African)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spanish (Argentina)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>German (Austria)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nepali</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QTextEdit</name>
@@ -21883,6 +22060,22 @@ is not exhaustive due to exceptions from called functions.
     <message>
         <source>&amp;Cancel</source>
         <translation type="obsolete">&amp;Avbryt</translation>
+    </message>
+    <message>
+        <source>Name &quot;%1&quot; is not allowed.
+Please choose another.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name &quot;%1&quot; already exists.
+Do you want to replace the current contents?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name &quot;%1&quot; is not unique.
+Please choose another.</source>
+        <translation type="unfinished">Navnet «%1» er ikke unikt.
+Velg et annet.</translation>
     </message>
 </context>
 <context>
@@ -22220,6 +22413,37 @@ Hvis du bruker motstående sider, kan dette brukes til å få rettinnbindingsmar
     <message>
         <source>Run Script</source>
         <translation>Kjør skript</translation>
+    </message>
+</context>
+<context>
+    <name>SATDialog</name>
+    <message>
+        <source>Save as Template</source>
+        <translation type="unfinished">Lagre som mal</translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished">Legal</translation>
+    </message>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished">Letter</translation>
+    </message>
+    <message>
+        <source>Tabloid</source>
+        <translation type="unfinished">Tabloid</translation>
+    </message>
+    <message>
+        <source>landscape</source>
+        <translation type="unfinished">liggende</translation>
+    </message>
+    <message>
+        <source>portrait</source>
+        <translation type="unfinished">stående</translation>
+    </message>
+    <message>
+        <source>custom</source>
+        <translation type="unfinished">selvvalgt</translation>
     </message>
 </context>
 <context>
@@ -22769,6 +22993,30 @@ Expressed as a percentage of the current white space value.</source>
     <message>
         <source>Right Only</source>
         <translation>Bare til høyre</translation>
+    </message>
+    <message>
+        <source>Lines:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <comment>optical margins</comment>
+        <translation type="unfinished">Ingen</translation>
+    </message>
+    <message>
+        <source>Both Sides</source>
+        <comment>optical margins</comment>
+        <translation type="unfinished">Begge sidene</translation>
+    </message>
+    <message>
+        <source>Left Only</source>
+        <comment>optical margins</comment>
+        <translation type="unfinished">Bare til venstre</translation>
+    </message>
+    <message>
+        <source>Right Only</source>
+        <comment>optical margins</comment>
+        <translation type="unfinished">Bare til høyre</translation>
     </message>
 </context>
 <context>
@@ -28113,7 +28361,7 @@ med jevne mellomrom</translation>
     </message>
     <message>
         <source>Default ICC profiles directory. This cannot be changed with a document open. By default, Scribus will look in the System Directories under Mac OSX and Windows. On Linux and Unix, Scribus will search $home/.color/icc,/usr/share/color/icc and /usr/local/share/color/icc </source>
-        <translation type="unfinished">
+        <translation type="obsolete">
             </translation>
     </message>
     <message>
@@ -28242,6 +28490,10 @@ med jevne mellomrom</translation>
         <source>Use Small Widgets in Palettes</source>
         <translation type="unfinished">
             </translation>
+    </message>
+    <message>
+        <source>Default ICC profiles directory. This cannot be changed with a document open. By default, Scribus will look in the System Directories under Mac OSX and Windows. On Linux and Unix, Scribus will search $home/.color/icc, $home/.local/share/color/icc, /usr/share/color/icc and /usr/local/share/color/icc</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -31764,6 +32016,14 @@ X: %4, Y: %5</translation>
         <source>Unlink text frame</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Move page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path Operation</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>UndoPalette</name>
@@ -32479,6 +32739,34 @@ A value of 0 means unlimited hyphenations.</source>
         <source>Ignore List</source>
         <translation>Unntaksliste</translation>
     </message>
+    <message>
+        <source>Hyphenation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spelling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installed Spelling Dictionaries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Downloadable Spelling Dictionaries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh Downloadable List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download Selected Dictionaries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Downloading</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>nftdialog</name>
@@ -32852,27 +33140,27 @@ A value of 0 means unlimited hyphenations.</source>
     </message>
     <message>
         <source>Legal</source>
-        <translation>Legal</translation>
+        <translation type="obsolete">Legal</translation>
     </message>
     <message>
         <source>Letter</source>
-        <translation>Letter</translation>
+        <translation type="obsolete">Letter</translation>
     </message>
     <message>
         <source>Tabloid</source>
-        <translation>Tabloid</translation>
+        <translation type="obsolete">Tabloid</translation>
     </message>
     <message>
         <source>landscape</source>
-        <translation>liggende</translation>
+        <translation type="obsolete">liggende</translation>
     </message>
     <message>
         <source>portrait</source>
-        <translation>stående</translation>
+        <translation type="obsolete">stående</translation>
     </message>
     <message>
         <source>custom</source>
-        <translation>selvvalgt</translation>
+        <translation type="obsolete">selvvalgt</translation>
     </message>
     <message>
         <source>&amp;More Details</source>

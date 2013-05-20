@@ -1182,21 +1182,21 @@ void ScribusDoc::loadStylesFromFile(QString fileName)
 	if (!fileName.isEmpty())
 	{
 		FileLoader fl(fileName);
-		if (fl.TestFile() == -1)
+		if (fl.testFile() == -1)
 		//TODO put in nice user warning
 			return;
 
-		if (!fl.ReadStyles(fileName, this, *wrkStyles))
+		if (!fl.readStyles(this, *wrkStyles))
 		{
 			//TODO put in nice user warning
 		}
 
-		if (!fl.ReadCharStyles(fileName, this, *wrkCharStyles))
+		if (!fl.readCharStyles(this, *wrkCharStyles))
 		{
 			//TODO put in nice user warning
 		}
 
-		if (!fl.ReadLineStyles(fileName, wrkLineStyles))
+		if (!fl.readLineStyles(wrkLineStyles))
 		{
 			//TODO put in nice user warning
 		}
@@ -1219,21 +1219,21 @@ void ScribusDoc::loadStylesFromFile(QString fileName, StyleSet<ParagraphStyle> *
 	if (!fileName.isEmpty())
 	{
 		FileLoader fl(fileName);
-		if (fl.TestFile() == -1)
+		if (fl.testFile() == -1)
 		//TODO put in nice user warning
 			return;
 
-		if (!fl.ReadStyles(fileName, this, *wrkStyles))
+		if (!fl.readStyles(this, *wrkStyles))
 		{
 			//TODO put in nice user warning
 		}
 
-		if (!fl.ReadCharStyles(fileName, this, *wrkCharStyles))
+		if (!fl.readCharStyles(this, *wrkCharStyles))
 		{
 			//TODO put in nice user warning
 		}
 
-		if (!fl.ReadLineStyles(fileName, wrkLineStyles))
+		if (!fl.readLineStyles(wrkLineStyles))
 		{
 			//TODO put in nice user warning
 		}
@@ -1801,6 +1801,9 @@ Page* ScribusDoc::addMasterPage(const int pageNumber, const QString& pageName)
 	//CB We dont create master pages (yet) with a pageCount based location
 	//Page* addedPage = new Page(ScratchLeft, MasterPages.count()*(pageHeight+ScratchBottom+ScratchTop)+ScratchTop, pageWidth, pageHeight);
 	Page* addedPage = new Page(scratch.Left, scratch.Top, pageWidth, pageHeight);
+	int pgN = pageNumber;
+	if (pageNumber > MasterPages.count())
+		pgN = MasterPages.count();
 	assert(addedPage!=NULL);
 	addedPage->setDocument(this);
 	addedPage->Margins.Top = pageMargins.Top;
@@ -1816,10 +1819,10 @@ Page* ScribusDoc::addMasterPage(const int pageNumber, const QString& pageName)
 	addedPage->marginPreset = marginPreset;
 	addedPage->MPageNam = "";
 	addedPage->setPageName(pageName);
-	addedPage->setPageNr(pageNumber);
-	MasterNames.insert(pageName, pageNumber);
-	MasterPages.insert(pageNumber, addedPage);
-	assert(MasterPages.at(pageNumber)!=NULL);
+	addedPage->setPageNr(pgN);
+	MasterNames.insert(pageName, pgN);
+	MasterPages.insert(pgN, addedPage);
+	assert(MasterPages.at(pgN)!=NULL);
 	if  (!isLoading())
 		changed();
 	return addedPage;
@@ -1867,6 +1870,15 @@ void ScribusDoc::deleteMasterPage(const int pageNumber)
 	Page* page = Pages->takeAt(pageNumber);
 	QString oldPageName(page->pageName());
 	delete page;
+	// #10658 : renumber masterpages and masterpage objects
+	// in order to avoid crash after masterpage deletion
+	for (int i = 0; i < MasterPages.count(); ++i)
+		MasterPages.at(i)->setPageNr(i);
+	for (int i = 0; i < MasterItems.count(); ++i)
+	{
+		if (MasterItems.at(i)->OwnPage > pageNumber)
+			MasterItems.at(i)->OwnPage--;
+	}
 	// remove the master page from the master page name list
 	//MasterNames.remove(page->PageNam);
 	/*CB TODO moved back to muster.cpp for now as this must happen after reformPages
@@ -3133,161 +3145,164 @@ void ScribusDoc::checkItemForFonts(PageItem *it, QMap<QString, QMap<uint, FPoint
 {
 	FPointArray gly;
 	QChar chstr;
-	if ((it->itemType() == PageItem::TextFrame) || (it->itemType() == PageItem::PathText))
+
+	if (!it->isTextFrame() && !it->isPathText())
+		return;
+
+	/* May be needed for fixing #10371 completely
+	if (it->isAnnotation())
 	{
-		/* May be needed for fixing #10371 completely
-		if (it->isAnnotation())
+		int annotType  = it->annotation().Type();
+		bool mustEmbed = ((annotType >= 2) && (annotType <= 6) && (annotType != 4));
+		if (mustEmbed && (!Really.contains(it->itemText.defaultStyle().charStyle().font().replacementName())))
 		{
-			int annotType  = it->annotation().Type();
-			bool mustEmbed = ((annotType >= 2) && (annotType <= 6) && (annotType != 4));
-			if (mustEmbed && (!Really.contains(it->itemText.defaultStyle().charStyle().font().replacementName())))
-			{
-				Really.insert(it->itemText.defaultStyle().charStyle().font().replacementName(), QMap<uint, FPointArray>());
-			}
-		}*/
-		for (int e = 0; e < it->itemText.length(); ++e)
+			Really.insert(it->itemText.defaultStyle().charStyle().font().replacementName(), QMap<uint, FPointArray>());
+		}
+	}*/
+	int start = it->isTextFrame() ? it->firstInFrame() : 0;
+	int stop  = it->isTextFrame() ? it->lastInFrame() + 1 : it->itemText.length();
+	for (int e = start; e < stop; ++e)
+	{
+		if (! Really.contains(it->itemText.charStyle(e).font().replacementName()) )
 		{
-			if (! Really.contains(it->itemText.charStyle(e).font().replacementName()) )
+			if (!it->itemText.charStyle(e).font().replacementName().isEmpty())
+				Really.insert(it->itemText.charStyle(e).font().replacementName(), QMap<uint, FPointArray>());
+		}
+		uint chr = it->itemText.text(e).unicode();
+		if ((chr == 13) || (chr == 32) || ((chr >= 26) && (chr <= 29)))
+			continue;
+		if (chr == 9)
+		{
+			for (int t1 = 0; t1 < it->itemText.paragraphStyle(e).tabValues().count(); t1++)
 			{
-				if (!it->itemText.charStyle(e).font().replacementName().isEmpty())
-					Really.insert(it->itemText.charStyle(e).font().replacementName(), QMap<uint, FPointArray>());
-			}
-			uint chr = it->itemText.text(e).unicode();
-			if ((chr == 13) || (chr == 32) || ((chr >= 26) && (chr <= 29)))
-				continue;
-			if (chr == 9)
-			{
-				for (int t1 = 0; t1 < it->itemText.paragraphStyle(e).tabValues().count(); t1++)
+				if (it->itemText.paragraphStyle(e).tabValues()[t1].tabFillChar.isNull())
+					continue;
+				chstr = it->itemText.paragraphStyle(e).tabValues()[t1].tabFillChar;
+				if ((it->itemText.charStyle(e).effects() & ScStyle_SmallCaps) || (it->itemText.charStyle(e).effects() & ScStyle_AllCaps))
 				{
-					if (it->itemText.paragraphStyle(e).tabValues()[t1].tabFillChar.isNull())
-						continue;
-					chstr = it->itemText.paragraphStyle(e).tabValues()[t1].tabFillChar;
-					if ((it->itemText.charStyle(e).effects() & ScStyle_SmallCaps) || (it->itemText.charStyle(e).effects() & ScStyle_AllCaps))
-					{
-						if (chstr.toUpper() != chstr)
-							chstr = chstr.toUpper();
-					}
-					chr = chstr.unicode();
-					uint gl = it->itemText.charStyle(e).font().char2CMap(chstr);
-					gly = it->itemText.charStyle(e).font().glyphOutline(gl);
-					if (!it->itemText.charStyle(e).font().replacementName().isEmpty())
-						Really[it->itemText.charStyle(e).font().replacementName()].insert(gl, gly);
+					if (chstr.toUpper() != chstr)
+						chstr = chstr.toUpper();
 				}
-				for (int t1 = 0; t1 < it->itemText.defaultStyle().tabValues().count(); t1++)
-				{
-					if (it->itemText.defaultStyle().tabValues()[t1].tabFillChar.isNull())
-						continue;
-					chstr = it->itemText.defaultStyle().tabValues()[t1].tabFillChar;
-					if ((it->itemText.charStyle(e).effects() & ScStyle_SmallCaps) || (it->itemText.charStyle(e).effects() & ScStyle_AllCaps))
-					{
-						if (chstr.toUpper() != chstr)
-							chstr = chstr.toUpper();
-					}
-					chr = chstr.unicode();
-					uint gl = it->itemText.charStyle(e).font().char2CMap(chstr);
-					gly = it->itemText.charStyle(e).font().glyphOutline(gl);
-					if (!it->itemText.charStyle(e).font().replacementName().isEmpty())
-						Really[it->itemText.charStyle(e).font().replacementName()].insert(gl, gly);
-				}
-				continue;
-			}
-			if ((chr == 30) || (chr == 23))
-			{
-				//Our page number collection string
-				QString pageNumberText(QString::null);
-				if (chr == 30)
-				{
-					if (e > 0 && it->itemText.text(e-1) == SpecialChars::PAGENUMBER)
-						pageNumberText=SpecialChars::ZWNBSPACE;
-					else if (lc!=0) //If not on a master page just get the page number for the page and the text
-						pageNumberText=getSectionPageNumberForPageIndex(it->OwnPage);
-					else
-					{
-						//Else, for a page number in a text frame on a master page we must scan
-						//all pages to see which ones use this page and get their page numbers.
-						//We only add each character of the pages' page number text if its nothing
-						//already in the pageNumberText variable. No need to add glyphs twice.
-						QString newText;
-						uint docPageCount=DocPages.count();
-						for (uint a = 0; a < docPageCount; ++a)
-						{
-							if (DocPages.at(a)->MPageNam == it->OnMasterPage)
-							{
-								newText=getSectionPageNumberForPageIndex(a);
-								for (int nti=0;nti<newText.length();++nti)
-									if (pageNumberText.indexOf(newText[nti])==-1)
-										pageNumberText+=newText[nti];
-							}
-						}
-					}
-				}
-				else
-				{
-					if (lc!=0)
-					{
-						QString out("%1");
-						int key = getSectionKeyForPageIndex(it->OwnPage);
-						if (key == -1)
-							pageNumberText = "";
-						else
-							pageNumberText = out.arg(getStringFromSequence(sections[key].type, sections[key].toindex - sections[key].fromindex + 1));
-					}
-					else
-					{
-						QString newText;
-						uint docPageCount=DocPages.count();
-						for (uint a = 0; a < docPageCount; ++a)
-						{
-							if (DocPages.at(a)->MPageNam == it->OnMasterPage)
-							{
-								QString out("%1");
-								int key = getSectionKeyForPageIndex(a);
-								if (key == -1)
-									newText = "";
-								else
-									newText = out.arg(getStringFromSequence(sections[key].type, sections[key].toindex - sections[key].fromindex + 1));
-								for (int nti=0;nti<newText.length();++nti)
-									if (pageNumberText.indexOf(newText[nti])==-1)
-										pageNumberText+=newText[nti];
-							}
-						}
-					}
-				}
-				//Now scan and add any glyphs used in page numbers
-				for (int pnti=0;pnti<pageNumberText.length(); ++pnti)
-				{
-					uint chr = pageNumberText[pnti].unicode();
-					if (it->itemText.charStyle(e).font().canRender(chr))
-					{
-						uint gl = it->itemText.charStyle(e).font().char2CMap(pageNumberText[pnti]);
-						FPointArray gly(it->itemText.charStyle(e).font().glyphOutline(gl));
-						if (!it->itemText.charStyle(e).font().replacementName().isEmpty())
-							Really[it->itemText.charStyle(e).font().replacementName()].insert(gl, gly);
-					}
-				}
-				continue;
-			}
-			if (it->itemText.charStyle(e).effects() & ScStyle_SmartHyphenVisible)
-			{
-				uint gl = it->itemText.charStyle(e).font().char2CMap(QChar('-'));
-				FPointArray gly(it->itemText.charStyle(e).font().glyphOutline(gl));
-				if (!it->itemText.charStyle(e).font().replacementName().isEmpty())
-					Really[it->itemText.charStyle(e).font().replacementName()].insert(gl, gly);
-			}
-			if ((it->itemText.charStyle(e).effects() & ScStyle_SmallCaps) || (it->itemText.charStyle(e).effects() & ScStyle_AllCaps))
-			{
-				chstr = it->itemText.text(e);
-				if (chstr.toUpper() != chstr)
-					chstr = chstr.toUpper();
 				chr = chstr.unicode();
-			}
-			if (it->itemText.charStyle(e).font().canRender(chr))
-			{
-				uint gl = it->itemText.charStyle(e).font().char2CMap(chr);
+				uint gl = it->itemText.charStyle(e).font().char2CMap(chstr);
 				gly = it->itemText.charStyle(e).font().glyphOutline(gl);
 				if (!it->itemText.charStyle(e).font().replacementName().isEmpty())
 					Really[it->itemText.charStyle(e).font().replacementName()].insert(gl, gly);
 			}
+			for (int t1 = 0; t1 < it->itemText.defaultStyle().tabValues().count(); t1++)
+			{
+				if (it->itemText.defaultStyle().tabValues()[t1].tabFillChar.isNull())
+					continue;
+				chstr = it->itemText.defaultStyle().tabValues()[t1].tabFillChar;
+				if ((it->itemText.charStyle(e).effects() & ScStyle_SmallCaps) || (it->itemText.charStyle(e).effects() & ScStyle_AllCaps))
+				{
+					if (chstr.toUpper() != chstr)
+						chstr = chstr.toUpper();
+				}
+				chr = chstr.unicode();
+				uint gl = it->itemText.charStyle(e).font().char2CMap(chstr);
+				gly = it->itemText.charStyle(e).font().glyphOutline(gl);
+				if (!it->itemText.charStyle(e).font().replacementName().isEmpty())
+					Really[it->itemText.charStyle(e).font().replacementName()].insert(gl, gly);
+			}
+			continue;
+		}
+		if ((chr == 30) || (chr == 23))
+		{
+			//Our page number collection string
+			QString pageNumberText(QString::null);
+			if (chr == 30)
+			{
+				if (e > 0 && it->itemText.text(e-1) == SpecialChars::PAGENUMBER)
+					pageNumberText=SpecialChars::ZWNBSPACE;
+				else if (lc!=0) //If not on a master page just get the page number for the page and the text
+					pageNumberText=getSectionPageNumberForPageIndex(it->OwnPage);
+				else
+				{
+					//Else, for a page number in a text frame on a master page we must scan
+					//all pages to see which ones use this page and get their page numbers.
+					//We only add each character of the pages' page number text if its nothing
+					//already in the pageNumberText variable. No need to add glyphs twice.
+					QString newText;
+					uint docPageCount=DocPages.count();
+					for (uint a = 0; a < docPageCount; ++a)
+					{
+						if (DocPages.at(a)->MPageNam == it->OnMasterPage)
+						{
+							newText=getSectionPageNumberForPageIndex(a);
+							for (int nti=0;nti<newText.length();++nti)
+								if (pageNumberText.indexOf(newText[nti])==-1)
+									pageNumberText+=newText[nti];
+						}
+					}
+				}
+			}
+			else
+			{
+				if (lc!=0)
+				{
+					QString out("%1");
+					int key = getSectionKeyForPageIndex(it->OwnPage);
+					if (key == -1)
+						pageNumberText = "";
+					else
+						pageNumberText = out.arg(getStringFromSequence(sections[key].type, sections[key].toindex - sections[key].fromindex + 1));
+				}
+				else
+				{
+					QString newText;
+					uint docPageCount=DocPages.count();
+					for (uint a = 0; a < docPageCount; ++a)
+					{
+						if (DocPages.at(a)->MPageNam == it->OnMasterPage)
+						{
+							QString out("%1");
+							int key = getSectionKeyForPageIndex(a);
+							if (key == -1)
+								newText = "";
+							else
+								newText = out.arg(getStringFromSequence(sections[key].type, sections[key].toindex - sections[key].fromindex + 1));
+							for (int nti=0;nti<newText.length();++nti)
+								if (pageNumberText.indexOf(newText[nti])==-1)
+									pageNumberText+=newText[nti];
+						}
+					}
+				}
+			}
+			//Now scan and add any glyphs used in page numbers
+			for (int pnti=0;pnti<pageNumberText.length(); ++pnti)
+			{
+				uint chr = pageNumberText[pnti].unicode();
+				if (it->itemText.charStyle(e).font().canRender(chr))
+				{
+					uint gl = it->itemText.charStyle(e).font().char2CMap(pageNumberText[pnti]);
+					FPointArray gly(it->itemText.charStyle(e).font().glyphOutline(gl));
+					if (!it->itemText.charStyle(e).font().replacementName().isEmpty())
+						Really[it->itemText.charStyle(e).font().replacementName()].insert(gl, gly);
+				}
+			}
+			continue;
+		}
+		if (it->itemText.charStyle(e).effects() & ScStyle_SmartHyphenVisible)
+		{
+			uint gl = it->itemText.charStyle(e).font().char2CMap(QChar('-'));
+			FPointArray gly(it->itemText.charStyle(e).font().glyphOutline(gl));
+			if (!it->itemText.charStyle(e).font().replacementName().isEmpty())
+				Really[it->itemText.charStyle(e).font().replacementName()].insert(gl, gly);
+		}
+		if ((it->itemText.charStyle(e).effects() & ScStyle_SmallCaps) || (it->itemText.charStyle(e).effects() & ScStyle_AllCaps))
+		{
+			chstr = it->itemText.text(e);
+			if (chstr.toUpper() != chstr)
+				chstr = chstr.toUpper();
+			chr = chstr.unicode();
+		}
+		if (it->itemText.charStyle(e).font().canRender(chr))
+		{
+			uint gl = it->itemText.charStyle(e).font().char2CMap(chr);
+			gly = it->itemText.charStyle(e).font().glyphOutline(gl);
+			if (!it->itemText.charStyle(e).font().replacementName().isEmpty())
+				Really[it->itemText.charStyle(e).font().replacementName()].insert(gl, gly);
 		}
 	}
 }
@@ -3517,7 +3532,7 @@ bool ScribusDoc::save(const QString& fileName, QString* savedFile)
 		mainWindowProgressBar->reset();
 	}
 	FileLoader fl(fileName);
-	bool ret = fl.SaveFile(fileName, this, savedFile);
+	bool ret = fl.saveFile(fileName, this, savedFile);
 	if (ret)
 	{
 		setName(fileName);
@@ -4475,6 +4490,45 @@ void  ScribusDoc::fixItemPageOwner()
 		currItem = FrameItems.at(i);
 		currItem->OwnPage = -1;
  	}
+
+	// #11274: Scribus crash when opening .sla document
+	// OwnPage is not meaningful for pattern items
+	QMap<QString, ScPattern>::iterator patternIt;
+	for (patternIt = docPatterns.begin(); patternIt != docPatterns.end(); ++patternIt)
+	{
+		QList<PageItem*> &patternItems(patternIt->items);
+		for (int i = 0; i < patternItems.count(); ++i)
+		{
+			currItem = patternItems.at(i);
+			currItem->OwnPage = -1;
+		}
+	}
+
+	// #11097 : we have a bug if an object inside a group fall outside masterpage
+	QMap<int, PageItem*> groupControls;
+	for (int i = 0; i < MasterItems.count(); ++i)
+	{
+		currItem = MasterItems.at(i);
+		if (currItem->isGroupControl)
+		{
+			int first = currItem->Groups.first();
+			groupControls[first] = currItem;
+		}
+		if (currItem->OwnPage == -1 && currItem->Groups.count() > 0)
+		{
+			int top = currItem->Groups.top();
+			PageItem* groupControl = groupControls.value(top, 0);
+			while (groupControl)
+			{
+				currItem->OwnPage = groupControl->OwnPage;
+				if (currItem->OwnPage >= 0 || groupControl->Groups.count() <= 1)
+					break;
+				int groupIndex = groupControl->Groups.count() - 2;
+				int groupID  = groupControl->Groups.at(groupIndex);
+				groupControl = groupControls.value(groupID, 0);
+			}
+		}
+	}
 }
 
 
@@ -4623,6 +4677,16 @@ void ScribusDoc::reformPages(bool moveObjects)
 	{
 		FPoint maxSize(maxXPos, maxYPos);
 		adjustCanvas(FPoint(0, 0), maxSize);
+	}
+}
+
+void ScribusDoc::refreshGuides()
+{
+	for (int i = 0; i < Pages->count(); ++i)
+	{
+		Page* page = Pages->at(i);
+		page->guides.addHorizontals(page->guides.getAutoHorizontals(page), GuideManagerCore::Auto);
+		page->guides.addVerticals(page->guides.getAutoVerticals(page), GuideManagerCore::Auto);
 	}
 }
 
@@ -6355,19 +6419,15 @@ void ScribusDoc::itemSelection_ApplyCharStyle(const CharStyle & newStyle, Select
 		{
 			int start = currItem->itemText.startOfItem(currItem->firstInFrame());
 			int length = currItem->itemText.endOfItem(currItem->lastInFrame()) - start;
-			if (appMode == modeEdit)
+			if (currItem->itemText.lengthOfSelection() > 0)
 			{
-				if (currItem->itemText.lengthOfSelection() > 0)
-				{
-					start = currItem->itemText.startOfSelection();
-					length = currItem->itemText.endOfSelection() - start;
-				}
-				else
-				{
-					start = qMax(currItem->firstInFrame(), currItem->itemText.cursorPosition());
-//9876					length = (start + 1) < currItem->itemText.length()? 1 : 0;
-					length = start < currItem->itemText.length() ? 1 : 0;
-				}
+				start = currItem->itemText.startOfSelection();
+				length = currItem->itemText.endOfSelection() - start;
+			}
+			else
+			{
+				start = qMax(currItem->firstInFrame(), currItem->itemText.cursorPosition());
+				length = start < currItem->itemText.length() ? 1 : 0;
 			}
 			currItem->itemText.applyCharStyle(start, qMax(0, length), newStyle);
 			currItem->invalid = true;
@@ -7592,52 +7652,51 @@ void ScribusDoc::itemSelection_ClearItem(Selection* customSelection)
 {
 	Selection* itemSelection = (customSelection!=0) ? customSelection : m_Selection;
 	assert(itemSelection!=0);
-	uint selectedItemCount=itemSelection->count();
-	if (selectedItemCount != 0)
+
+	uint selectedItemCount = itemSelection->count();
+	if (selectedItemCount <= 0) return;
+
+	PageItem *currItem;
+	bool userDecide = false;
+	bool userWantClear = true;
+	UndoTransaction* activeTransaction = NULL;
+	if (selectedItemCount > 1)
+		activeTransaction = new UndoTransaction(undoManager->beginTransaction(Um::SelectionGroup, Um::IGroup, Um::ClearContent, tr( "Remove content from frames" ), Um::IDelete));
+	for (uint i = 0; i < selectedItemCount; ++i)
 	{
-		PageItem *currItem;
-		bool userDecide = false;
-		bool userWantClear = true;
-		UndoTransaction* activeTransaction = NULL;
-		if (selectedItemCount > 1)
-			activeTransaction = new UndoTransaction(undoManager->beginTransaction(Um::SelectionGroup, Um::IGroup, Um::ClearContent, tr( "Remove content from frames" ), Um::IDelete));
-		for (uint i = 0; i < selectedItemCount; ++i)
+		currItem = itemSelection->itemAt(i);
+		if (currItem->asImageFrame())
 		{
-			currItem = itemSelection->itemAt(i);
-			if (currItem->asImageFrame())
+			if ((ScCore->fileWatcher->files().contains(currItem->Pfile) != 0) && (currItem->PictureIsAvailable))
+				ScCore->fileWatcher->removeFile(currItem->Pfile);
+			currItem->clearContents();
+		}
+		else if (currItem->asTextFrame())
+		{
+			if (ScCore->usingGUI() && (! userDecide))
 			{
-				if ((ScCore->fileWatcher->files().contains(currItem->Pfile) != 0) && (currItem->PictureIsAvailable))
-					ScCore->fileWatcher->removeFile(currItem->Pfile);
-				currItem->clearContents();
-			}
-			else
-			if (currItem->asTextFrame())
-			{
-				if (ScCore->usingGUI() && (! userDecide))
+				if (currItem->itemText.length() != 0 && (currItem->nextInChain() == 0 || currItem->prevInChain() == 0))
 				{
-					if (currItem->itemText.length() != 0 && (currItem->nextInChain() == 0 || currItem->prevInChain() == 0))
-					{
-						int t = ScMessageBox::warning(m_ScMW, CommonStrings::trWarning,
-										tr("Do you really want to clear all your text?"),
-										QMessageBox::Yes, QMessageBox::No | QMessageBox::Default);
-						userWantClear = (t != QMessageBox::No);
-						userDecide = true;
-					}
+					int t = ScMessageBox::warning(m_ScMW, CommonStrings::trWarning,
+									tr("Do you really want to clear all your text?"),
+									QMessageBox::Yes, QMessageBox::No | QMessageBox::Default);
+					userWantClear = (t != QMessageBox::No);
+					userDecide = true;
 				}
-				if (userWantClear)
-					currItem->clearContents();
 			}
+			if (userWantClear)
+				currItem->clearContents();
 		}
-		if (activeTransaction)
-		{
-			activeTransaction->commit();
-			delete activeTransaction;
-			activeTransaction = NULL;
-		}
-		updateFrameItems();
-		regionsChanged()->update(QRectF());
-		changed();
 	}
+	if (activeTransaction)
+	{
+		activeTransaction->commit();
+		delete activeTransaction;
+		activeTransaction = NULL;
+	}
+	updateFrameItems();
+	regionsChanged()->update(QRectF());
+	changed();
 }
 
 
@@ -9435,14 +9494,7 @@ void ScribusDoc::itemSelection_MultipleDuplicate(ItemMultipleDuplicateData& mdDa
 			activeTransaction = new UndoTransaction(undoManager->beginTransaction(item->getUName(), item->getUPixmap(), Um::MultipleDuplicate, "", Um::IMultipleDuplicate));
 		}
 	}
-	//FIXME: Enable paste without doing this save/restore, and stop using paste with all the refreshes
-	bool savedAlignGrid = useRaster;
-	bool savedAlignGuides = SnapGuides;
-	useRaster = false;
-	SnapGuides = false;
-	DoDrawing = false;
 	view()->updatesOn(false);
-	m_Selection->delaySignalsOn();
 	m_ScMW->setScriptRunning(true);
 	if (mdData.type==0) // Copy and offset or set a gap
 	{
@@ -9459,18 +9511,23 @@ void ScribusDoc::itemSelection_MultipleDuplicate(ItemMultipleDuplicateData& mdDa
 			if (dV != 0.0)
 				dV2 += m_Selection->height();
 		}
-		m_ScMW->slotEditCopy();
+		ScriXmlDoc ss;
+		QString BufferS = ss.WriteElem(this, view(), m_Selection);
 		//FIXME: stop using m_View
 		m_View->Deselect(true);
 		for (int i=0; i<mdData.copyCount; ++i)
 		{
-			m_ScMW->slotEditPaste();
-			for (int b=0; b<m_Selection->count(); ++b)
+			uint ac = Items->count();
+			ss.ReadElem(BufferS, prefsData.AvailFonts, this, currentPage()->xOffset(), currentPage()->yOffset(), false, true, prefsData.GFontSub, view());
+			m_Selection->delaySignalsOn();
+			for (int as = ac; as < Items->count(); ++as)
 			{
-				PageItem* bItem=m_Selection->itemAt(b);
+				PageItem* bItem = Items->at(as);
 				bItem->setLocked(false);
-				MoveItem(dH2, dV2, bItem, true);
+				bItem->moveBy(dH2, dV2, true);
+				m_Selection->addItem(bItem);
 			}
+			m_Selection->delaySignalsOff();
 			m_Selection->setGroupRect();
 			if (dR != 0.0)
 			{
@@ -9489,6 +9546,12 @@ void ScribusDoc::itemSelection_MultipleDuplicate(ItemMultipleDuplicateData& mdDa
 					dV2 += m_Selection->height();
 			}
 			dR2 += dR;
+			if (m_Selection->count() > 0)
+			{
+				m_Selection->itemAt(0)->connectToGUI();
+				m_Selection->itemAt(0)->emitAllToGUI();
+			}
+			m_Selection->clear();
 		}
 		tooltip = tr("Number of copies: %1\nHorizontal shift: %2\nVertical shift: %3\nRotation: %4").arg(mdData.copyCount).arg(dH).arg(dV).arg(dR);
 	}
@@ -9498,9 +9561,8 @@ void ScribusDoc::itemSelection_MultipleDuplicate(ItemMultipleDuplicateData& mdDa
 		int copyCount=mdData.gridRows*mdData.gridCols;
 		double dX=mdData.gridGapH/docUnitRatio + m_Selection->width();
 		double dY=mdData.gridGapV/docUnitRatio + m_Selection->height();
-// 		Personnaly I would prefer to first cleanup area but I guess it could mess up things elsewhere - pm
-// 		m_ScMW->slotEditCut();
-		m_ScMW->slotEditCopy();
+		ScriXmlDoc ss;
+		QString BufferS = ss.WriteElem(this, view(), m_Selection);
 		for (int i=0; i<mdData.gridRows; ++i) //skip 0, the item is the one we are copying
 		{
 			for (int j=0; j<mdData.gridCols; ++j) //skip 0, the item is the one we are copying
@@ -9508,14 +9570,15 @@ void ScribusDoc::itemSelection_MultipleDuplicate(ItemMultipleDuplicateData& mdDa
 				// We can comment out this conditional jump if we use slotEditCut(), would not be cool? ;-)
 				if (i==0 && j==0)
 					continue;
-				// The true fix would be in slotEdit{Copy,Cut} but now its a reasonnably clean workaround
-				m_View->Deselect(true);
-				m_ScMW->slotEditPaste();
-				for (int b=0; b<m_Selection->count(); ++b)
+				uint ac = Items->count();
+				ss.ReadElem(BufferS, prefsData.AvailFonts, this, currentPage()->xOffset(), currentPage()->yOffset(), false, true, prefsData.GFontSub, view());
+				for (int as = ac; as < Items->count(); ++as)
 				{
-					PageItem* bItem=m_Selection->itemAt(b);
+					PageItem* bItem = Items->at(as);
 					bItem->setLocked(false);
-					MoveItem(j*dX, i*dY, bItem, true);
+					bItem->moveBy(j*dX, i*dY, true);
+					bItem->connectToGUI();
+					bItem->emitAllToGUI();
 				}
 			}
 		}
@@ -9527,11 +9590,7 @@ void ScribusDoc::itemSelection_MultipleDuplicate(ItemMultipleDuplicateData& mdDa
 		delete activeTransaction;
 		activeTransaction = NULL;
 	}
-	//FIXME: Enable paste without doing this save/restore
-	useRaster = savedAlignGrid;
-	SnapGuides = savedAlignGuides;
 	DoDrawing = true;
-	m_Selection->delaySignalsOff();
 	view()->updatesOn(true);
 	m_ScMW->setScriptRunning(false);
 	//FIXME: stop using m_View

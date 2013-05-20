@@ -41,7 +41,7 @@ for which a new license (GPL+exception) is in place.
 #include <QValidator>
 #include <QWidget>
 
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) && !defined(_USE_MATH_DEFINES)
 #define _USE_MATH_DEFINES
 #endif
 #include <cmath>
@@ -133,7 +133,7 @@ QString LineFormatItemDelegate::text(const QVariant& data) const
 NameWidget::NameWidget(QWidget* parent) : QLineEdit(parent)
 {
 	setObjectName("namewidget");
-	QRegExp rx( "\\w+" );
+	QRegExp rx( "[\\w()]+" );
 	QValidator* validator = new QRegExpValidator( rx, this );
 	setValidator( validator );
 }
@@ -2090,13 +2090,15 @@ void PropertiesPalette::SetCurItem(PageItem *i)
 		if (colgapLabel->currentIndex() == 0)
 		{
 			dGap->setMaximum(qMax((i2->width() / i2->Cols - i2->textToFrameDistLeft() - i2->textToFrameDistRight())*m_unitRatio, 0.0));
-			dGap->setValue(i2->ColGap*m_unitRatio);
+			dGap->setValue(i2->ColGap * m_unitRatio);
 		}
 		else
 		{
 			dGap->setMaximum(qMax((i2->width() / i2->Cols)*m_unitRatio, 0.0));
-			dGap->setValue(i2->columnWidth()*m_unitRatio);
+			dGap->setValue(i2->columnWidth() * m_unitRatio);
 		}
+		colgapLabel->setEnabled(DCol->value() > 1);
+		dGap->setEnabled(DCol->value() > 1);
 		DLeft->setValue(i2->textToFrameDistLeft()*m_unitRatio);
 		DTop->setValue(i2->textToFrameDistTop()*m_unitRatio);
 		DBottom->setValue(i2->textToFrameDistBottom()*m_unitRatio);
@@ -2926,17 +2928,19 @@ void PropertiesPalette::setCols(int r, double g)
 			if (colgapLabel->currentIndex() == 0)
 			{
 				dGap->setMaximum(qMax((i2->width() / i2->Cols - i2->textToFrameDistLeft() - i2->textToFrameDistRight())*m_unitRatio, 0.0));
-				dGap->setValue(i2->ColGap*m_unitRatio);
+				dGap->setValue(i2->ColGap * m_unitRatio);
 			}
 			else
 			{
-				dGap->setMaximum(qMax((i2->width() / i2->Cols)*m_unitRatio, 0.0));
-				dGap->setValue(i2->columnWidth()*m_unitRatio);
+				dGap->setMaximum(qMax((i2->width() / i2->Cols) *m_unitRatio, 0.0));
+				dGap->setValue(i2->columnWidth() * m_unitRatio);
 			}
 		}
 	}
 	DCol->setMinimum(1);
 	dGap->setMinimum(0);
+	colgapLabel->setEnabled(DCol->value() > 1);
+	dGap->setEnabled(DCol->value() > 1);
 	HaveItem = tmp;
 }
 
@@ -3925,7 +3929,7 @@ void PropertiesPalette::NewGap()
 		return;
 	if (colgapLabel->currentIndex() == 0)
 		CurItem->ColGap = dGap->value() / m_unitRatio;
-	else
+	else if (CurItem->Cols > 1)
 	{
 		double lineCorr;
 		if (CurItem->lineColor() != CommonStrings::None)

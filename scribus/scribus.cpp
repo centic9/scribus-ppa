@@ -2647,11 +2647,7 @@ void ScribusMainWindow::docSetup(ReformDoc* dia)
 	doc->setMasterPageMode(true);
 	view->reformPages();
 	doc->setMasterPageMode(false);
-/*	doc->setLoading(true);
-	uint pageCount=doc->DocPages.count();
-	for (uint c=0; c<pageCount; ++c)
-		Apply_MasterPage(doc->DocPages.at(c)->MPageNam, c, false);
-	doc->setLoading(false); */
+	doc->changed();
 	view->reformPages();
 	view->GotoPage(doc->currentPage()->pageNr());
 	view->DrawNew();
@@ -3646,7 +3642,7 @@ void ScribusMainWindow::importVectorFile()
 		else
 		{
 			FileLoader *fileLoader = new FileLoader(fileName);
-			int testResult = fileLoader->TestFile();
+			int testResult = fileLoader->testFile();
 			delete fileLoader;
 			if ((testResult != -1) && (testResult >= FORMATID_ODGIMPORT))
 			{
@@ -3845,14 +3841,14 @@ bool ScribusMainWindow::loadPage(QString fileName, int Nr, bool Mpa, const QStri
 	if (!fileName.isEmpty())
 	{
 		FileLoader *fl = new FileLoader(fileName);
-		if (fl->TestFile() == -1)
+		if (fl->testFile() == -1)
 		{
 			delete fl;
 			return false;
 		}
 		doc->setLoading(true);
 		uint oldItemsCount = doc->Items->count();
-		if(!fl->LoadPage(doc, Nr, Mpa, renamedPageName))
+		if(!fl->loadPage(doc, Nr, Mpa, renamedPageName))
 		{
 			delete fl;
 			doc->setLoading(false);
@@ -3949,7 +3945,7 @@ bool ScribusMainWindow::loadDoc(QString fileName)
 	{
 		QString FName = fi.absoluteFilePath();
 		FileLoader *fileLoader = new FileLoader(FName);
-		int testResult=fileLoader->TestFile();
+		int testResult = fileLoader->testFile();
 		if (testResult == -1)
 		{
 			delete fileLoader;
@@ -3999,11 +3995,11 @@ bool ScribusMainWindow::loadDoc(QString fileName)
 		doc->SoftProofing = false;
 		doc->Gamut = false;
 		setScriptRunning(true);
-		bool loadSuccess=fileLoader->LoadFile(doc);
+		bool loadSuccess = fileLoader->loadFile(doc);
 		//Do the font replacement check from here, when we have a GUI. TODO do this also somehow without the GUI
 		//This also gives the user the opportunity to cancel the load when finding theres a replacement required.
 		if (loadSuccess && ScCore->usingGUI())
-			loadSuccess=fileLoader->postLoad(doc);
+			loadSuccess = fileLoader->postLoad(doc);
 		if(!loadSuccess)
 		{
 			view->close();
@@ -4158,7 +4154,7 @@ bool ScribusMainWindow::loadDoc(QString fileName)
 		}
 //		propertiesPalette->updateColorList();
 //		propertiesPalette->Cpal->ChooseGrad(0);
-		if (fileLoader->FileType > FORMATID_NATIVEIMPORTEND)
+		if (fileLoader->fileType() > FORMATID_NATIVEIMPORTEND)
 		{
 			doc->setName(FName+ tr("(converted)"));
 			QFileInfo fi(doc->DocName);
@@ -4183,6 +4179,7 @@ bool ScribusMainWindow::loadDoc(QString fileName)
 		doc->RePos = true;
 		doc->setMasterPageMode(true);
 		doc->reformPages();
+		doc->refreshGuides();
 		doc->setLoading(false);
 		for (int azz=0; azz<doc->MasterItems.count(); ++azz)
 		{
@@ -4201,27 +4198,9 @@ bool ScribusMainWindow::loadDoc(QString fileName)
 		for (int azz=0; azz<docItemsCount; ++azz)
 		{
 			PageItem *ite = doc->Items->at(azz);
-			//CB dont need this as we get it from the loading page in 1.2.x docs. 1.3.x items have this anyway.
-			/*
-			if (ite->Groups.count() != 0)
-				doc->GroupOnPage(ite);
-			else
-				ite->OwnPage = doc->OnPage(ite);
-			*/
-			//view->setRedrawBounding(ite);
 //			qDebug() << QString("load D: %1 %2 %3").arg(azz).arg((uint)ite).arg(ite->itemType());
 			if(ite->nextInChain() == NULL)
 				ite->layout();
-/*			if (doc->OldBM)
-			{
-				if ((ite->itemType() == PageItem::TextFrame) && (ite->isBookmark))
-					bookmarkPalette->BView->AddPageItem(ite);
-			}
-			else
-			{
-				if ((ite->itemType() == PageItem::TextFrame) && (ite->isBookmark))
-					bookmarkPalette->BView->ChangeItem(ite->BMnr, ite->ItemNr);
-			} */
 		}
 		for (int azz=0; azz<doc->FrameItems.count(); ++azz)
 		{
@@ -4231,8 +4210,6 @@ bool ScribusMainWindow::loadDoc(QString fileName)
 				ite->layout();
 		}
 		/*qDebug("Time elapsed: %d ms", t.elapsed());*/
-//		if (doc->OldBM)
-//			StoreBookmarks();
 		doc->RePos = false;
 		doc->setModified(false);
 		updateRecent(FName);
@@ -4524,8 +4501,13 @@ bool ScribusMainWindow::slotFileSaveAs()
 	if (doc->hasName)
 	{
 		QFileInfo fi(doc->DocName);
+		QString completeBaseName = fi.completeBaseName();
+		if (completeBaseName.endsWith(".sla", Qt::CaseInsensitive))
+			completeBaseName.chop(4);
+		else if (completeBaseName.endsWith(".gz", Qt::CaseInsensitive))
+			completeBaseName.chop(3);
 		wdir = QDir::fromNativeSeparators( fi.path() );
-		fna  = QDir::fromNativeSeparators( fi.path()+"/"+fi.baseName()+".sla" );
+		fna  = QDir::fromNativeSeparators( fi.path()+"/"+completeBaseName+".sla" );
 	}
 	else
 	{
@@ -4881,7 +4863,12 @@ void ScribusMainWindow::slotReallyPrint()
 		if (!doc->DocName.startsWith( tr("Document")))
 		{
 			QFileInfo fi(doc->DocName);
-			doc->Print_Options.filename = fi.path()+"/"+fi.baseName()+".ps";
+			QString completeBaseName = fi.completeBaseName();
+			if (completeBaseName.endsWith(".sla", Qt::CaseInsensitive))
+				if (completeBaseName.length() > 4) completeBaseName.chop(4);
+			if (completeBaseName.endsWith(".gz", Qt::CaseInsensitive))
+				if (completeBaseName.length() > 3) completeBaseName.chop(3);
+			doc->Print_Options.filename = fi.path()+"/"+completeBaseName+".ps";
 		}
 		else
 		{
@@ -6564,6 +6551,8 @@ void ScribusMainWindow::setAppMode(int mode)
 			if (currItem != 0)
 			{
 				currItem->update();
+				if (currItem->asTextFrame())
+					enableTextActions(&scrActions, false);
 				scrMenuMgr->setMenuEnabled("Item", true);
 			}
 			view->horizRuler->textMode(false);
@@ -6732,33 +6721,6 @@ void ScribusMainWindow::setAppMode(int mode)
 			activateWindow();
 		PluginManager& pluginManager(PluginManager::instance());
 		pluginManager.enablePluginActionsForSelection(this);
-/*
-		QStringList pluginNames(pluginManager.pluginNames(false));
-		ScPlugin* plugin;
-		ScActionPlugin* ixplug;
-		ScrAction* pluginAction = 0;
-		QString pName;
-		for (int i = 0; i < pluginNames.count(); ++i)
-		{
-			pName = pluginNames.at(i);
-			plugin = pluginManager.getPlugin(pName, true);
-			Q_ASSERT(plugin); // all the returned names should represent loaded plugins
-			if (plugin->inherits("ScActionPlugin"))
-			{
-				ixplug = dynamic_cast<ScActionPlugin*>(plugin);
-				Q_ASSERT(ixplug);
-				ScActionPlugin::ActionInfo ai(ixplug->actionInfo());
-				pluginAction = ScCore->primaryMainWindow()->scrActions[ai.name];
-				if (pluginAction != 0)
-				{
-					if (doc->m_Selection->count() != 0)
-						pluginAction->setEnabled(ixplug->handleSelection(doc, doc->m_Selection->itemAt(0)->itemType()));
-					else
-						pluginAction->setEnabled(ixplug->handleSelection(doc));
-				}
-			}
-		}
-*/
 	}
 	actionManager->connectModeActions();
 }
@@ -7808,7 +7770,7 @@ void ScribusMainWindow::prefsOrg(Preferences *dia)
 	prefsManager->applyLoadedShortCuts();
 
 	int newImageQuality = prefsManager->appPrefs.toolSettings.lowResType;
-	if (oldImageQuality != newImageQuality)
+	if (view && (oldImageQuality != newImageQuality))
 		view->previewQualitySwitcher->setCurrentIndex(newImageQuality);
 
 	QWidgetList windows = wsp->windowList();
@@ -8432,6 +8394,7 @@ void ScribusMainWindow::slotChangeUnit(int unitIndex, bool draw)
 
 	doc->setUnitIndex(unitIndex);
 	setCurrentComboItem(view->unitSwitcher, unitGetStrFromIndex(doc->unitIndex()));
+	view->unitChange();
 	propertiesPalette->unitChange();
 	nodePalette->unitChange();
 	alignDistributePalette->unitChange();
@@ -8892,8 +8855,8 @@ QString ScribusMainWindow::CFileDialog(QString wDir, QString caption, QString fi
 	if (!defNa.isEmpty())
 	{
 		QFileInfo f(defNa);
-		dia->setExtension(f.completeSuffix());
-		dia->setZipExtension(f.completeSuffix() + ".gz");
+		dia->setExtension(f.suffix());
+		dia->setZipExtension(f.suffix() + ".gz");
 		dia->setSelection(defNa);
 	}
 	if (optionFlags & fdDirectoriesOnly)
@@ -9017,6 +8980,8 @@ void ScribusMainWindow::changeLayer(int )
 		NoFrameEdit();
 	view->Deselect(true);
 	rebuildLayersList();
+	layerPalette->rebuildList();
+	layerPalette->markActiveLayer();
 	view->updateLayerMenu();
 	view->setLayerMenuText(doc->activeLayerName());
 	view->DrawNew();
@@ -9257,7 +9222,7 @@ void ScribusMainWindow::emergencySave()
 				std::cout << "Saving: " << doc->DocName.toStdString() << ".emergency" << std::endl;
 				doc->autoSaveTimer->stop();
 				FileLoader fl(doc->DocName+".emergency");
-				fl.SaveFile(doc->DocName+".emergency", doc, 0);
+				fl.saveFile(doc->DocName+".emergency", doc, 0);
 			}
 			view->close();
 			uint numPages=doc->Pages->count();
@@ -9578,7 +9543,7 @@ void ScribusMainWindow::dragEnterEvent ( QDragEnterEvent* e)
 			{
 				QUrl url( fileUrls[i] );
 				FileLoader *fileLoader = new FileLoader(url.path());
-				int testResult = fileLoader->TestFile();
+				int testResult = fileLoader->testFile();
 				delete fileLoader;
 				if ((testResult != -1) && (testResult >= FORMATID_ODGIMPORT))
 				{
@@ -9616,7 +9581,7 @@ void ScribusMainWindow::dropEvent ( QDropEvent * e)
 			{
 				QUrl url( fileUrls[i] );
 				FileLoader *fileLoader = new FileLoader(url.path());
-				int testResult = fileLoader->TestFile();
+				int testResult = fileLoader->testFile();
 				delete fileLoader;
 				if ((testResult != -1) && (testResult >= FORMATID_ODGIMPORT))
 				{
@@ -9764,6 +9729,7 @@ void ScribusMainWindow::PutToPatterns()
 	{
 		PageItem* paItem = doc->Items->takeAt(ac);
 		paItem->setItemName(patternName+QString("_%1").arg(as-ac));
+		paItem->OwnPage = -1; // #11274 : OwnPage is not meaningful for pattern items
 		pat.items.append(paItem);
 	}
 	doc->addPattern(patternName, pat);

@@ -147,6 +147,9 @@ QRegion PageItem_TextFrame::availableRegion()
 			for (int a = 0; a < m_Doc->MasterItems.count(); ++a)
 			{
 				docItem = m_Doc->MasterItems.at(a);
+				// #10642 : masterpage items interact only with items placed on same masterpage
+				if (docItem->OnMasterPage != OnMasterPage)
+					continue;
 				LayerLevItem = m_Doc->layerLevelFromNumber(docItem->LayerNr);
 				if (((docItem->ItemNr > ItemNr) && (docItem->LayerNr == LayerNr)) || (LayerLevItem > LayerLev && m_Doc->layerFlow(docItem->LayerNr)))
 				{
@@ -237,6 +240,39 @@ void PageItem_TextFrame::setShadow()
 		invalid = true;
 		currentShadow = newShadow;
 	}
+}
+
+static void debugLineLayout(const StoryText& itemText, const LineSpec& line)
+{
+	QFile debugFile(QDir::homePath() + "/Desktop/debug_line.csv");
+	debugFile.open(QIODevice::WriteOnly);
+
+	QTextStream stream(&debugFile);
+	stream.setRealNumberNotation(QTextStream::FixedNotation);
+	stream.setRealNumberPrecision(7);
+
+	stream << "xoffset"  << "\t";
+	stream << "yoffset"  << "\t";
+	stream << "xadvance" << "\t";
+	stream << "yadvance" << "\t";
+	stream << "scaleH"   << "\t";
+	stream << "scaleV"   << "\t";
+	stream << "\n";
+
+	for (int zc = line.firstItem; zc < line.lastItem; ++zc)
+	{
+		const ScText* item = itemText.item(zc);
+
+		stream << item->glyph.xoffset  << "\t";
+		stream << item->glyph.yoffset  << "\t";
+		stream << item->glyph.xadvance << "\t";
+		stream << item->glyph.yadvance << "\t";
+		stream << item->glyph.scaleH   << "\t";
+		stream << item->glyph.scaleV   << "\t";
+		stream << "\n";
+	}
+
+	debugFile.close();
 }
 
 static void dumpIt(const ParagraphStyle& pstyle, QString indent = QString("->"))
@@ -1001,8 +1037,9 @@ void PageItem_TextFrame::layout()
 	double oldCurY, EndX, OFs, wide, kernVal;
 	QString chstr;
 	ScText *hl;
+	PageItem_TextFrame* nextFrame;
 	ParagraphStyle style;
-	int /*ParagraphStyle::OpticalMarginType*/ opticalMargins = ParagraphStyle::OM_None;
+	int opticalMargins = ParagraphStyle::OM_None;
 	
 	bool outs = false;
 	bool goNoRoom = false;
@@ -1562,25 +1599,41 @@ void PageItem_TextFrame::layout()
 				double Xpos, Xend;
 				bool done = false;
 				bool newColumn = false;
+
+				//FIX ME - that should be paragraph style`s properties
+				//if set then indent is add to possible line start point (after overflow)
+				//if not then indent is calculated from column left edge
+				//if you dont agree that adding indent to overflow should be default behaviour 
+				//then change it to false
+				bool addIndent2overflow = false; // should be addIndent2Overflow = style.addIndent2Overlow();
+				bool addFirstIndent2overflow = true; // should be addFirstIndent2Overflow = style.addFirstIndent2Overlow();
+				//if first line indent is negative and left indent should not be added to overflow
+				//then dont add first line ident either
+				if ((style.firstIndent() < 0) && !addIndent2overflow)
+					addFirstIndent2overflow = false;
+
 				while (!done)
 				{
-					Xpos = current.xPos;
+					Xpos = current.xPos + (addIndent2overflow ? 0 : current.leftIndent);
 					Xend = current.xPos + current.leftIndent;
 					//check if in indent any overflow occurs
 					while (Xpos <= Xend && Xpos < current.colRight)
 					{
+						pt.moveTopLeft(QPoint(static_cast<int>(floor(Xpos)),maxYAsc));
 						if (!regionContainsRect(cl, pt))
 						{
 							Xpos = current.xPos = realEnd = findRealOverflowEnd(cl, pt, current.colRight);
-							Xend = current.xPos + current.leftIndent;
+							Xend = current.xPos + (addIndent2overflow ? current.leftIndent : 0);
+							//for first paragraph`s line - move it back if first line offset should not be add
+							if ( addFirstIndent2overflow && (a==0 || (a > 0 && (itemText.text(a-1) == SpecialChars::PARSEP))))
+								Xend += style.firstIndent();
 						}
 						else
 							Xpos++;
-						pt.moveTopLeft(QPoint(static_cast<int>(floor(Xpos)),maxYAsc));
 					}
 					current.xPos = Xend;
 					done = true;
-					if (current.isEndOfLine((style.minGlyphExtension() * wide) + current.rightMargin + current.leftIndent))
+					if (current.isEndOfLine((style.minGlyphExtension() * wide) + current.rightMargin))
 					{
 						// new line
 						current.xPos = qMax(current.colLeft, maxDX);
@@ -2445,14 +2498,13 @@ void PageItem_TextFrame::layout()
 	}
 	MaxChars = itemText.length();
 	invalid = false;
-	if (NextBox != NULL) 
+
+	nextFrame = dynamic_cast<PageItem_TextFrame*>(NextBox);
+	while (nextFrame != NULL)
 	{
-		PageItem_TextFrame* nextFrame = dynamic_cast<PageItem_TextFrame*>(NextBox);
-		if (nextFrame != NULL)
-		{
-			nextFrame->invalid = true;
-			nextFrame->firstChar = MaxChars;
-		}
+		nextFrame->invalid   = true;
+		nextFrame->firstChar = MaxChars;
+		nextFrame = dynamic_cast<PageItem_TextFrame*>(nextFrame->NextBox);
 	}
 //	qDebug("textframe: len=%d, done relayout", itemText.length());
 	return;
@@ -2514,8 +2566,7 @@ void PageItem_TextFrame::DrawObj_Item(ScPainter *p, QRectF cullingArea, double s
 		return;
 	QMatrix pf2;
 	QPoint pt1, pt2;
-	double wide, lineCorr;
-	QChar chstr0;
+	double wide;
 	QString cachedStroke = "";
 	QString cachedFill = "";
 	double cachedFillShade = -1;
@@ -2527,7 +2578,7 @@ void PageItem_TextFrame::DrawObj_Item(ScPainter *p, QRectF cullingArea, double s
 	QColor cachedFillQ;
 	QColor cachedStrokeQ;
 	//	QValueList<ParagraphStyle::TabRecord> tTabValues;
-	double desc, asce, tabDist;
+	double desc, asce;
 	//	tTabValues.clear();
 	p->save(); //SA1
 	//	QRect e2;
@@ -2551,10 +2602,6 @@ void PageItem_TextFrame::DrawObj_Item(ScPainter *p, QRectF cullingArea, double s
 			p->fillPath();
 		}
 	}
-	if (lineColor() != CommonStrings::None)
-		lineCorr = m_lineWidth / 2.0;
-	else
-		lineCorr = 0;
 	if ((isAnnotation()) && (annotation().Type() == 2) && (!Pfile.isEmpty()) && (PictureIsAvailable) && (PicArt) && (annotation().UseIcons()))
 	{
 		p->save();//SA2
@@ -2614,14 +2661,12 @@ void PageItem_TextFrame::DrawObj_Item(ScPainter *p, QRectF cullingArea, double s
 			pf2.translate(0, Height);
 			pf2.scale(1, -1);
 		}
-		uint tabCc = 0;
 		assert( firstInFrame() >= 0 );
 		assert( lastInFrame() < itemText.length() );
 		LineSpec ls;
 		for (uint ll=0; ll < itemText.lines(); ++ll)
 		{
 			ls = itemText.line(ll);
-			tabDist = ls.x;
 			double CurX = ls.x;
 
 			// Draw text selection rectangles
@@ -2702,11 +2747,8 @@ void PageItem_TextFrame::DrawObj_Item(ScPainter *p, QRectF cullingArea, double s
 			{
 				hl = itemText.item(a);
 				const CharStyle& charStyle(itemText.charStyle(a));
-				double chs = charStyle.fontSize() * hl->glyph.scaleV;
 				bool selected = itemText.selected(a);
-				if (charStyle.effects() & ScStyle_StartOfLine)
-					tabCc = 0;
-				chstr0 = hl->ch;
+
 				actFill = charStyle.fillColor();
 				actFillShade = charStyle.fillShade();
 				if (actFill != CommonStrings::None)
@@ -2725,24 +2767,6 @@ void PageItem_TextFrame::DrawObj_Item(ScPainter *p, QRectF cullingArea, double s
 				}
 				else
 					p->setFillMode(ScPainter::None);
-				if (charStyle.effects() & ScStyle_DropCap)
-				{
-					const ParagraphStyle& style(itemText.paragraphStyle(a));
-					if (style.lineSpacingMode() == ParagraphStyle::BaselineGridLineSpacing)
-						chs = qRound(10 * ((m_Doc->typographicSettings.valueBaseGrid * (style.dropCapLines()-1) + (charStyle.font().ascent(style.charStyle().fontSize() / 10.0))) / charStyle.font().realCharHeight(chstr0, 10)));
-					else
-					{
-						if (style.lineSpacingMode() == ParagraphStyle::FixedLineSpacing)
-							chs = qRound(10 * ((style.lineSpacing() * (style.dropCapLines()-1)+(charStyle.font().ascent(style.charStyle().fontSize() / 10.0))) / charStyle.font().realCharHeight(chstr0, 10)));
-						else
-						{
-							double currasce = charStyle.font().height(style.charStyle().fontSize() / 10.0);
-							chs = qRound(10 * ((currasce * (style.dropCapLines()-1)+(charStyle.font().ascent(style.charStyle().fontSize() / 10.0))) / charStyle.font().realCharHeight(chstr0, 10)));
-						}
-					}
-				}
-				if (chstr0 == SpecialChars::TAB)
-					tabCc++;
 
 				if (!m_Doc->RePos)
 				{
@@ -2785,7 +2809,6 @@ void PageItem_TextFrame::DrawObj_Item(ScPainter *p, QRectF cullingArea, double s
 					else
 						CurX += hl->glyph.wide();
 				}
-				tabDist = CurX;
 			}
 		}
 	//	else {
@@ -2851,8 +2874,8 @@ void PageItem_TextFrame::DrawObj_Post(ScPainter *p)
 	if ((!isEmbedded) && (!m_Doc->RePos))
 	{
 		// added to prevent fat frame outline due to antialiasing and considering you can’t pass a cosmetic pen to scpainter - pm
-		double aestheticFactor(5.0);
-		double scpInv = 1.0 / (qMax(view->scale(), 1.0) * aestheticFactor);
+		double aestheticFactor(3.33);
+		double scpInv = 1.0 / (view->scale() * aestheticFactor);
 		if ((Frame) && (m_Doc->guidesSettings.framesShown))
 		{
 			p->setPen(PrefsManager::instance()->appPrefs.DFrameNormColor, scpInv, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
@@ -2902,7 +2925,7 @@ void PageItem_TextFrame::DrawObj_Post(ScPainter *p)
 			drawColumnBorders(p);
 		if ((m_Doc->guidesSettings.layerMarkersShown) && (m_Doc->layerCount() > 1) && (!m_Doc->layerOutline(LayerNr)) && (!view->m_canvas->isPreviewMode()))
 		{
-			p->setPen(Qt::black, 0.5/ m_Doc->view()->scale(), Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
+			p->setPen(Qt::black, 0.5 / m_Doc->view()->scale(), Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
 			p->setPenOpacity(1.0);
 			p->setBrush(m_Doc->layerMarker(LayerNr));
 			p->setBrushOpacity(1.0);
@@ -2974,8 +2997,12 @@ void PageItem_TextFrame::handleModeEditKey(QKeyEvent *k, bool& keyRepeat)
 	}
 	int oldPos = itemText.cursorPosition(); // 15-mar-2004 jjsa for cursor movement with Shift + Arrow key
 	int kk = k->key();
-	int as = k->text()[0].unicode();
 	QString uc = k->text();
+#ifdef Q_OS_HAIKU
+	if (kk == Qt::Key_Return)
+		uc = "\r";
+#endif
+	int as = uc[0].unicode();
 	QString cr, Tcha, Twort;
 	uint Tcoun;
 	int len, pos;
@@ -2991,7 +3018,7 @@ void PageItem_TextFrame::handleModeEditKey(QKeyEvent *k, bool& keyRepeat)
 	//<< ISO 14755
 	//Check if we are trying to enter Unicode sequence mode first
 	QKeySequence currKeySeq = QKeySequence(k->key() | keyModifiers);
-	if(currKeySeq.matches(doc()->scMW()->scrActions["specialUnicodeSequenceBegin"]->shortcut())==QKeySequence::ExactMatch)
+	if (currKeySeq.matches(doc()->scMW()->scrActions["specialUnicodeSequenceBegin"]->shortcut())==QKeySequence::ExactMatch)
 	{
 		unicodeTextEditMode = true;
 		unicodeInputCount = 0;
@@ -3110,9 +3137,9 @@ void PageItem_TextFrame::handleModeEditKey(QKeyEvent *k, bool& keyRepeat)
 	case Qt::Key_End:
 		// go to end of line
 		len = lastInFrame();
-		if ( itemText.cursorPosition() >= len )
+		if (itemText.cursorPosition() >= (len + 1))
 			break; // at end of frame
-		if ( (buttonModifiers & Qt::ControlModifier) == 0 )
+		if ((buttonModifiers & Qt::ControlModifier) == 0)
 		{
 			itemText.setCursorPosition( itemText.endOfLine(itemText.cursorPosition()) );
 		}
@@ -3121,9 +3148,9 @@ void PageItem_TextFrame::handleModeEditKey(QKeyEvent *k, bool& keyRepeat)
 			//Control End for end of frame text
 			itemText.setCursorPosition( itemText.endOfFrame(itemText.cursorPosition()) );
 		}
-		if ( buttonModifiers & Qt::ShiftModifier )
+		if (buttonModifiers & Qt::ShiftModifier)
 			ExpandSel(1, oldPos);
-//		if ( this->itemText.lengthOfSelection() > 0 )
+//		if (this->itemText.lengthOfSelection() > 0)
 //			view->RefreshItem(this);
 		m_Doc->scMW()->setTBvals(this);
 		break;
@@ -3182,7 +3209,7 @@ void PageItem_TextFrame::handleModeEditKey(QKeyEvent *k, bool& keyRepeat)
 				break; // at begin of frame
 			len = itemText.length();
 			itemText.setCursorPosition( itemText.prevParagraph(itemText.cursorPosition()) );
-			if ( buttonModifiers & Qt::ShiftModifier )
+			if (buttonModifiers & Qt::ShiftModifier)
 				ExpandSel(-1, oldPos);
 		}
 		else
@@ -3802,7 +3829,6 @@ void PageItem_TextFrame::drawColumnBorders(ScPainter *p)
 		p->drawLine(FPoint(0, TExtra + lineCorr), FPoint(Width, TExtra + lineCorr));
 	if (BExtra + lineCorr!=0.0)
 		p->drawLine(FPoint(0, Height - BExtra - lineCorr), FPoint(Width, Height - BExtra - lineCorr));
-	double oldColRightX = Extra + lineCorr;
 	while(curCol < Cols)
 	{
 		colLeft=(colWidth + ColGap) * curCol + Extra + lineCorr;
@@ -3810,7 +3836,6 @@ void PageItem_TextFrame::drawColumnBorders(ScPainter *p)
 			p->drawLine(FPoint(colLeft, 0), FPoint(colLeft, 0+Height));
 		if (colLeft + colWidth != Width)
 			p->drawLine(FPoint(colLeft+colWidth, 0), FPoint(colLeft+colWidth, 0+Height));
-		oldColRightX=colLeft+colWidth;
 		++curCol;
 	}
 	

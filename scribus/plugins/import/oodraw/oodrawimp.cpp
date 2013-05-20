@@ -378,9 +378,6 @@ bool OODPlug::convert(const TransactionSettings& trSettings, int flags)
 				m_Doc->documentInfo.setKeywords(Keys.left(Keys.length()-2));
 		}
 	}
-	FPoint minSize = m_Doc->minCanvasCoordinate;
-	FPoint maxSize = m_Doc->maxCanvasCoordinate;
-	FPoint cOrigin = m_Doc->view()->canvasOrigin();
 	Elements.clear();
 	m_Doc->view()->Deselect();
 	m_Doc->setLoading(true);
@@ -1016,13 +1013,13 @@ void OODPlug::parseStyle(OODrawStyle& oostyle, const QDomElement &e)
 				{
 					const ScColor& col1 = m_Doc->PageColors[c];
 					const ScColor& col2 = m_Doc->PageColors[c2];
-					oostyle.gradient.addStop( ScColorEngine::getRGBColor(col2, m_Doc), 0.0, 0.5, 1, c2, shadeE );
-					oostyle.gradient.addStop( ScColorEngine::getRGBColor(col1, m_Doc), 1.0 - border, 0.5, 1, c, shadeS );
+					oostyle.gradient.addStop( ScColorEngine::getShadeColor(col2, m_Doc, shadeE), 0.0, 0.5, 1, c2, shadeE );
+					oostyle.gradient.addStop( ScColorEngine::getShadeColor(col1, m_Doc, shadeS), 1.0 - border, 0.5, 1, c, shadeS );
 				}
 				else
 				{
-					oostyle.gradient.addStop( ScColorEngine::getRGBColor(col1, m_Doc), border, 0.5, 1, c, shadeS );
-					oostyle.gradient.addStop( ScColorEngine::getRGBColor(col2, m_Doc), 1.0, 0.5, 1, c2, shadeE );
+					oostyle.gradient.addStop( ScColorEngine::getShadeColor(col1, m_Doc, shadeS), border, 0.5, 1, c, shadeS );
+					oostyle.gradient.addStop( ScColorEngine::getShadeColor(col2, m_Doc, shadeE), 1.0, 0.5, 1, c2, shadeE );
 				}
 			}
 		}
@@ -2003,6 +2000,3 @@ OODPlug::~OODPlug()
 	m_styles.clear();
 	m_draws.clear();
 }
-
-
-

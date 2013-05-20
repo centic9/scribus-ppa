@@ -1271,8 +1271,8 @@ void PageItem::DrawObj_Post(ScPainter *p)
 	}
 	if ((!isEmbedded) && (!m_Doc->RePos))
 	{
-		double aestheticFactor(5.0);
-		double scpInv = 1.0 / (qMax(view->scale(), 1.0) * aestheticFactor);
+		double aestheticFactor(3.33);
+		double scpInv = 1.0 / (view->scale() * aestheticFactor);
 		if (!isGroupControl)
 		{
 			if ((Frame) && (m_Doc->guidesSettings.framesShown) && ((itemType() == ImageFrame) || (itemType() == LatexFrame) || (itemType() == PathText)))
@@ -1320,7 +1320,7 @@ void PageItem::DrawObj_Post(ScPainter *p)
 		}
 		if ((m_Doc->guidesSettings.framesShown) && textFlowUsesContourLine() && (ContourLine.size() != 0))
 		{
-			p->setPen(Qt::darkGray, 1.0 / qMax(view->scale(), 1.0), Qt::DotLine, Qt::FlatCap, Qt::MiterJoin);
+			p->setPen(Qt::darkGray, scpInv, Qt::DotLine, Qt::FlatCap, Qt::MiterJoin);
 // Ugly Hack to fix rendering problems with cairo >=1.5.10 && <1.8.0 follows
 #ifdef HAVE_CAIRO
 	#if ((CAIRO_VERSION >= CAIRO_VERSION_ENCODE(1, 5, 10)) && (CAIRO_VERSION < CAIRO_VERSION_ENCODE(1, 8, 0)))
@@ -1335,7 +1335,7 @@ void PageItem::DrawObj_Post(ScPainter *p)
 		}
 		if ((m_Doc->guidesSettings.layerMarkersShown) && (m_Doc->layerCount() > 1) && (!m_Doc->layerOutline(LayerNr)) && ((isGroupControl) || (Groups.count() == 0)) && (!view->m_canvas->isPreviewMode()))
 		{
-			p->setPen(Qt::black, 0.5/ m_Doc->view()->scale(), Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
+			p->setPen(Qt::black, 0.5 / m_Doc->view()->scale(), Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
 			p->setPenOpacity(1.0);
 			p->setBrush(m_Doc->layerMarker(LayerNr));
 			p->setBrushOpacity(1.0);
@@ -3300,6 +3300,8 @@ void PageItem::restore(UndoState *state, bool isUndo)
 			restoreUnlinkTextFrame(ss, isUndo);
 		else if (ss->contains("REVERSE_TEXT"))
 			restoreReverseText(ss, isUndo);
+		else if (ss->contains("PATH_OPERATION"))
+			restorePathOperation(ss, isUndo);
 	}
 	if (!OnMasterPage.isEmpty())
 		m_Doc->setCurrentPage(oldCurrentPage);
@@ -3720,6 +3722,37 @@ void PageItem::restoreReverseText(UndoState *state, bool /*isUndo*/)
 	if (!isTextFrame())
 		return;
 	Reverse = !Reverse;
+}
+
+void PageItem::restorePathOperation(UndoState *state, bool isUndo)
+{//PATH_OPERATION
+	ItemState<QPair<QPair<FPointArray, FPointArray>, QPair<FPointArray, FPointArray> > >*is = dynamic_cast<ItemState<QPair<QPair<FPointArray, FPointArray>, QPair<FPointArray, FPointArray> > >*>(state);
+	if (is)
+	{
+		if (isUndo)
+		{
+			this->ClipEdited=is->getBool("PATH_OP_OLD_CLIPEDITED");
+			this->Frame=is->getBool("PATH_OP_OLD_FRAME");
+			this->FrameType=is->getInt("PATH_OP_OLD_FRAMETYPE");
+			this->OldB2=is->getDouble("PATH_OP_OLD_OLDB2");
+			this->OldH2=is->getDouble("PATH_OP_OLD_OLDH2");
+			QPair<FPointArray, FPointArray> oldLines=is->getItem().first;
+			this->PoLine = oldLines.first;
+			this->ContourLine = oldLines.second;
+		}
+		else
+		{
+			this->ClipEdited=is->getBool("PATH_OP_NEW_CLIPEDITED");
+			this->Frame=is->getBool("PATH_OP_NEW_FRAME");
+			this->FrameType=is->getInt("PATH_OP_NEW_FRAMETYPE");
+			this->OldB2=is->getDouble("PATH_OP_NEW_OLDB2");
+			this->OldH2=is->getDouble("PATH_OP_NEW_OLDH2");
+			QPair<FPointArray, FPointArray> newLines=is->getItem().second;
+			this->PoLine = newLines.first;
+			this->ContourLine = newLines.second;
+		}
+		this->updateClip();
+	}
 }
 
 void PageItem::restorePoly(SimpleState *state, bool isUndo, bool isContour)
@@ -4829,7 +4862,11 @@ void PageItem::getBoundingRect(double *x1, double *y1, double *x2, double *y2) c
 		FPoint maxAr = getMaxClipF(&arrow);
 		totalRect = totalRect.united(QRectF(QPointF(minAr.x(), minAr.y()), QPointF(maxAr.x(), maxAr.y())));
 	}
-	totalRect.getCoords((qreal*)x1, (qreal*)y1, (qreal*)x2, (qreal*)y2);
+
+	qreal rx1, ry1, rx2, ry2;
+	totalRect.getCoords(&rx1, &ry1, &rx2, &ry2);
+	*x1 = rx1; *y1 = ry1;
+	*x2 = rx2; *y2 = ry2;
 }
 
 void PageItem::getVisualBoundingRect(double * x1, double * y1, double * x2, double * y2) const
@@ -4989,7 +5026,11 @@ void PageItem::getVisualBoundingRect(double * x1, double * y1, double * x2, doub
 		FPoint maxAr = getMaxClipF(&arrow);
 		totalRect = totalRect.united(QRectF(QPointF(minAr.x(), minAr.y()), QPointF(maxAr.x(), maxAr.y())));
 	}
-	totalRect.getCoords((qreal*)x1, (qreal*)y1, (qreal*)x2, (qreal*)y2);
+
+	qreal rx1, ry1, rx2, ry2;
+	totalRect.getCoords(&rx1, &ry1, &rx2, &ry2);
+	*x1 = rx1; *y1 = ry1;
+	*x2 = rx2; *y2 = ry2;
 }
 
 double PageItem::visualXPos() const

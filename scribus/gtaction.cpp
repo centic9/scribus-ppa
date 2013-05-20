@@ -21,7 +21,7 @@ for which a new license (GPL+exception) is in place.
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.             *
  ***************************************************************************/
 
 #include "missing.h"
@@ -198,7 +198,7 @@ void gtAction::write(const QString& text, gtStyle *style)
 	lastStyle = newStyle;
 	lastStyleStart = it->itemText.length();
 
-	QChar ch0(0), ch5(5), ch10(10), ch13(13); 
+	QChar ch0(0), ch5(5), ch10(10), ch13(13);
 	for (int a = 0; a < text.length(); ++a)
 	{
 		if ((text.at(a) == ch0) || (text.at(a) == ch13))
@@ -206,6 +206,10 @@ void gtAction::write(const QString& text, gtStyle *style)
 		QChar ch = text.at(a);
 		if ((ch == ch10) || (ch == ch5))
 			ch = ch13;
+		else if (ch.unicode() == 0x2028)
+			ch = SpecialChars::LINEBREAK;
+		else if (ch.unicode() == 0x2029)
+			ch = SpecialChars::PARSEP;
 		
 		int pos = it->itemText.length();
 		it->itemText.insertChars(pos, QString(ch));

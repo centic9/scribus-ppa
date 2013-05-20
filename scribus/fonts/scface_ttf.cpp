@@ -374,10 +374,21 @@ KernFeature::ClassDefTable KernFeature::getClass ( bool leftGlyph, quint16 class
 			quint16 End ( toUint16 ( ClassRangeRecord + ( CRR * 6 ) + 2 ) );
 			quint16 Class ( toUint16 ( ClassRangeRecord + ( CRR * 6 ) + 4 ) );
 
-			for ( int gl ( Start ); gl <= (int) End; ++gl )
+			if (Start <= End)
 			{
-				excludeList<< (quint16) gl;
-				ret[Class] << gl;
+				for ( int gl ( Start ); gl <= (int) End; ++gl )
+				{
+					excludeList<< (quint16) gl;
+					ret[Class] << gl;
+				}
+			}
+			else
+			{
+				for ( int gl ( Start ); gl >= (int) End; --gl )
+				{
+					excludeList<< (quint16) gl;
+					ret[Class] << gl;
+				}
 			}
 		}
 	}
@@ -592,7 +603,7 @@ bool ScFace_ttf::EmbedFont(QString &str) const
 	str+="/FontName /" + psName + " def\n";
 	str+="/Encoding /ISOLatin1Encoding where {pop ISOLatin1Encoding} {StandardEncoding} ifelse def\n";
 	str+="/PaintType 0 def\n/FontMatrix [1 0 0 1 0 0] def\n";
-	str+="/FontBBox ["+FontBBox+"] def\n";
+	str+="/FontBBox ["+m_pdfFontBBox+"] def\n";
 	str+="/FontType 42 def\n";
 	str+="/FontInfo 8 dict dup begin\n";
 	str+="/FamilyName (" + psName + ") def\n";

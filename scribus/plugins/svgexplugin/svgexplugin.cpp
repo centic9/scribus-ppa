@@ -21,13 +21,14 @@ for which a new license (GPL+exception) is in place.
  *                                                                         *
  ***************************************************************************/
 
-#include <QFile>
-#include <QTextStream>
-#include <QDataStream>
-#include <QByteArray>
 #include <QBuffer>
-#include <QList>
+#include <QByteArray>
 #include <QCheckBox>
+#include <QDataStream>
+#include <QFile>
+#include <QList>
+#include <QMessageBox>
+#include <QTextStream>
 #include <QScopedPointer>
 
 #include "svgexplugin.h"
@@ -43,7 +44,6 @@ for which a new license (GPL+exception) is in place.
 #include "prefsmanager.h"
 #include "prefsfile.h"
 #include "prefscontext.h"
-#include "scmessagebox.h"
 #include "scpattern.h"
 #include "util.h"
 #include "util_math.h"
@@ -857,12 +857,10 @@ QDomElement SVGExPlug::processPathTextItem(PageItem *Item, QString trans, QStrin
 			}
 		}
 	}
-	double x, y, wide;
+	double wide;
 	QString chstr;
 	for (int a = 0; a < Item->itemText.length(); ++a)
 	{
-		x = 0.0;
-		y = 0.0;
 		ScText *hl = Item->itemText.item(a);
 		const CharStyle& charStyle(Item->itemText.charStyle(a));
 		chstr = Item->itemText.text(a,1);

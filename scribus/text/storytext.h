@@ -109,6 +109,12 @@ class SCRIBUS_API StoryText : public QObject, public SaxIO
 
  	void clear();
 	StoryText copy() const;
+
+	// Find text in story
+	int indexOf(const QString &str, int from = 0, Qt::CaseSensitivity cs = Qt::CaseSensitive) const;
+	int indexOf(QChar ch, int from = 0, Qt::CaseSensitivity cs = Qt::CaseSensitive) const;
+
+	// Add, change, replace
 	// Insert chars from another StoryText object at current cursor position
 	void insert(const StoryText& other, bool onlySelection = false);
 	// Insert chars from another StoryText object at specific position
@@ -126,16 +132,29 @@ class SCRIBUS_API StoryText : public QObject, public SaxIO
 	// Insert object at specific position
  	void insertObject(int pos, PageItem* obj);
  	void replaceChar(int pos, QChar ch);
+	// Replaced a word, and return the difference in length between old and new
+	int replaceWord(int pos, QString newWord);
 
 	void hyphenateWord(int pos, uint len, char* hyphens);
 	
+	// Retrieve length of story text
  	int length() const;
+
+	// Get content at specific position as plain text
+	// Internal paragraph separator are converted to 
+	// unix new lines for better compatibility with
+	// text editors
+	QString plainText() const;
+
 	// Get char at current cursor position
 	QChar   text() const;
 	// Get char at specific position
  	QChar   text(int pos) const;
 	// Get text with len chars at specific position
  	QString text(int pos, uint len) const;
+
+	//Get sentence at any position within it
+	QString sentence(int pos, int &posn);
 
 	bool hasObject(int pos) const;
  	PageItem* object(int pos) const;
@@ -193,8 +212,10 @@ class SCRIBUS_API StoryText : public QObject, public SaxIO
 // positioning
 	int nextChar(int pos);
 	int prevChar(int pos);
+	int firstWord();
 	int nextWord(int pos);
 	int prevWord(int pos);
+	int endOfWord(int pos) const;
 	int nextSentence(int pos);
 	int prevSentence(int pos);
 	int nextParagraph(int pos);

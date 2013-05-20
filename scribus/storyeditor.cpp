@@ -126,8 +126,10 @@ void SideBar::mouseReleaseEvent(QMouseEvent *m)
 	CurrentPar = editor->StyledText.nrOfParagraph(p);
 	int pos = editor->StyledText.startOfParagraph( editor->StyledText.nrOfParagraph(p) );
 
+	pmen->clear();
+
 	QString styleName = "";
-	ParaStyleComboBox* paraStyleCombo = new ParaStyleComboBox(this);
+	ParaStyleComboBox* paraStyleCombo = new ParaStyleComboBox(pmen);
 	paraStyleCombo->setDoc(editor->doc);
 	if ((CurrentPar < static_cast<int>(editor->StyledText.nrOfParagraphs())) && (editor->StyledText.length() != 0))
 	{
@@ -137,11 +139,10 @@ void SideBar::mouseReleaseEvent(QMouseEvent *m)
 	}
 	paraStyleCombo->setFormat(styleName);
 	connect(paraStyleCombo, SIGNAL(newStyle(const QString&)), this, SLOT(setPStyle(const QString&)));
-	pmen->clear();
-	paraStyleAct = new QWidgetAction(this);
+	
+	paraStyleAct = new QWidgetAction(pmen);
 	paraStyleAct->setDefaultWidget(paraStyleCombo);
 	pmen->addAction(paraStyleAct);
-	//pmen->addAction( tr("Edit Styles..."), this, SLOT(editStyles()));
 	pmen->exec(QCursor::pos());
 }
 
@@ -1547,6 +1548,7 @@ StoryEditor::StoryEditor(QWidget* parent) : QMainWindow(parent, Qt::Window), // 
 	charSelect(NULL),
 	charSelectUsed(false)
 {
+	m_spellActive=false;
 	prefsManager=PrefsManager::instance();
 #ifdef Q_WS_MAC
 	noIcon = loadIcon("noicon.xpm");
@@ -1811,6 +1813,9 @@ void StoryEditor::buildMenus()
 	seMenuMgr->addMenuToMenuBar("Edit");
 	seMenuMgr->addMenuToMenuBar("Insert");
 	seMenuMgr->addMenuToMenuBar("Settings");
+
+	ScCore->pluginManager->setupPluginActions(this);
+	ScCore->pluginManager->languageChange();
 }
 
 void StoryEditor::buildGUI()
@@ -1957,6 +1962,7 @@ void StoryEditor::buildGUI()
 	EditorBar->editor = Editor;
 	Editor->installEventFilter(this);
 	languageChange();
+	ActionManager::setActionTooltips(&seActions);
 }
 
 void StoryEditor::changeEvent(QEvent *e)
@@ -2105,6 +2111,11 @@ void StoryEditor::setCurrentDocumentAndItem(ScribusDoc *doc, PageItem *item)
 		seActions["editPaste"]->setEnabled(true);
 }
 
+void StoryEditor::setSpellActive(bool ssa)
+{
+	m_spellActive=ssa;
+}
+
 /** 10/12/2004 - pv - #1203: wrong selection on double click
 Catch the double click signal - cut the wrong selection (with
 whitespaces on the tail) - select only one word - return
@@ -2180,45 +2191,48 @@ void StoryEditor::keyPressEvent (QKeyEvent * e)
 
 bool StoryEditor::eventFilter( QObject* ob, QEvent* ev )
 {
-	if ( ev->type() == QEvent::WindowDeactivate )
+	if (!m_spellActive)
 	{
-		if ((currItem!=NULL) && (!blockUpdate))
-			updateTextFrame();
-		activFromApp = false;
-//		Editor->getCursorPosition(&CurrPara, &CurrChar);
-	}
-	if ( ev->type() == QEvent::WindowActivate )
-	{
-		if ((!activFromApp) && (!textChanged) && (!blockUpdate))
+		if ( ev->type() == QEvent::WindowDeactivate )
 		{
-			activFromApp = true;
-			if (currItem!=NULL)
+			if ((currItem!=NULL) && (!blockUpdate))
+				updateTextFrame();
+			activFromApp = false;
+			//		Editor->getCursorPosition(&CurrPara, &CurrChar);
+		}
+		if ( ev->type() == QEvent::WindowActivate )
+		{
+			if ((!activFromApp) && (!textChanged) && (!blockUpdate))
 			{
-				//set to false otherwise some dialog properties wont be set correctly
-				if (currItem->itemText.length() == 0)
-					firstSet = false; 
-				disconnectSignals();
-				Editor->setUndoRedoEnabled(false);
-				Editor->setUndoRedoEnabled(true);
-				Editor->textCursor().setPosition(0);
-				seActions["fileRevert"]->setEnabled(false);
-				seActions["editCopy"]->setEnabled(false);
-				seActions["editCut"]->setEnabled(false);
-				seActions["editClear"]->setEnabled(false);
-				textChanged = false;
-				FontTools->Fonts->RebuildList(currDoc, currItem->isAnnotation());
-				Editor->loadItemText(currItem);
-//				Editor->getCursorPosition(&CurrPara, &CurrChar);
-				updateStatus();
-				textChanged = false;
-				Editor->moveCursor(QTextCursor::Start, QTextCursor::MoveAnchor);
-				Editor->repaint();
-				EditorBar->offs = 0;
-//				EditorBar->doMove(0, Editor->contentsY());
-				EditorBar->setRepaint(true);
-				EditorBar->doRepaint();
-				updateProps(0, 0);
-				connectSignals();
+				activFromApp = true;
+				if (currItem!=NULL)
+				{
+					//set to false otherwise some dialog properties wont be set correctly
+					if (currItem->itemText.length() == 0)
+						firstSet = false;
+					disconnectSignals();
+					Editor->setUndoRedoEnabled(false);
+					Editor->setUndoRedoEnabled(true);
+					Editor->textCursor().setPosition(0);
+					seActions["fileRevert"]->setEnabled(false);
+					seActions["editCopy"]->setEnabled(false);
+					seActions["editCut"]->setEnabled(false);
+					seActions["editClear"]->setEnabled(false);
+					textChanged = false;
+					FontTools->Fonts->RebuildList(currDoc, currItem->isAnnotation());
+					Editor->loadItemText(currItem);
+					//				Editor->getCursorPosition(&CurrPara, &CurrChar);
+					updateStatus();
+					textChanged = false;
+					Editor->moveCursor(QTextCursor::Start, QTextCursor::MoveAnchor);
+					Editor->repaint();
+					EditorBar->offs = 0;
+					//				EditorBar->doMove(0, Editor->contentsY());
+					EditorBar->setRepaint(true);
+					EditorBar->doRepaint();
+					updateProps(0, 0);
+					connectSignals();
+				}
 			}
 		}
 	}
@@ -3277,7 +3291,7 @@ void StoryEditor::SaveTextFile()
 	if (!fileName.isEmpty())
 	{
 		dirs->set("story_save", fileName.left(fileName.lastIndexOf("/")));
-		Serializer::writeWithEncoding(fileName, LoadEnc, Editor->toPlainText());
+		Serializer::writeWithEncoding(fileName, LoadEnc, Editor->StyledText.plainText());
 	}
 	blockUpdate = false;
 }

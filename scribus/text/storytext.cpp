@@ -118,15 +118,6 @@ StoryText StoryText::copy() const
 	StoryText result(doc);
 	*(result.d) = *d;
 	return result;
-//	qDebug() << QString("StoryText::copy:");
-	QListIterator<ScText*> it( *(result.d) );
-	ScText* elem;
-	while ( it.hasNext() ) {
-		elem = it.next();
-//		qDebug() << QString("\tchar '%1' size %2 (orig %3)").arg(elem->ch).arg(elem->fontSize()).arg(charStyle(i++).fontSize());
-	}
-	
-	return result;
 }
 
 
@@ -199,6 +190,95 @@ void StoryText::clear()
 	d->clear();
 	d->len = 0;
 	invalidateAll();
+}
+
+int StoryText::indexOf(const QString &str, int from, Qt::CaseSensitivity cs) const
+{
+	int foundIndex = -1;
+
+	if (str.isEmpty() || (from < 0))
+		return -1;
+
+	int strLen   = str.length();
+	int storyLen = length();
+
+	QString qStr = str;
+	if (cs == Qt::CaseInsensitive)
+		qStr = qStr.toLower();
+	QChar ch = qStr.at(0);
+
+	if (cs == Qt::CaseSensitive)
+	{
+		int i = indexOf(ch, from, cs);
+		while (i >= 0 && i < (int) d->len)
+		{
+			int index = 0;
+			while ((index < strLen) && ((index + i) < storyLen))
+			{
+				if (qStr.at(index) != d->at(index + i)->ch)
+					break;
+				++index;
+			}
+			if (index == strLen)
+			{
+				foundIndex = i;
+				break;
+			}
+			i = indexOf(ch, i + 1, cs);
+		}
+	}
+	else
+	{
+		int i = indexOf(ch, from, cs);
+		while (i >= 0 && i < (int) d->len)
+		{
+			int index = 0;
+			while ((index < strLen) && ((index + i) < storyLen))
+			{
+				if (qStr.at(index) != d->at(index + i)->ch.toLower())
+					break;
+				++index;
+			}
+			if (index == strLen)
+			{
+				foundIndex = i;
+				break;
+			}
+			i = indexOf(ch, i + 1, cs);
+		}
+	}
+
+	return foundIndex;
+}
+
+int StoryText::indexOf(QChar ch, int from, Qt::CaseSensitivity cs) const
+{
+	int foundIndex = -1;
+	int textLength = length();
+
+	if (cs == Qt::CaseSensitive)
+	{
+		for (int i = from; i < textLength; ++i)
+		{
+			if (d->at(i)->ch == ch)
+			{
+				foundIndex = i;
+				break;
+			}
+		}
+	}
+	else
+	{
+		for (int i = from; i < textLength; ++i)
+		{
+			if (d->at(i)->ch.toLower() == ch)
+			{
+				foundIndex = i;
+				break;
+			}
+		}
+	}
+	return foundIndex;
 }
 
 void StoryText::insert(const StoryText& other, bool onlySelection)
@@ -444,7 +524,7 @@ void StoryText::insertCharsWithSmartHyphens(int pos, QString txt, bool applyNeig
 			if (item->ch == SpecialChars::PARSEP) {
 				insertParSep(index);
 			}
-			if (d->cursorPosition >= index) {
+			if (d->cursorPosition >= static_cast<uint>(index)) {
 				d->cursorPosition += 1;
 			}
 			++inserted;
@@ -476,6 +556,42 @@ void StoryText::replaceChar(int pos, QChar ch)
 	}
 	
 	invalidate(pos, pos + 1);
+}
+
+int StoryText::replaceWord(int pos, QString newWord)
+{
+	int eoWord=pos;
+	while(eoWord < length())
+	{
+		if (text(eoWord).isLetterOrNumber())
+			++eoWord;
+		else
+			break;
+	}
+	QString word=text(pos,eoWord-pos);
+	int lengthDiff=newWord.length()-word.length();
+	if (lengthDiff==0)
+	{
+		for (int j = 0; j < word.length(); ++j)
+			replaceChar(pos+j, newWord[j]);
+	}
+	else
+	{
+		if (lengthDiff>0)
+		{
+			for (int j = 0; j < word.length(); ++j)
+				replaceChar(pos+j, newWord[j]);
+			for (int j = word.length(); j < newWord.length(); ++j)
+				insertChars(pos+j, newWord.mid(j,1), true);
+		}
+		else
+		{
+			for (int j = 0; j < newWord.length(); ++j)
+				replaceChar(pos+j, newWord[j]);
+			removeChars(pos+newWord.length(), -lengthDiff);
+		}
+	}
+	return lengthDiff;
 }
 
 void StoryText::hyphenateWord(int pos, uint len, char* hyphens)
@@ -521,6 +637,28 @@ int StoryText::length() const
 	return d->len;
 }
 
+QString StoryText::plainText() const
+{
+	if (length() <= 0)
+		return QString();
+
+	QChar   ch;
+	QString result;
+
+	uint len = length();
+	result.reserve(len);
+
+	StoryText* that(const_cast<StoryText*>(this));
+	for (int i = 0; i < len; ++i) {
+		ch = that->d->at(i)->ch;
+		if (ch == SpecialChars::PARSEP)
+			ch = QLatin1Char('\n');
+		result += ch;
+	}
+
+	return result;
+}
+
 QChar StoryText::text() const
 {
 	return text(d->cursorPosition);
@@ -552,6 +690,15 @@ QString StoryText::text(int pos, uint len) const
 	}
 
 	return result;
+}
+
+QString StoryText::sentence(int pos, int &posn)
+{
+	int sentencePos=qMax(0, prevSentence(pos));
+	sentencePos=qMax(sentencePos, nextWord(sentencePos));
+	posn=sentencePos;
+	int nextSentencePos=qMin(length(), nextSentence(pos+1));
+	return text(sentencePos, nextSentencePos-sentencePos);
 }
 
 QString StoryText::textWithSmartHyphens(int pos, uint len) const
@@ -712,7 +859,7 @@ void StoryText::applyCharStyle(int pos, uint len, const CharStyle& style )
 	if (len == 0)
 		return;
 
-	int lastParStart = pos == 0? 0 : -1;
+	//int lastParStart = pos == 0? 0 : -1;
 	ScText* itText;
 	for (uint i=pos; i < pos+len; ++i) {
 		itText = d->at(i);
@@ -1073,6 +1220,7 @@ int StoryText::nextChar(int pos)
 	else
 		return length();
 }
+
 int StoryText::prevChar(int pos)
 {
 	if (pos > 0)
@@ -1080,14 +1228,42 @@ int StoryText::prevChar(int pos)
 	else 
 		return 0;
 }
+
+int StoryText::firstWord()
+{
+	int len = length();
+	int pos = 0;
+
+	while (pos < len)
+	{
+		if (text(pos).isLetter())
+			break;
+		++pos;
+	}
+	return pos;
+}
+
 int StoryText::nextWord(int pos)
 {
 	int len = length();
-	pos = qMin(len, pos+1);
-	while (pos < len  && wordBoundaries.indexOf(text(pos)) < 0)
-		++pos;
+	if (text(pos).isLetter())
+		pos = qMin(len, pos+1);
+	else
+		pos = qMin(len, pos);
+
+	//	while (pos < len  && wordBoundaries.indexOf(text(pos)) < 0)
+	//		++pos;
+
+	while (pos < len)
+	{
+		if(text(pos).isLetter())
+			++pos;
+		else
+			break;
+	}
 	return pos < len ? pos + 1 : pos;
 }
+
 int StoryText::prevWord(int pos)
 {
 	pos = qMax(0, pos-1);
@@ -1095,6 +1271,20 @@ int StoryText::prevWord(int pos)
 		--pos;
 	return wordBoundaries.indexOf(text(pos)) < 0 ? pos + 1 : pos;
 }
+
+int StoryText::endOfWord(int pos) const
+{
+	int len = length();
+	while (pos < len)
+	{
+		if(text(pos).isLetter())
+			++pos;
+		else
+			break;
+	}
+	return pos;
+}
+
 int StoryText::nextSentence(int pos)
 {
 	int len = length();

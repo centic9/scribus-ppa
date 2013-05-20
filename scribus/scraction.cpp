@@ -187,6 +187,8 @@ void ScrAction::triggeredToTriggeredData()
 		emit triggeredData(layerID);
 	if (_actionType==ScrAction::ActionDLL)
 		emit triggeredData(((ScribusMainWindow*)parent())->doc);
+	if (_actionType==ScrAction::ActionDLLSE)
+		emit triggeredData(dynamic_cast<QWidget*>(parent()), ((ScribusMainWindow*)parent())->doc);
 }
 
 void ScrAction::toggledToToggledData(bool ison)
@@ -227,6 +229,15 @@ void ScrAction::addedTo ( int index, QMenu * menu )
 QString ScrAction::cleanMenuText()
 {
 	return text().remove('&').remove("...");
+}
+
+void ScrAction::setToolTipFromTextAndShortcut()
+{
+	QString sct(shortcut());
+	if (sct.isEmpty())
+		QAction::setToolTip("<qt>" + cleanMenuText() + "</qt>");
+	else
+		QAction::setToolTip("<qt>" + cleanMenuText() + " (" + sct + ")" + "</qt>");
 }
 
 int ScrAction::getMenuIndex() const

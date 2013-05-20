@@ -298,9 +298,6 @@ void SVGPlug::convert(const TransactionSettings& trSettings, int flags)
 			m_Doc->PageOri = 0;
 		m_Doc->m_pageSize = "Custom";
 	}
-	FPoint minSize = m_Doc->minCanvasCoordinate;
-	FPoint maxSize = m_Doc->maxCanvasCoordinate;
-	FPoint cOrigin = m_Doc->view()->canvasOrigin();
 	m_Doc->view()->Deselect();
 	m_Doc->setLoading(true);
 	m_Doc->DoDrawing = false;
@@ -857,6 +854,11 @@ void SVGPlug::parseClipPath(const QDomElement &e)
 			clip.addQuadPoint(width+x, y, width+x, y, width+x, height+y, width+x, height+y);
 			clip.addQuadPoint(width+x, height+y, width+x, height+y, x, height+y, x, height+y);
 			clip.addQuadPoint(x, height+y, x, height+y, x, y, x, y);
+		}
+		if (b2.hasAttribute("transform"))
+		{
+			QMatrix transform = parseTransform(b2.attribute("transform"));
+			clip.map(transform);
 		}
 		if (clip.size() >= 2)
 			m_clipPaths.insert(id, clip);
@@ -1672,7 +1674,7 @@ QFont SVGPlug::getFontFromStyle(SvgStyle& style)
 		font.setOverline(overline);
 		font.setStrikeOut(strikeOut);
 	}
-	font.setPointSize(style.FontSize / 10);
+	font.setPointSizeF(style.FontSize);
 	return font;
 }
 
@@ -1755,30 +1757,30 @@ double SVGPlug::parseUnit(const QString &unit)
 {
 	bool noUnit = false;
 	QString unitval=unit;
-	if( unit.right( 2 ) == "pt" )
+	if (unit.right( 2 ) == "pt")
 		unitval.replace( "pt", "" );
-	else if( unit.right( 2 ) == "cm" )
+	else if (unit.right( 2 ) == "cm")
 		unitval.replace( "cm", "" );
-	else if( unit.right( 2 ) == "mm" )
+	else if (unit.right( 2 ) == "mm")
 		unitval.replace( "mm" , "" );
-	else if( unit.right( 2 ) == "in" )
+	else if (unit.right( 2 ) == "in")
 		unitval.replace( "in", "" );
-	else if( unit.right( 2 ) == "px" )
+	else if (unit.right( 2 ) == "px")
 		unitval.replace( "px", "" );
 	if (unitval == unit)
 		noUnit = true;
 	double value = ScCLocale::toDoubleC(unitval);
-	if( unit.right( 2 ) == "pt" )
+	if (unit.right( 2 ) == "pt")
 		value = value;
-	else if( unit.right( 2 ) == "cm" )
+	else if (unit.right( 2 ) == "cm")
 		value = ( value / 2.54 ) * 72;
-	else if( unit.right( 2 ) == "mm" )
+	else if (unit.right( 2 ) == "mm")
 		value = ( value / 25.4 ) * 72;
-	else if( unit.right( 2 ) == "in" )
+	else if (unit.right( 2 ) == "in")
 		value = value * 72;
-	else if( unit.right( 2 ) == "px" )
+	else if (unit.right( 2 ) == "px")
 		value = value * 0.8;
-	else if(noUnit)
+	else if (noUnit)
 		value = value;
 	return value;
 }
@@ -2276,7 +2278,7 @@ void SVGPlug::parsePA( SvgStyle *obj, const QString &command, const QString &par
 	else if( command == "font-stretch" )
 		obj->FontStretch = params;
 	else if( command == "font-size" )
-		obj->FontSize = static_cast<int>(parseFontSize(params) * 10.0);
+		obj->FontSize = parseFontSize(params);
 	else if( command == "text-anchor" )
 		obj->textAnchor = params;
 	else if( command == "text-decoration" )
