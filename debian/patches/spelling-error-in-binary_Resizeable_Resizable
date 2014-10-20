@@ -1,0 +1,505 @@
+Description: fix spelling-error-in-binary lintian tag, doing
+ s/Resizeable/Resizable/g on all files.
+Author: Mattia Rizzolo <mattia@mapreri.org>
+Forwarded: no
+Last-Update: 2014-07-25
+
+--- a/scribus/selectobjects.ui
++++ b/scribus/selectobjects.ui
+@@ -258,7 +258,7 @@
+          <string>Select items based on whether they have their size locked or not</string>
+         </property>
+         <property name="text" >
+-         <string>Resizeable</string>
++         <string>Resizable</string>
+         </property>
+        </widget>
+       </item>
+--- a/resources/translations/po/scribus.ca.ts
++++ b/resources/translations/po/scribus.ca.ts
+@@ -46671,7 +46671,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.fi.ts
++++ b/resources/translations/po/scribus.fi.ts
+@@ -33829,7 +33829,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.fr.ts
++++ b/resources/translations/po/scribus.fr.ts
+@@ -35981,7 +35981,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Redimensionnable</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.et.ts
++++ b/resources/translations/po/scribus.et.ts
+@@ -34703,7 +34703,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Muudetav suurus</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.lt_LT.ts
++++ b/resources/translations/po/scribus.lt_LT.ts
+@@ -36574,7 +36574,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Keičiamo dydžio</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.uk.ts
++++ b/resources/translations/po/scribus.uk.ts
+@@ -38643,7 +38643,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.ko.ts
++++ b/resources/translations/po/scribus.ko.ts
+@@ -28158,7 +28158,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>크기 재조정 가능여부</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.th_TH.ts
++++ b/resources/translations/po/scribus.th_TH.ts
+@@ -40431,7 +40431,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.tr.ts
++++ b/resources/translations/po/scribus.tr.ts
+@@ -38583,7 +38583,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.nl.ts
++++ b/resources/translations/po/scribus.nl.ts
+@@ -28313,7 +28313,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Schaalbaar</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.en_US.ts
++++ b/resources/translations/po/scribus.en_US.ts
+@@ -27759,7 +27759,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.sq.ts
++++ b/resources/translations/po/scribus.sq.ts
+@@ -48296,7 +48296,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.de_CH.ts
++++ b/resources/translations/po/scribus.de_CH.ts
+@@ -40631,7 +40631,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Grössenänderung möglich</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.it.ts
++++ b/resources/translations/po/scribus.it.ts
+@@ -36570,7 +36570,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Ridimensionabile</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.af.ts
++++ b/resources/translations/po/scribus.af.ts
+@@ -36688,7 +36688,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.pt_BR.ts
++++ b/resources/translations/po/scribus.pt_BR.ts
+@@ -46486,7 +46486,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Redimensionável</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.pl_PL.ts
++++ b/resources/translations/po/scribus.pl_PL.ts
+@@ -43294,7 +43294,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Zmiana rozmiaru dozwolona</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.es_ES.ts
++++ b/resources/translations/po/scribus.es_ES.ts
+@@ -33829,7 +33829,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.sa.ts
++++ b/resources/translations/po/scribus.sa.ts
+@@ -28028,7 +28028,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.zh_CN.ts
++++ b/resources/translations/po/scribus.zh_CN.ts
+@@ -27998,7 +27998,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>可调整大小</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.gl.ts
++++ b/resources/translations/po/scribus.gl.ts
+@@ -50607,7 +50607,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Pódeselle mudar o tamaño</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.ja.ts
++++ b/resources/translations/po/scribus.ja.ts
+@@ -28167,7 +28167,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>リサイズ可能</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.eu.ts
++++ b/resources/translations/po/scribus.eu.ts
+@@ -38995,7 +38995,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.sv.ts
++++ b/resources/translations/po/scribus.sv.ts
+@@ -40345,7 +40345,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.ar.ts
++++ b/resources/translations/po/scribus.ar.ts
+@@ -28793,7 +28793,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.da_DK.ts
++++ b/resources/translations/po/scribus.da_DK.ts
+@@ -39954,7 +39954,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Størrelse kan ændres</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.de_1901.ts
++++ b/resources/translations/po/scribus.de_1901.ts
+@@ -40631,7 +40631,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Größenänderung möglich</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.bg.ts
++++ b/resources/translations/po/scribus.bg.ts
+@@ -29194,7 +29194,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.en_GB.ts
++++ b/resources/translations/po/scribus.en_GB.ts
+@@ -36559,8 +36559,8 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
+-        <translation>Resizeable</translation>
++        <source>Resizable</source>
++        <translation>Resizable</translation>
+     </message>
+     <message>
+         <source>Select All Objects</source>
+--- a/resources/translations/po/scribus.id.ts
++++ b/resources/translations/po/scribus.id.ts
+@@ -30085,7 +30085,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.en_AU.ts
++++ b/resources/translations/po/scribus.en_AU.ts
+@@ -36559,8 +36559,8 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
+-        <translation>Resizeable</translation>
++        <source>Resizable</source>
++        <translation>Resizable</translation>
+     </message>
+     <message>
+         <source>Select All Objects</source>
+--- a/resources/translations/po/scribus.cs_CZ.ts
++++ b/resources/translations/po/scribus.cs_CZ.ts
+@@ -37055,7 +37055,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.el.ts
++++ b/resources/translations/po/scribus.el.ts
+@@ -27839,7 +27839,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.pt.ts
++++ b/resources/translations/po/scribus.pt.ts
+@@ -46469,7 +46469,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.sl.ts
++++ b/resources/translations/po/scribus.sl.ts
+@@ -44584,7 +44584,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Spremenljive velikosti</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.br.ts
++++ b/resources/translations/po/scribus.br.ts
+@@ -28035,7 +28035,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.hu.ts
++++ b/resources/translations/po/scribus.hu.ts
+@@ -28155,7 +28155,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Átméretezhető</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.de.ts
++++ b/resources/translations/po/scribus.de.ts
+@@ -40633,7 +40633,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Größenänderung möglich</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.cy.ts
++++ b/resources/translations/po/scribus.cy.ts
+@@ -36732,7 +36732,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.sr.ts
++++ b/resources/translations/po/scribus.sr.ts
+@@ -32256,7 +32256,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation type="unfinished"></translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.zh_TW.ts
++++ b/resources/translations/po/scribus.zh_TW.ts
+@@ -38322,7 +38322,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>可縮放</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.ru.ts
++++ b/resources/translations/po/scribus.ru.ts
+@@ -28268,7 +28268,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Изменяемость размера:</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.sk_SK.ts
++++ b/resources/translations/po/scribus.sk_SK.ts
+@@ -36538,7 +36538,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Meniteľná veľkosť</translation>
+     </message>
+     <message>
+--- a/resources/translations/po/scribus.nb_NO.ts
++++ b/resources/translations/po/scribus.nb_NO.ts
+@@ -33262,7 +33262,7 @@
+         <translation>Låst</translation>
+     </message>
+     <message>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Kan endre størrelse</translation>
+     </message>
+     <message>

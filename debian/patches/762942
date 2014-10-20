@@ -1,0 +1,22 @@
+Description: Allow the use of others hyphenators files.
+ The idea here is to allow the use of hyphenator dictionaries presents in
+ /usr/share/hyphen through a symlink from /usr/share/scribus/dicts.
+ It's clearly a workaround-
+Author: Mattia Rizzolo <mattia@mapreri.org>
+Forwarded: not-needed, but looks like upstream don't want it
+Bug: http://bugs.scribus.net/view.php?id=8157
+Bug-Debian: https://bugs.debian.org/533081
+Bug-Debian: https://bugs.debian.org/762942
+Last-Update: 2014-10-11
+
+--- a/scribus/scribus.cpp
++++ b/scribus/scribus.cpp
+@@ -7935,7 +7935,7 @@
+ 		delete dia;
+ 		QFile::remove(prefsManager->preferencesLocation()+"/tmp.ps");
+ 		QFile::remove(prefsManager->preferencesLocation()+"/sc.png");
+-		QDir d(prefsManager->preferencesLocation()+"/", "sc.*", QDir::Name, QDir::Files | QDir::NoSymLinks);
++		QDir d(prefsManager->preferencesLocation()+"/", "sc.*", QDir::Name, QDir::Files);
+ 		if ((d.exists()) && (d.count() != 0))
+ 		{
+ 			for (uint dc = 0; dc < d.count(); dc++)

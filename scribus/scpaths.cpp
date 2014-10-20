@@ -101,7 +101,8 @@ ScPaths::ScPaths() :
 	m_templateDir = QString("%1/Contents/share/scribus/templates/").arg(pathPtr);
 	m_libDir = QString("%1/Contents/lib/scribus/").arg(pathPtr);
 	m_pluginDir = QString("%1/Contents/lib/scribus/plugins/").arg(pathPtr);
-	QApplication::setLibraryPaths(QStringList(QString("%1/Contents/lib/qtplugins/").arg(pathPtr)));
+//	QApplication::setLibraryPaths(QStringList(QString("%1/Contents/lib/qtplugins/").arg(pathPtr)));
+	QApplication::addLibraryPath(QString("%1/Contents/lib/qtplugins/").arg(pathPtr));
 //	CFRelease(pluginRef);
 //	CFRelease(macPath);
 
@@ -127,7 +128,10 @@ ScPaths::ScPaths() :
 	m_templateDir = QString("%1/share/templates/").arg(appPath);
 	m_libDir = QString("%1/libs/").arg(appPath);
 	m_pluginDir = QString("%1/plugins/").arg(appPath);
-	QApplication::setLibraryPaths( QStringList(QString("%1/qtplugins/").arg(appPath)) );
+
+	QString qtpluginDir = QString("%1/qtplugins/").arg(appPath);
+	if (QDir(qtpluginDir).exists())
+		QApplication::setLibraryPaths( QStringList(qtpluginDir) );
 #endif
 	
 // 	if(!m_shareDir.endsWith("/"))        m_shareDir += "/";
@@ -342,9 +346,11 @@ QStringList ScPaths::getSystemProfilesDirs(void)
 #elif defined(Q_WS_X11)
 	iccProfDirs.append(QDir::homePath()+"/color/icc/");
 	iccProfDirs.append(QDir::homePath()+"/.color/icc/");
+	iccProfDirs.append(QDir::homePath()+"/.local/share/icc/");
 	iccProfDirs.append(QDir::homePath()+"/.local/share/color/icc/");
 	iccProfDirs.append("/usr/share/color/icc/");
 	iccProfDirs.append("/usr/local/share/color/icc/");
+	iccProfDirs.append("/var/lib/color/icc/");
 #elif defined(_WIN32)
 	// On Windows it's more complicated, profiles location depends on OS version
 	WCHAR sysDir[MAX_PATH + 1];

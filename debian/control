@@ -2,19 +2,46 @@ Source: scribus
 Section: graphics
 Priority: optional
 Maintainer: Oleksandr Moskalenko <malex@debian.org>
-Build-Depends: debhelper (>= 7), cmake (>= 2.4.3), gcc (>=3.3.5), libqt4-dev (>= 4.6), libcairo2-dev, zlib1g-dev, liblcms1-dev (>= 1.13), libtiff4-dev, libcups2-dev, libxml2-dev (>= 2.6.16), gettext, python-all-dev, libhunspell-dev, quilt, libpodofo-dev (>= 0.9.0), libboost-python-dev, libhyphen-dev
-Standards-Version: 3.9.3
-Vcs-Git: git://git.debian.org/git/collab-maint/scribus.git
-Vcs-Browser: http://git.debian.org/?p=collab-maint/scribus.git
+Uploaders: Mattia Rizzolo <mattia@mapreri.org>
+Build-Depends: cmake (>= 2.4.3),
+               debhelper (>= 9),
+               gettext,
+               libboost-python-dev,
+               libcairo2-dev,
+               libcups2-dev,
+               libhunspell-dev,
+               libhyphen-dev,
+               liblcms2-dev,
+               libpodofo-dev (>= 0.9.0),
+               libqt4-dev,
+               libtiff-dev,
+               libxml2-dev (>= 2.6.16),
+               python-all-dev (>= 2.6.6-3~),
+               zlib1g-dev
+Standards-Version: 3.9.6
+Vcs-Git: git://anonscm.debian.org/collab-maint/scribus.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/scribus.git
+Homepage: http://www.scribus.net
 
 Package: scribus
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}, python, python-tk, ghostscript (>= 8.61)
-Recommends: xfonts-scalable | gsfonts-x11, cups-bsd
-Suggests: scribus-template, icc-profiles
+Depends: ghostscript (>= 8.61),
+         python-tk,
+         ${misc:Depends},
+         ${python:Depends},
+         ${shlibs:Depends}
+Recommends: cups-bsd,
+            fonts-liberation,
+            hyphen-hyphenation-patterns,
+            icc-profiles-free,
+            ttf-bitstream-vera,
+            xfonts-scalable | gsfonts-x11
+Suggests: icc-profiles,
+          scribus-doc,
+          scribus-template,
+          texlive-latex-recommended
 Provides: ${python:Provides}
 XB-Python-Version: ${python:Versions}
-Homepage: http://www.scribus.net/
 Description: Open Source Desktop Page Layout - stable branch
  Scribus is an open source desktop page layout program with the aim of
  producing commercial grade output in PDF and Postscript, primarily, though
@@ -47,3 +74,6 @@ Description: Open Source Desktop Page Layout - stable branch
  When run from KDE, Drag and Drop, for example from desktop to the canvas,
  is enabled. There is easy to use drag and drop scrapbook for frequently
  used items such as text blocks, pictures and custom shaped frames.
+ .
+ If you need to use the render frame install the texlive-latex-recommended
+ (suggested).

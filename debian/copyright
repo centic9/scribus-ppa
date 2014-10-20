@@ -1,11 +1,31 @@
-Format: http://dep.debian.net/deps/dep5
-upstream-Name: Scribus
-Source: http://www.scribus.net/
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: scribus
+Upstream-Contact: Scribut Team <scribus@scribus.net>
+Source: http://www.scribus.net
+File-Excluded:
+ OSX-package
+ resources/dicts
+ resources/editorconfig/dot.svg
+ resources/swatches/*.eps
+ resources/swatches/Federal_Identity_Program.xml
+ resources/swatches/GiveLife_Color_System_*.xml
+ resources/swatches/dtp-studio-free-palettes-license.rtf
+ resources/swatches/givelife_colors_license.rtf
+ scribus/doc
+ scribus/profiles/GenericCMYK.icm
+ scribus/profiles/sRGB.icm
+ scribus/profiles/srgb.license
+ win32
 
 Files: *
-Copyright: 2001-2012 Scribus Team <scribus@scribus.net>
+Copyright: 2001-2014 Scribus Team <scribus@scribus.net>
+License: GPL-2+
+
 Files: debian/*
-Copyright: 2005-2012 Oleksandr Moskalenko <malex@debian.org>
+Copyright: 2005-2013 Oleksandr Moskalenko <malex@debian.org>
+           2013-2014 Mattia Rizzolo <mattia@mapreri.org>
+License: GPL-2+
+
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -21,10 +41,10 @@ License: GPL-2+
  along with this program. If not, see <http://www.gnu.org/licenses/>
  .
  On Debian systems, the complete text of the GNU General
- Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".Files: debian/*
+ Public License version 2 can be found in "/usr/share/common-licenses/GPL-2".
 
 Files: resources/swatches/Japanese_Traditional.xml
-Copyright: 2008 Motohiro INOKI (webmaster@colordic.org)
+Copyright: 2008 Motohiro INOKI <webmaster@colordic.org>
 License: GPL-2
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

@@ -1,3 +1,147 @@
+scribus (1.4.4+dfsg1-2) unstable; urgency=medium
+
+  * [a780c7d] Use /usr/share/hyphen to provide hyphenator dicts:
+    + debian/control:
+      - promote hyphen-hyphenation-patterns from suggests to recommends.
+    + debian/patches/762942:
+      - allow the use of symlinks in the directory used to pick up dicts.
+    + debian/scribus.links:
+      - link usr/share/hyphen → usr/share/scribus/dicts.
+    + Closes: #762942
+  * [3590799] debian/control: bump standards-version to 3.9.6.
+  * [7b37ea0] debian/rules: use gzip -n to allow reproducibily building.
+
+ -- Mattia Rizzolo <mattia@mapreri.org>  Mon, 20 Oct 2014 21:01:51 +0200
+
+scribus (1.4.4+dfsg1-1) unstable; urgency=medium
+
+  * [54f1b99] Imported Upstream version 1.4.4+dfsg1. (Closes: #747814)
+     + Now scribus compiles fine with clang (Closes: #753277).
+     + Repacked to remove resources/dicts (Closes: #410079).
+       - [41385a7] debian/{copyright,README.source}: update accordingly.
+       - [a2a847a] debian/patches/remove_non-free_file.patch: update.
+       - indirectly closes: #533081.
+       - maybe they are really dfsg-compliant, but given that their licenses
+         are unclear, and that we are not using them, let's remove them.
+  * [e2c4c28] update upstream information:
+    + debian/copyright:
+      - update years.
+      - add Files-Excluded field.
+    + debian/README.source:
+      - rewrite and update it.
+  * debian/control:
+    + [5a38dbf] remove build-dep on gcc, unversion the build-dep on libqt4-dev
+      (4.6 is in oldstable now).
+    + [8f58a88] suggest hyphen-hyphenation-patterns.
+  * debian/rules:
+    + [7ec2bac] remove a now pointless configure switch.
+    + [8279630] enable parallel building.
+    + [898e7c2] enable LFS.
+  * [21cede5] debian/patches/* refresh entire patchset:
+    + [63f3980] spelling-error-in-binary_*: add to fix homonymous lintian tag.
+    + [4d8ab12] qreal_double.patch: update header.
+  * [ac8bb35] debian/control: suggest scribus-doc (non-free).
+  * [0618e96] debian/scribus.links: add to symlink
+    usr/share/doc/scribus/{copyright → COPYING} (used in the scribus interface,
+    in the about window).
+
+ -- Mattia Rizzolo <mattia@mapreri.org>  Mon, 25 Aug 2014 09:51:58 +0200
+
+scribus (1.4.2.dfsg.3+r18267-2) unstable; urgency=medium
+
+  * [cee3e4f] switch to dh9:
+    + debian/compat: bump 7 -> 9.
+    + debian/rules: greatly simplify.
+    + debian/control: bump Build-Depend on debhelper to 9.0.
+    + debian/install: add a file, previusly installed via rules.
+    + debian/docs: list here some docs, instead of using rules.
+    + debian/pycompat: drop, not needed anymore.
+    + debian/scribus.lintian: rename to debian/scribus.lintian-overrides
+    + debian/dirs: remove all now useless dirs.
+    + this fixes a lot of hardening-no-relro lintian warnings.
+  * [37e5355] debian/watch: change pgp check from .sig to .asc.
+  * debian/control:
+    + [44fa951] do wrap-and-sort maintenance
+    + [adf01fc] suggest texlive-latex-recommended and cite it in the
+      description (Closes: #732694) (LP: #915388)
+    + [a0354de] recommend ttf-bitstream-vera, which is used in a template
+    + [e2a0e53] recommend fonts-liberation, which is used in templates
+  * debian/rules:
+    + [52415e9] enable full hardening.
+    + [af2f904] remove references to proprietary fonts and use free fonts in
+      templates. (Thanks to Trent W. Buck <trentbuck@gmail.com> for the patch)
+      (Closes: #742003)
+
+ -- Mattia Rizzolo <mattia@mapreri.org>  Wed, 23 Jul 2014 09:25:08 +0200
+
+scribus (1.4.2.dfsg.3+r18267-1) unstable; urgency=medium
+
+  * Remove scribus/profiles/GenericCMYK.icm:
+    + [1dd1b23] Repack to remove the non-free profile.
+    + [e32bfb4] debian/README.source: update according to the last repack.
+    + [a674ee9] debian/patches/profiles_cmakelists.patch: update to reflect
+      the last repack.
+  * debian/control:
+    + [aba660c] bump Standards-Version to 3.9.5 (no changes needed).
+    + [8311a60] fix vcs-field-not-canonical lintian tag.
+    + [5197746] fix homepage-in-binary-package lintian tag.
+    + [a864b9d] build-depend on libtiff-dev rather than libtiff4-dev (Closes:
+    #736046).
+    + [40b8286] drop hard depends on python.
+    + [ded9f31] version the build-dep for python-all-dev (to call dh_python2).
+    + [28aed8c] add myself to the Uploaders.
+    + [c3ab5a9] recommend icc-profiles-free
+  * [bb004c8] debian/copyright:
+    + fix unversioned-copyright-format-uri lintian tag.
+    + fix syntax-error-in-dep5-copyright lintian tag.
+    + add myself to copyrights holder of debian/*.
+    + update years.
+  * [b4b6d64] debian/patches/{profiles,scribus}_cmakelists.patch:
+    + fix quilt-patch-missing-description lintian tags.
+  * [9ca8d7f] debian/watch, debian/upstream/signing-key.asc:
+    + update: add some more heuristics to dversionmangle.
+    + add gpg check (fix debian-watch-may-check-gpg-signature lintian tag).
+  * debian/rules:
+    + [21f679d] fix duplicate-changelog-files lintian tag.
+    + [a03f68a] add a call to dh_python2 to proper version the dependence on
+      python.
+    + [c3ef0e7] fix package-contains-empty-directory lintian tag.
+    + [0a4d00b] make the build verbose.
+  * [ed3c167] debian/patch/hyphen-used-as-minus-sign.patch:
+    + add to fix the homonymous lintian tag.
+  * [206a0ed] debian/NEWS: fix debian-news-entry-uses-asterisk lintian tag.
+
+
+ -- Mattia Rizzolo <mattia@mapreri.org>  Thu, 03 Jul 2014 14:15:56 +0200
+
+scribus (1.4.2.dfsg.2+r18267-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Remove resources/editorconfig/dot.svg (Closes: #741666):
+    + [e4927c3] Repack the source to remove a non-free image.
+    + [0d54ebf] debian/README.source: update to reflect the above change.
+    + [67e3a92] debian/patch/remove_non-free_file.patch: add
+  * [ba8d805] debian/control: change build-dep liblcms1-dev → liblcms2-dev
+    (Closes: #745526)
+
+ -- Mattia Rizzolo <mattia@mapreri.org>  Sun, 01 Jun 2014 19:36:30 +0200
+
+scribus (1.4.2.dfsg.1+r18267-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Repack the source to remove some non-free contents. (Closes: #741666)
+  * debian/README.source: update to reflect the above changes.
+
+ -- Mattia Rizzolo <mattia@mapreri.org>  Sun, 11 May 2014 16:29:44 +0200
+
+scribus (1.4.2.dfsg+r18267-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * debian/patch/qreal_double.patch: Avoid qreal/double clashes on ARM
+    (imported from Ubuntu). (Closes: #707882)
+
+ -- Mattia Rizzolo <mattia@mapreri.org>  Sat, 21 Dec 2013 16:13:37 +0100
+
 scribus (1.4.2.dfsg+r18267-1) unstable; urgency=low
 
   * Update from the upstream svn, which fixes many bugs.

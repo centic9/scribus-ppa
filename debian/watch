@@ -1,3 +1,5 @@
 version=3
 
-opts="dversionmangle='s/\.dfsg*$//'" http://sf.net/scribus/scribus-(\d\.\d\.\d+\.)tar\.bz2
+opts="dversionmangle=s/(\.dfsg)?(\.\d)?\+r(\d\S*)//,pgpsigurlmangle=s/$/.asc/" \
+http://sf.net/scribus/scribus-(\d\S{0,10})\.(?:zip|tgz|tbz|txz|(?:tar\.(?:gz|bz2|xz)))
+

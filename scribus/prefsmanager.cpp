@@ -72,17 +72,17 @@ PrefsManager::~PrefsManager()
 
 PrefsManager* PrefsManager::instance()
 {
-    if (_instance == 0)
-        _instance = new PrefsManager();
+	if (_instance == 0)
+		_instance = new PrefsManager();
 
-    return _instance;
+	return _instance;
 }
 
 void PrefsManager::deleteInstance()
 {
-    if (_instance)
-        delete _instance;
-    _instance = 0;
+	if (_instance)
+		delete _instance;
+	_instance = 0;
 }
 
 
@@ -948,8 +948,8 @@ void PrefsManager::ReadPrefsXML()
 		{
 			appPrefs.guiLanguage = userprefsContext->get("gui_language","");
 			appPrefs.mainWinState = QByteArray::fromBase64(userprefsContext->get("mainwinstate","").toAscii());
-            //continue here...
-            //Prefs."blah blah" =...
+			//continue here...
+			//Prefs."blah blah" =...
 		}
 		if (prefsFile->hasContext("print_options"))
 		{
@@ -1002,8 +1002,8 @@ void PrefsManager::SavePrefsXML()
 		{
 			userprefsContext->set("gui_language", appPrefs.guiLanguage);
 			userprefsContext->set("mainwinstate", QString::fromAscii(appPrefs.mainWinState.toBase64()));
-            //continue here...
-            //Prefs."blah blah" =...
+			//continue here...
+			//Prefs."blah blah" =...
 		}
 		prefsFile->write();
 	}
@@ -1275,10 +1275,10 @@ bool PrefsManager::WritePref(QString filename)
 	dc.setAttribute("rulersShown", static_cast<int>(appPrefs.guidesSettings.rulersShown));
 	dc.setAttribute("showBleed", static_cast<int>(appPrefs.guidesSettings.showBleed));
 	dc.setAttribute("rulerMode", static_cast<int>(appPrefs.guidesSettings.rulerMode));
-	dc.setAttribute("ScratchBottom", appPrefs.scratch.Bottom);
-	dc.setAttribute("ScratchLeft", appPrefs.scratch.Left);
-	dc.setAttribute("ScratchRight", appPrefs.scratch.Right);
-	dc.setAttribute("ScratchTop", appPrefs.scratch.Top);
+	dc.setAttribute("ScratchBottom", ScCLocale::toQStringC(appPrefs.scratch.Bottom));
+	dc.setAttribute("ScratchLeft", ScCLocale::toQStringC(appPrefs.scratch.Left));
+	dc.setAttribute("ScratchRight", ScCLocale::toQStringC(appPrefs.scratch.Right));
+	dc.setAttribute("ScratchTop", ScCLocale::toQStringC(appPrefs.scratch.Top));
 	dc.setAttribute("GapHorizontal", ScCLocale::toQStringC(appPrefs.GapHorizontal));
 	dc.setAttribute("GapVertical", ScCLocale::toQStringC(appPrefs.GapVertical));
 	dc.setAttribute("STECOLOR", appPrefs.STEcolor.name());
@@ -2434,7 +2434,8 @@ void PrefsManager::initDefaultCheckerPrefs(CheckerPrefsList* cp)
 		checkerSettings.checkTransparency = true;
 		checkerSettings.checkAnnotations = true;
 		checkerSettings.minResolution = 144.0;
-		cp->insert( CommonStrings::PDF_X3    , checkerSettings);
+		cp->insert( CommonStrings::PDF_X1a  , checkerSettings);
+		cp->insert( CommonStrings::PDF_X3   , checkerSettings);
 	}
 }
 

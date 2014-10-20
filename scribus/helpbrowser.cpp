@@ -31,7 +31,6 @@ for which a new license (GPL+exception) is in place.
 #include <QAction>
 // #include <QDebug>
 #include <QDir>
-#include <QDomDocument>
 #include <QEvent>
 #include <QFileDialog>
 #include <QFileInfo>
@@ -329,9 +328,9 @@ void HelpBrowser::searchingButton_clicked()
 {
 	// root files
 	searchingView->clear();
-	QApplication::changeOverrideCursor(QCursor(Qt::WaitCursor));
+	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 	searchingInDirectory(finalBaseDir);
-	QApplication::changeOverrideCursor(Qt::ArrowCursor);
+	QApplication::restoreOverrideCursor();
 }
 
 void HelpBrowser::searchingInDirectory(const QString& aDir)

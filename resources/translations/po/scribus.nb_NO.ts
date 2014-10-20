@@ -3366,6 +3366,10 @@ Configuration invalid</source>
         <source>Select Barcode Type</source>
         <translation>Velg strekkode-type</translation>
     </message>
+    <message>
+        <source>Variable number of characters, digits and any symbols.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BarcodeGeneratorBase</name>
@@ -7532,6 +7536,14 @@ Er du sikker på at du vil overskrive den?
         <source>Ctrl-V</source>
         <translation>Ctrl + V</translation>
     </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">Greit</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Avbryt</translation>
+    </message>
 </context>
 <context>
     <name>EffectsDialog</name>
@@ -8648,11 +8660,15 @@ This is not a direct translation, but a norwegian pangram,</comment>
     </message>
     <message>
         <source>Enabling this tells Scribus to use these replacements for missing fonts permanently in all future layouts. This can be reverted or changed in Edit &gt; Preferences &gt; Fonts.</source>
-        <translation>Hvis du skrur dette på vil Scribus bruke disse erstatningene for manglende skrifttyper også senere. Du kan angre eller endre dette i «Fil → Instillinger → Skrifttyper».</translation>
+        <translation type="obsolete">Hvis du skrur dette på vil Scribus bruke disse erstatningene for manglende skrifttyper også senere. Du kan angre eller endre dette i «Fil → Instillinger → Skrifttyper».</translation>
     </message>
     <message>
         <source>If you select OK, then save, these substitutions are made permanent in the document.</source>
         <translation>Hvis du velger «Greit» og lagrer, så vil disse erstatningene gjøres permanente i dette dokumentet.</translation>
+    </message>
+    <message>
+        <source>Enabling this tells Scribus to use these replacements for missing fonts permanently in all future layouts. This can be reverted or changed in File &gt; Preferences &gt; Fonts.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9223,6 +9239,14 @@ og www.scribus.net for nye versjoner av Scribus.</translation>
     <name>HunspellPlugin</name>
     <message>
         <source>Check Spelling...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hunspell-based spell checker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spell Checker based on the Hunspell libraries</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13016,8 +13040,8 @@ ellers måles koordinatene i forhold til objektet.</translation>
         <translation>Dette lar deg eksportere en side med sitt eget navn for hver side i dokumentet. Sidetallene legges til automatisk. Dette er mest nyttig hvis du vil trykke filene på et trykkeri.</translation>
     </message>
     <message>
-        <source>The save button will be disabled if you are trying to export PDF/X-3 and the info string is missing from the PDF/X-3 tab.</source>
-        <translation>Lagreknappen vil være utilgjengelig hvis du prøver å eksportere som PDF/X-3 og det mangler en informasjonsstreng på PDF/X-3-fanebladet.</translation>
+        <source>The save button will be disabled if you are trying to export PDF/X and the info string is missing from the PDF/X tab.</source>
+        <translation>Lagreknappen vil være utilgjengelig hvis du prøver å eksportere som PDF/X og det mangler en informasjonsstreng på PDF/X-fanebladet.</translation>
     </message>
     <message>
         <source>%1 does not exists and will be created, continue?</source>
@@ -13303,8 +13327,8 @@ ellers måles koordinatene i forhold til objektet.</translation>
         <translation type="obsolete">Ikke bruk innebygde ICC-profiler</translation>
     </message>
     <message>
-        <source>PDF/X-3 Output Intent</source>
-        <translation type="obsolete">Visning for PDF/X-3</translation>
+        <source>PDF/X Output Intent</source>
+        <translation type="obsolete">Visning for PDF/X</translation>
     </message>
     <message>
         <source>Trim Box</source>
@@ -13525,10 +13549,10 @@ Velg «Trykk» hvis du skal skrive ut på en 4 fargers CMYK-skriver.</translatio
         <translation type="obsolete">Utgivelse profil for utskrift. hvis mulig, få noe rådgiving fra din skriver når du velger.</translation>
     </message>
     <message>
-        <source>Mandatory string for PDF/X-3 or the PDF will fail
-PDF/X-3 conformance. We recommend you use the title of the document.</source>
-        <translation type="obsolete">Nødvendig tekstbit for PDF/X-3. Ellers vil PDF-fila ikke
-følge PDF/X3-conformance. Vi foreslår at du bruker dokumentets tittel.</translation>
+        <source>Mandatory string for PDF/X or the PDF will fail
+PDF/X conformance. We recommend you use the title of the document.</source>
+        <translation type="obsolete">Nødvendig tekstbit for PDF/X. Ellers vil PDF-fila ikke
+følge PDF/X-conformance. Vi foreslår at du bruker dokumentets tittel.</translation>
     </message>
     <message>
         <source>Distance for bleed from the top of the physical page</source>
@@ -18680,7 +18704,7 @@ Corners:</source>
     </message>
     <message>
         <source>Use the bounding box, which is always rectangular, instead of the frame&apos;s shape for text flow of text frames below the object. </source>
-        <translation>Bruk grenseboksen, som alltid er rektangulær, istedenfor rammeformen til tekstflyt på rammer på et lavere lag enn den valgte.</translation>
+        <translation type="obsolete">Bruk grenseboksen, som alltid er rektangulær, istedenfor rammeformen til tekstflyt på rammer på et lavere lag enn den valgte.</translation>
     </message>
     <message>
         <source>Transparency Settings</source>
@@ -18768,7 +18792,7 @@ Corners:</source>
     </message>
     <message>
         <source>When chosen, the contour line can be edited with the Edit Shape Tool on the palette further above. When edited via the shape palette, this becomes a second separate line originally based on the frame&apos;s shape for text flow of text frames below the object. T</source>
-        <translation>Hvis dette er på kan konturlinjene redigeres med verktøyet «Endre form» (se ovenfor). Dette blir da en ny linje, som til å begynne med er basert på rammeformen, og kan brukes til tekstflyt for rammer som er på lavere lag.</translation>
+        <translation type="obsolete">Hvis dette er på kan konturlinjene redigeres med verktøyet «Endre form» (se ovenfor). Dette blir da en ny linje, som til å begynne med er basert på rammeformen, og kan brukes til tekstflyt for rammer som er på lavere lag.</translation>
     </message>
     <message>
         <source>Default</source>
@@ -18826,7 +18850,7 @@ Corners:</source>
     </message>
     <message>
         <source>Use the clipping path of the image</source>
-        <translation type="unfinished">
+        <translation type="obsolete">
             </translation>
     </message>
     <message>
@@ -18995,6 +19019,18 @@ Corners:</source>
     </message>
     <message>
         <source>This rule determines the &amp;quot;insideness&amp;quot; of a point on the canvas by drawing a ray from that point to infinity in any direction and then examining the places where a segment of the shape crosses the ray. Starting with a count of zero, add one each time a path segment crosses the ray from left to right and subtract one each time a path segment crosses the ray from right to left. If the result is zero then the point is outside the path. Otherwise, it is inside.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the bounding box, which is always rectangular, instead of the frame&apos;s shape for text flow of text frames below the object.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When chosen, the contour line can be edited with the Edit Shape Tool on the palette further above. When edited via the shape palette, this becomes a second separate line originally based on the frame&apos;s shape for text flow of text frames below the object.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the clipping path of the image.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -21931,6 +21967,10 @@ is not exhaustive due to exceptions from called functions.
     </message>
     <message>
         <source>Nepali</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anii</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -29409,8 +29449,8 @@ med jevne mellomrom</translation>
         <translation>&amp;Farge</translation>
     </message>
     <message>
-        <source>PDF/X-3 Output Intent</source>
-        <translation>Tilpass visningen til PDF/X-3</translation>
+        <source>PDF/X Output Intent</source>
+        <translation>Tilpass visningen til PDF/X</translation>
     </message>
     <message>
         <source>&amp;Info String:</source>
@@ -29607,8 +29647,8 @@ Otherwise, your exported PDF may not print properly and is truly not portable ac
             </translation>
     </message>
     <message>
-        <source>Mandatory string for PDF/X-3 or the PDF will fail
-PDF/X-3 conformance. We recommend you use the title of the document.</source>
+        <source>Mandatory string for PDF/X or the PDF will fail
+PDF/X conformance. We recommend you use the title of the document.</source>
         <translation type="obsolete">
             </translation>
     </message>
@@ -29716,9 +29756,9 @@ sikkerhetsfunksjonen i den eksporterte PDF-fila</translation>
         <translation>Dette er en avansert innstilling som ikke er tilgjengelig som standard. Du bør bare bruke dette hvis trykkeriet ber spesielt om det og du vet nøyaktig hvilke innstillinger du trenger. Hvis du gjør det feil kan det hende pdf-fila ikke kan skrives ut på rett vis, eller at den ikke blir overførbar mellom ulike operativsystemer.</translation>
     </message>
     <message>
-        <source>Mandatory string for PDF/X-3 or the PDF will fail PDF/X-3 conformance. We recommend you use the title of the document.</source>
-        <translation>Nødvendig tekstbit for PDF/X-3. Ellers vil PDF-fila ikke
-følge PDF/X3-standarden. Det kan være lurt å bruke tittelen på dokumentet.</translation>
+        <source>Mandatory string for PDF/X or the PDF will fail PDF/X conformance. We recommend you use the title of the document.</source>
+        <translation>Nødvendig tekstbit for PDF/X. Ellers vil PDF-fila ikke
+følge PDF/X-standarden. Det kan være lurt å bruke tittelen på dokumentet.</translation>
     </message>
     <message>
         <source>Display Settings</source>

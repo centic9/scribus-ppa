@@ -78,8 +78,8 @@ PROJECT(scribus)
 #where VERSION_SUFFIX is of the form "", "svn" or "Nsvn" (N being the minor patch level)
 SET (VERSION_MAJOR "1")
 SET (VERSION_MINOR "4")
-SET (VERSION_PATCH "3")
-SET (VERSION_SUFFIX "svn")
+SET (VERSION_PATCH "4")
+SET (VERSION_SUFFIX "")
 SET (VERSION ${VERSION_MAJOR})
 IF (VERSION_MINOR GREATER -1)
   SET (VERSION ${VERSION}.${VERSION_MINOR})
@@ -534,8 +534,8 @@ ENDIF(TIFF_FOUND)
 #<< JPEG, TIFF
 
 #<< PYTHON
-SET(PythonLibs_FIND_VERSION 2)
-FIND_PACKAGE(PythonLibs REQUIRED)
+#SET(PythonLibs_FIND_VERSION 2)
+FIND_PACKAGE(PythonLibs 2 REQUIRED)
 IF (PYTHON_LIBRARY)
   MESSAGE("Python Library Found OK")
   SET(HAVE_PYTHON 1)
@@ -887,12 +887,12 @@ IF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
   SET(CPACK_TOPLEVEL_TAG "")
   SET(CPACK_SOURCE_IGNORE_FILES
     CMakeCache.txt
-	scribus-1.4.3.tar.gz
-	scribus-1.4.3.tar.Z
-	scribus-1.4.3.tar.xz
-	scribus-1.4.3.gz
-	scribus-1.4.3.tar.bz2
-	scribus-1.4.3.tar.7z
+	scribus-1.4.4.tar.gz
+	scribus-1.4.4.tar.Z
+	scribus-1.4.4.tar.xz
+	scribus-1.4.4.gz
+	scribus-1.4.4.tar.bz2
+	scribus-1.4.4.tar.7z
     "~$"
     "\\\\.cvsignore$"
     "\\\\.o$"

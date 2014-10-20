@@ -298,18 +298,15 @@ void Preferences::setDS(int layout)
 
 void Preferences::unitChange()
 {
-	double oldUnitRatio = unitRatio;
 	docUnitIndex = tabDocument->unitCombo->currentIndex();
 	unitRatio = unitGetRatioFromIndex(docUnitIndex);
-	QString suffix = unitGetSuffixFromIndex(docUnitIndex);
-	double invUnitConversion = 1.0 / oldUnitRatio * unitRatio;
 	
 	tabDocument->unitChange();
-	tabGuides->unitChange(suffix, docUnitIndex, invUnitConversion);
+	tabGuides->unitChange(docUnitIndex);
 	tabView->unitChange(docUnitIndex);
 	tabTools->unitChange(docUnitIndex);
-	tabPDF->unitChange(suffix, docUnitIndex, invUnitConversion);
-	tabPrinter->unitChange(suffix, docUnitIndex, invUnitConversion);
+	tabPDF->unitChange(docUnitIndex);
+	tabPrinter->unitChange(docUnitIndex);
 }
 
 

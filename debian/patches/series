@@ -1,2 +1,6 @@
-profiles_cmakelists.patch
-scribus_cmakelists.patch
+762942
+remove_non-free_file.patch
+qreal_double.patch
+hyphen-used-as-minus-sign.patch
+spelling-error-in-binary_Resizeable_Resizable
+spelling-error-in-binary_explicitely_explicitly

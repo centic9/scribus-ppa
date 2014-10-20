@@ -365,6 +365,7 @@ void NewDoc::createOpenDocPage()
 	fileDialog = new QFileDialog(openDocFrame, tr("Open"), docDir, formats);
 	fileDialog->setFileMode(QFileDialog::ExistingFile);
 	fileDialog->setAcceptMode(QFileDialog::AcceptOpen);
+	fileDialog->setOption(QFileDialog::DontUseNativeDialog);
 	fileDialog->setReadOnly(true);
 	fileDialog->setSizeGripEnabled(false);
 	fileDialog->setModal(false);
@@ -383,6 +384,7 @@ void NewDoc::createOpenDocPage()
 	connect(keyCatcher, SIGNAL(escapePressed()), this, SLOT(reject()));
 
 	connect(fileDialog, SIGNAL(filesSelected(const QStringList &)), this, SLOT(openFile()));
+	connect(fileDialog, SIGNAL(rejected()), this, SLOT(reject()));
 }
 
 void NewDoc::openFile()
