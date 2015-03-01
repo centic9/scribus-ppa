@@ -30,18 +30,20 @@ public:
 	QPushButton* AddScript;
 	QPushButton* DeleteScript;
 	QPushButton* ExitDia;
-	ScribusDoc *Doc;
-	ScribusView *View;
 
 private slots:
 	void slotAdd();
 	void slotEdit();
 	void slotDelete();
+	void slotSelectionChanged();
 
 signals:
 	void docChanged(bool);
 
 protected:
+	ScribusDoc  *m_Doc;
+	ScribusView *m_View;
+
 	QHBoxLayout* JavaDocsLayout;
 	QVBoxLayout* Layout1;
 };

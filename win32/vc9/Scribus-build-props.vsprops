@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="Scribus-build-props"
+	>
+	<!-- Qt4 -->
+	<UserMacro Name="QT4_DIR"
+		Value="F:\Libraries-vcall\Qt-4.8.6\msvc2008"
+	/>
+	<!-- Boost -->
+	<UserMacro Name="BOOST_DIR"
+		Value="F:\Scribus Libs\scribus-common-libs\boost-1.51.0"
+	/>
+	<!-- Cairo -->
+	<UserMacro Name="CAIRO_DIR"
+		Value="F:\Scribus Libs\scribus-1.4.x-libs-msvc2008\cairo-1.8.6"
+	/>
+	<UserMacro Name="CAIRO_DEBUG_LIB"
+		Value="cairo2d.lib"
+	/>
+	<UserMacro Name="CAIRO_RELEASE_LIB"
+		Value="cairo2.lib"
+	/>
+	<!-- Freetype -->
+	<UserMacro Name="FREETYPE_DIR"
+		Value="F:\Scribus Libs\scribus-1.4.x-libs-msvc2008\freetype-2.4.6"
+	/>
+	<UserMacro Name="FREETYPE_DEBUG_LIB"
+		Value="freetypeD.lib"
+	/>
+	<UserMacro Name="FREETYPE_RELEASE_LIB"
+		Value="freetype.lib"
+	/>
+	<!-- Hunspell -->
+	<UserMacro Name="HUNSPELL_DIR"
+		Value="F:\Scribus Libs\scribus-1.4.x-libs-msvc2008\hunspell-1.3.2"
+	/>
+	<UserMacro Name="HUNSPELL_DEBUG_LIB"
+		Value="libhunspell_staticD.lib"
+	/>
+	<UserMacro Name="HUNSPELL_RELEASE_LIB"
+		Value="libhunspell_static.lib"
+	/>
+	<!-- Iconv -->
+	<UserMacro Name="ICONV_DIR"
+		Value="F:\Scribus Libs\scribus-1.4.x-libs-msvc2008\iconv-1.14"
+	/>
+	<UserMacro Name="ICONV_DEBUG_LIB"
+		Value="iconv_d.lib"
+	/>
+	<UserMacro Name="ICONV_RELEASE_LIB"
+		Value="iconv.lib"
+	/>
+	<!-- Littlecms -->
+	<UserMacro Name="LCMS_DIR"
+		Value="F:\Scribus Libs\scribus-1.4.x-libs-msvc2008\lcms2-2.3"
+	/>
+	<UserMacro Name="LCMS_DEBUG_LIB"
+		Value="lcms2_staticd.lib"
+	/>
+	<UserMacro Name="LCMS_RELEASE_LIB"
+		Value="lcms2_static.lib"
+	/>
+	<!-- Libjpeg -->
+	<UserMacro Name="LIBJPEG_DIR"
+		Value="F:\Scribus Libs\scribus-1.4.x-libs-msvc2008\libjpeg-8d"
+	/>
+	<UserMacro Name="LIBJPEG_DEBUG_LIB"
+		Value="jpeg8d_d.lib"
+	/>
+	<UserMacro Name="LIBJPEG_RELEASE_LIB"
+		Value="jpeg8d.lib"
+	/>
+	<!-- Libtiff -->
+	<UserMacro Name="LIBTIFF_DIR"
+		Value="F:\Scribus Libs\scribus-1.4.x-libs-msvc2008\libtiff-3.9.7"
+	/>
+	<UserMacro Name="LIBTIFF_DEBUG_LIB"
+		Value="libtiff3_d.lib"
+	/>
+	<UserMacro Name="LIBTIFF_RELEASE_LIB"
+		Value="libtiff3.lib"
+	/>
+	<!-- PoDoFo -->
+	<UserMacro Name="PODOFO_DIR"
+		Value="F:\Scribus Libs\scribus-1.4.x-libs-msvc2008\podofo-0.9.1"
+	/>
+	<UserMacro Name="PODOFO_DEBUG_LIB"
+		Value="PoDoFoLibD.lib"
+	/>
+	<UserMacro Name="PODOFO_RELEASE_LIB"
+		Value="PoDoFoLib.lib"
+	/>
+	<!-- Libxml2 -->
+	<UserMacro Name="LIBXML2_DIR"
+		Value="F:\Scribus Libs\scribus-1.4.x-libs-msvc2008\libxml2-2.9.1"
+	/>
+	<UserMacro Name="LIBXML2_DEBUG_LIB"
+		Value="libxml2_d.lib"
+	/>
+	<UserMacro Name="LIBXML2_RELEASE_LIB"
+		Value="libxml2.lib"
+	/>
+	<!-- Python -->
+	<UserMacro Name="PYTHON_DIR"
+		Value="F:\Scribus Libs\scribus-common-libs\python-2.7.8-win32"
+	/>
+	<UserMacro Name="PYTHON_DEBUG_LIB"
+		Value="python27_d.lib"
+	/>
+	<UserMacro Name="PYTHON_RELEASE_LIB"
+		Value="python27.lib"
+	/>
+</VisualStudioPropertySheet>

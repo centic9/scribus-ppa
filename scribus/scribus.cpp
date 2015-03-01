@@ -3902,7 +3902,6 @@ bool ScribusMainWindow::loadPage(QString fileName, int Nr, bool Mpa, const QStri
 
 bool ScribusMainWindow::loadDoc(QString fileName)
 {
-	undoManager->setUndoEnabled(false);
 	QFileInfo fi(fileName);
 	if (!fi.exists())
 	{
@@ -3922,7 +3921,8 @@ bool ScribusMainWindow::loadDoc(QString fileName)
 	// PV - 5780: Scribus doesn't track what documents are already opened
 	// The goal of this part of code is to disallow user to open one
 	// doc multiple times.
-	QString platfName(QDir::toNativeSeparators(fileName));
+	QString FName = fi.absoluteFilePath();
+	QString platfName(QDir::toNativeSeparators(FName));
 	uint windowCount = windows.count();
 	for ( uint i = 0; i < windowCount; ++i )
 	{
@@ -3942,9 +3942,9 @@ bool ScribusMainWindow::loadDoc(QString fileName)
 		}
 	}
 
+	UndoBlocker undoBlocker;
 	if (!fileName.isEmpty())
 	{
-		QString FName = fi.absoluteFilePath();
 		FileLoader *fileLoader = new FileLoader(FName);
 		int testResult = fileLoader->testFile();
 		if (testResult == -1)
@@ -4001,7 +4001,7 @@ bool ScribusMainWindow::loadDoc(QString fileName)
 		//This also gives the user the opportunity to cancel the load when finding theres a replacement required.
 		if (loadSuccess && ScCore->usingGUI())
 			loadSuccess = fileLoader->postLoad(doc);
-		if(!loadSuccess)
+		if (!loadSuccess)
 		{
 			view->close();
 			delete fileLoader;
@@ -4015,7 +4015,6 @@ bool ScribusMainWindow::loadDoc(QString fileName)
 			mainWindowStatusLabel->setText("");
 			mainWindowProgressBar->reset();
 			ActWin = NULL;
-			undoManager->setUndoEnabled(true);
 			if (windows.count() != 0)
 				newActWin(ActWinOld);
 			return false;
@@ -4265,7 +4264,6 @@ bool ScribusMainWindow::loadDoc(QString fileName)
 	undoManager->switchStack(doc->DocName);
 	pagePalette->Rebuild();
 	qApp->restoreOverrideCursor();
-	undoManager->setUndoEnabled(true);
 	doc->setModified(false);
 	return ret;
 }
@@ -4720,6 +4718,8 @@ bool ScribusMainWindow::DoFileClose()
 		scrActions["editSelectAll"]->setEnabled(false);
 		scrActions["editSelectAllOnLayer"]->setEnabled(false);
 		scrActions["editDeselectAll"]->setEnabled(false);
+		scrActions["editEditWithImageEditor"]->setEnabled(false);
+		scrActions["editEditRenderSource"]->setEnabled(false);
 		scrActions["editReplaceColors"]->setEnabled(false);
 		scrActions["editPatterns"]->setEnabled(false);
  		scrActions["editStyles"]->setEnabled(false);
@@ -5539,7 +5539,10 @@ void ScribusMainWindow::SelectAll(bool docWideSelect)
 
 void ScribusMainWindow::deselectAll()
 {
-	if (doc->appMode == modeEdit)
+	bool inEditMode = (doc->appMode == modeEdit ||
+					   doc->appMode == modeEditClip ||
+					   doc->appMode == modeEditGradientVectors);
+	if (inEditMode)
 	{
 		if (doc->m_Selection->count() <= 0)
 			return;
@@ -5657,7 +5660,7 @@ void ScribusMainWindow::SaveText()
 		wdir = prefsManager->prefsFile->getContext("dirs")->get("save_text", prefsDocDir);
 	else
 		wdir = prefsManager->prefsFile->getContext("dirs")->get("save_text", ".");
-	QString fn = CFileDialog( wdir, tr("Save As"), tr("Text Files (*.txt);;All Files(*)"), "", fdShowCodecs|fdHidePreviewCheckBox);
+	QString fn = CFileDialog( wdir, tr("Save As"), tr("Text Files (*.txt);;All Files (*)"), "", fdShowCodecs|fdHidePreviewCheckBox);
 	if (!fn.isEmpty())
 	{
 		prefsManager->prefsFile->getContext("dirs")->set("save_text", fn.left(fn.lastIndexOf("/")));
@@ -5730,6 +5733,7 @@ void ScribusMainWindow::addNewPages(int wo, int where, int numPages, double heig
 		ss->set("PAGE", wo);
 		ss->set("WHERE", where);
 		ss->set("COUNT", numPages);
+		ss->set("MASTER_PAGE_MODE",  doc->masterPageMode());
 		if (basedOn != NULL)
 			ss->set("BASED", basedOn->join("|"));
 		else
@@ -6332,6 +6336,7 @@ void ScribusMainWindow::ToggleFrameEdit()
 		connect(view, SIGNAL(PolyStatus(int, uint)), nodePalette, SLOT(PolyStatus(int, uint)));
 		doc->nodeEdit.reset();
 //done elsewhere now		doc->appMode = modeEditClip;
+		scrActions["insertFrame"]->setEnabled(false);
 		scrActions["toolsSelect"]->setEnabled(false);
 		scrActions["toolsRotate"]->setEnabled(false);
 		scrActions["toolsEditContents"]->setEnabled(false);
@@ -6410,6 +6415,9 @@ void ScribusMainWindow::NoFrameEdit()
 	nodePalette->setDoc(0,0);
 	nodePalette->hide();
 //	qDebug() << "nodepalette hide";
+	scrActions["editUndoAction"]->setEnabled(UndoManager::instance()->hasUndoActions());
+	scrActions["editRedoAction"]->setEnabled(UndoManager::instance()->hasRedoActions());
+	scrActions["insertFrame"]->setEnabled(true);
 	scrActions["toolsSelect"]->setEnabled(true);
 	scrActions["toolsSelect"]->setChecked(true);
 	scrActions["toolsRotate"]->setEnabled(true);
@@ -6889,6 +6897,7 @@ void ScribusMainWindow::deletePage(int from, int to)
 			ss->set("PAGENR", a + 1);
 			ss->set("PAGENAME",   doc->Pages->at(a)->pageName());
 			ss->set("MASTERPAGE", doc->Pages->at(a)->MPageNam);
+			ss->set("MASTER_PAGE_MODE",  doc->masterPageMode());
 			// replace the deleted page in the undostack by a dummy object that will
 			// replaced with the "undone" page if user choose to undo the action
 			DummyUndoObject *duo = new DummyUndoObject();
@@ -7644,7 +7653,7 @@ void ScribusMainWindow::duplicateItem()
 	view->Deselect(true);
 	UndoTransaction *trans = NULL;
 	if (UndoManager::undoEnabled())
-		trans = new UndoTransaction(undoManager->beginTransaction(Um::Selection, Um::IPolygon, Um::Copy, "", Um::IMultipleDuplicate));
+		trans = new UndoTransaction(undoManager->beginTransaction(Um::Selection, Um::IPolygon, Um::Duplicate, "", Um::IMultipleDuplicate));
 	slotEditPaste();
 	for (int b=0; b<doc->m_Selection->count(); ++b)
 	{
@@ -8520,6 +8529,10 @@ void ScribusMainWindow::manageMasterPagesEnd()
 	pagePalette->enablePalette(true);
 	pagePalette->rebuildMasters();
 	ActWin->setMasterPagesPalette(NULL);
+	// #12857 : the number of pages may change when undoing/redoing
+	// page addition/deletion while in edit mode, so take some extra
+	// care so that storedPageNum is in appropriate range
+	storedPageNum = qMin(storedPageNum, doc->DocPages.count() - 1);
 	doc->setCurrentPage(doc->DocPages.at(storedPageNum));
 	view->reformPages(false);
 	view->setContentsPos(static_cast<int>(storedViewXCoor * storedViewScale), static_cast<int>(storedViewYCoor * storedViewScale));
@@ -8660,9 +8673,10 @@ void ScribusMainWindow::restoreDeletePage(SimpleState *state, bool isUndo)
 	QStringList tmpl;
 	tmpl << state->get("MASTERPAGE");
 	QString pageName = state->get("PAGENAME");
-	bool oldPageMode = doc->masterPageMode();
-	if (!pageName.isEmpty() && !oldPageMode) // We try do undo a master page deletion in standard mode
-		doc->setMasterPageMode(true);
+	bool savedMasterPageMode = state->getBool("MASTER_PAGE_MODE");
+	bool currMasterPageMode=doc->masterPageMode();
+	if (currMasterPageMode!=savedMasterPageMode)
+		doc->setMasterPageMode(savedMasterPageMode);
 	if (pagenr == 1)
 	{
 		where = 0;
@@ -8678,9 +8692,10 @@ void ScribusMainWindow::restoreDeletePage(SimpleState *state, bool isUndo)
 		where = 1;
 		wo = pagenr - 1;
 	}
+
 	if (isUndo)
 	{
-		if (doc->masterPageMode())
+		if (savedMasterPageMode)
 		{
 			slotNewMasterPage(wo, pageName);
 		}
@@ -8700,15 +8715,15 @@ void ScribusMainWindow::restoreDeletePage(SimpleState *state, bool isUndo)
 		state->set("DUMMY_ID", id);
 		deletePage(pagenr, pagenr);
 	}
-	if (!pageName.isEmpty() && !oldPageMode)
-	{
-		doc->setMasterPageMode(oldPageMode);
-		doc->rebuildMasterNames();
-		pagePalette->rebuildMasters();
-	}
-	if (doc->masterPageMode() && !pageName.isEmpty())
+	if (currMasterPageMode!=savedMasterPageMode)
+		doc->setMasterPageMode(currMasterPageMode);
+	doc->rebuildMasterNames();
+	if (ActWin->masterPagesPalette())
 		ActWin->masterPagesPalette()->updateMasterPageList();
+	pagePalette->rebuildMasters();
 	pagePalette->rebuildPages();
+	if (outlinePalette->isVisible())
+		outlinePalette->BuildTree();
 }
 
 void ScribusMainWindow::restoreAddPage(SimpleState *state, bool isUndo)
@@ -8722,9 +8737,14 @@ void ScribusMainWindow::restoreAddPage(SimpleState *state, bool isUndo)
 	int orient = state->getInt("ORIENT");
 	QString siz = state->get("SIZE");
 	bool mov = static_cast<bool>(state->getInt("MOVED"));
+	bool savedMasterPageMode = state->getBool("MASTER_PAGE_MODE");
 
 	int delFrom = 0;
 	int delTo = 0;
+	bool currMasterPageMode=doc->masterPageMode();
+	if (currMasterPageMode!=savedMasterPageMode)
+		doc->setMasterPageMode(savedMasterPageMode);
+
 	switch (where)
 	{
 		case 0:
@@ -8761,7 +8781,7 @@ void ScribusMainWindow::restoreAddPage(SimpleState *state, bool isUndo)
 	}
 	else
 	{
-		if (doc->masterPageMode())
+		if (savedMasterPageMode)
 		{
 			assert (count == 1);
 			slotNewMasterPage(wo, based[0]);
@@ -8777,6 +8797,14 @@ void ScribusMainWindow::restoreAddPage(SimpleState *state, bool isUndo)
 			delete tmp;
 		}
 	}
+	if (currMasterPageMode!=savedMasterPageMode)
+		doc->setMasterPageMode(currMasterPageMode);
+	doc->rebuildMasterNames();
+	if (ActWin->masterPagesPalette())
+		ActWin->masterPagesPalette()->updateMasterPageList();
+	pagePalette->rebuildPages();
+	if (outlinePalette->isVisible())
+		outlinePalette->BuildTree();
 }
 
 void ScribusMainWindow::restoreGrouping(SimpleState *state, bool isUndo)
@@ -9694,19 +9722,21 @@ void ScribusMainWindow::slotEditPasteContents(int absolute)
 
 void ScribusMainWindow::slotInsertFrame()
 {
-	if (HaveDoc)
+	if (!HaveDoc)
+		return;
+
+	view->requestMode(modeNormal);
+	if (doc->m_Selection->count() != 0)
+		view->Deselect(false);
+
+	InsertAFrame *dia = new InsertAFrame(this, doc);
+	if (dia->exec())
 	{
-		if (doc->m_Selection->count() != 0)
-			view->Deselect(false);
-		InsertAFrame *dia = new InsertAFrame(this, doc);
-		if (dia->exec())
-		{
-			InsertAFrameData iafData;
-			dia->getNewFrameProperties(iafData);
-			doc->itemAddUserFrame(iafData);
-		}
-		delete dia;
+		InsertAFrameData iafData;
+		dia->getNewFrameProperties(iafData);
+		doc->itemAddUserFrame(iafData);
 	}
+	delete dia;
 }
 
 void ScribusMainWindow::PutToPatterns()

@@ -22,9 +22,11 @@ class QListWidget;
 class QListWidgetItem;
 class QPushButton;
 class QTableWidget;
+class QTimer;
 
 class ScribusView;
 class PageItem;
+
 #include "scribusapi.h"
 #include "scimage.h"
 
@@ -36,6 +38,17 @@ public:
 	ExtImageProps( QWidget* parent, ImageInfoRecord *info, PageItem *item, ScribusView *view );
 	~ExtImageProps() {};
 
+public slots:
+	void leaveOK();
+	void leaveCancel();
+	void changePreview();
+	void changedLayer();
+	void delayedLayerChange();
+	void selLayer();
+	void selPath(QListWidgetItem *c);
+	void noPath();
+
+protected:
 	QTabWidget* propsTab;
 	QWidget* tab;
 	QLabel* textLabel1;
@@ -51,8 +64,17 @@ public:
 	QPushButton* cancelButton;
 	QList<QCheckBox*> FlagsSicht;
 	QList<QCheckBox*> FlagsMask;
-	ScribusView *viewWidget;
-	PageItem *currentItem;
+
+	QVBoxLayout* ExtImagePropsLayout;
+	QVBoxLayout* tabLayout;
+	QVBoxLayout* tabLayout_2;
+	QHBoxLayout* layout1;
+	QHBoxLayout* layoutBottom;
+
+	QTimer* m_timer;
+	ScribusView *m_view;
+	PageItem *m_item;
+
 	int currentLayer;
 	bool doPreview;
 	ImageInfoRecord originalInfo;
@@ -60,22 +82,7 @@ public:
 	QMap<QString, QString> blendModes;
 	QMap<QString, QString> blendModesRev;
 
-public slots:
-	void leaveOK();
-	void leaveCancel();
-	void changePreview();
-	void changedLayer();
-	void selLayer(int layer);
-	void selPath(QListWidgetItem *c);
-	void noPath();
-
-protected:
-	QVBoxLayout* ExtImagePropsLayout;
-	QVBoxLayout* tabLayout;
-	QVBoxLayout* tabLayout_2;
-	QHBoxLayout* layout1;
-	QHBoxLayout* layoutBottom;
-
+	void updateLayerInfo();
 };
 
 #endif // EXTIMAGEPROPS_H

@@ -138,12 +138,17 @@ void CanvasMode_NodeEdit::drawControls(QPainter* p)
 			cli.point((*itm), &x, &y);
 			p->drawPoint(QPointF(x, y));
 		}
-		emit m_view->HavePoint(true, m_doc->nodeEdit.MoveSym);
+	}
+	
+	bool havePoint = (m_doc->nodeEdit.ClRe != -1);
+	emit m_view->HavePoint(havePoint, m_doc->nodeEdit.MoveSym);
+
+	if (m_doc->nodeEdit.ClRe != -1) // May change when calling HavePoint()
+	{
 		cli.point(m_doc->nodeEdit.ClRe, &x, &y);
 		emit m_view->ClipPo(x, y);
 	}
-	else
-		emit m_view->HavePoint(false, m_doc->nodeEdit.MoveSym);
+
 	p->restore();
 }
 
@@ -739,6 +744,11 @@ void CanvasMode_NodeEdit::handleNodeEditPress(QMouseEvent* m, QRect)
 					cli.putPoints(cli.size(), EndInd - StartInd - 4, Clip, StartInd+4);
 					cli.putPoints(cli.size(), Clip.size() - EndInd, Clip, EndInd);
 				}
+			}
+			else if (m_doc->nodeEdit.ClRe == static_cast<int>(EndInd - 2))
+			{
+				cli.putPoints(0, m_doc->nodeEdit.ClRe - 2, Clip);
+				cli.putPoints(cli.size(), Clip.size()-(m_doc->nodeEdit.ClRe + 2), Clip, m_doc->nodeEdit.ClRe+2);
 			}
 			else
 			{

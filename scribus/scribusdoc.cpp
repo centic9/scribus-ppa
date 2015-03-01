@@ -154,6 +154,11 @@ public:
 		}
 		m_docChangeNeeded = true;
 	}
+
+	void setDocChangeNeeded(bool changeNeeded = true)
+	{
+		m_docChangeNeeded = changeNeeded;
+	}
 };
 
 
@@ -786,20 +791,8 @@ bool ScribusDoc::OpenCMSProfiles(ProfilesL InPo, ProfilesL InPoCMYK, ProfilesL M
 			CMSSettings.ComponentsInput2 = 3;
 	if (DocInputRGBProf.colorSpace() == ColorSpace_Cmyk)
 			CMSSettings.ComponentsInput2 = 4;
-	if (DocInputRGBProf.colorSpace() == ColorSpace_Cmyk)
+	if (DocInputRGBProf.colorSpace() == ColorSpace_Cmy)
 			CMSSettings.ComponentsInput2 = 3;
-	if (DocInputCMYKProf.colorSpace() == ColorSpace_Rgb)
-			CMSSettings.ComponentsInput3 = 3;
-	if (DocInputCMYKProf.colorSpace() == ColorSpace_Cmyk)
-			CMSSettings.ComponentsInput3 = 4;
-	if (DocInputCMYKProf.colorSpace() == ColorSpace_Cmy)
-			CMSSettings.ComponentsInput3 = 3;
-	if (DocPrinterProf.colorSpace() == ColorSpace_Rgb)
-			CMSSettings.ComponentsPrinter = 3;
-	if (DocPrinterProf.colorSpace() == ColorSpace_Cmyk)
-			CMSSettings.ComponentsPrinter = 4;
-	if (DocPrinterProf.colorSpace() == ColorSpace_Cmy)
-			CMSSettings.ComponentsPrinter = 3;
 
 	bool success  = (stdTransRGBMon && stdTransCMYKMon && stdProofImg  && stdProofImgCMYK &&
 		             stdTransImg    && stdTransRGB     && stdTransCMYK && stdProof       &&
@@ -6887,6 +6880,8 @@ void ScribusDoc::updatePict(QString name)
 	for (int c = 0; c < patterns.count(); ++c)
 	{
 		ScPattern pa = docPatterns[patterns[c]];
+		if (pa.items.count() <= 0)
+			continue;
 		for (int o = 0; o < pa.items.count(); o++)
 		{
 			PageItem *currItem = pa.items.at(o);
@@ -6993,6 +6988,8 @@ void ScribusDoc::updatePictDir(QString name)
 	for (int c = 0; c < patterns.count(); ++c)
 	{
 		ScPattern pa = docPatterns[patterns[c]];
+		if (pa.items.count() <= 0)
+			continue;
 		for (int o = 0; o < pa.items.count(); o++)
 		{
 			PageItem *currItem = pa.items.at(o);
@@ -7134,6 +7131,8 @@ void ScribusDoc::recalcPicturesRes(bool applyNewRes)
 	for (int c = 0; c < patterns.count(); ++c)
 	{
 		ScPattern pa = docPatterns[patterns[c]];
+		if (pa.items.count() <= 0)
+			continue;
 		for (int o = 0; o < pa.items.count(); o++)
 		{
 			PageItem *currItem = pa.items.at(o);
@@ -7202,6 +7201,8 @@ void ScribusDoc::removePict(QString name)
 	for (int c = 0; c < patterns.count(); ++c)
 	{
 		ScPattern pa = docPatterns[patterns[c]];
+		if (pa.items.count() <= 0)
+			continue;
 		for (int o = 0; o < pa.items.count(); o++)
 		{
 			PageItem *currItem = pa.items.at(o);
@@ -7763,8 +7764,12 @@ void ScribusDoc::itemSelection_DeleteItem(Selection* customSelection, bool force
 	}
 	selectedItemCount = delItems.count();
 
+	bool doCreateTransaction = (selectedItemCount > 1);
+	if (selectedItemCount == 1)
+		doCreateTransaction = delItems.at(0)->isTextFrame();
+
 	UndoTransaction* activeTransaction = NULL;
-	if ((selectedItemCount > 1) && UndoManager::undoEnabled())
+	if (doCreateTransaction && UndoManager::undoEnabled())
 		activeTransaction = new UndoTransaction(undoManager->beginTransaction(Um::Group + "/" + Um::Selection, Um::IGroup,
 																			  Um::Delete, tooltip, Um::IDelete));
 
@@ -8281,18 +8286,18 @@ void ScribusDoc::buildAlignItemList(Selection* customSelection)
 }
 
 
-bool ScribusDoc::startAlign()
+bool ScribusDoc::startAlign(uint minObjects)
 {
 	buildAlignItemList();
-	uint alignObjectsCount=AObjects.count();
-	if (alignObjectsCount==0)
+	uint alignObjectsCount = AObjects.count();
+	if (alignObjectsCount < minObjects)
 		return false;
 		
 	bool oneLocked=false;
 	for (uint i = 0; i < alignObjectsCount && !oneLocked; ++i)
 		for (int j = 0; j < AObjects[i].Objects.count() && !oneLocked; ++j)
 			if (AObjects[i].Objects.at(j)->locked())
-				oneLocked=true;
+				oneLocked = true;
 	int t = 2;
 	if (oneLocked)
 	{
@@ -8336,7 +8341,6 @@ bool ScribusDoc::startAlign()
 	}
 	return true;
 }
-
 
 void ScribusDoc::endAlign()
 {
@@ -8417,8 +8421,8 @@ void ScribusDoc::itemSelection_AlignLeftOut(AlignTo currAlignTo, AlignMethod cur
 {
 	if (!startAlign())
 		return;
-	uint alignObjectsCount=AObjects.count();
-	int loopStart=0, loopEnd=alignObjectsCount-1;
+	uint alignObjectsCount = AObjects.count();
+	int loopStart = 0, loopEnd = alignObjectsCount - 1;
 	double newX = 99999.9;
 	switch ( currAlignTo )
 	{
@@ -8455,8 +8459,8 @@ void ScribusDoc::itemSelection_AlignLeftIn(AlignTo currAlignTo, AlignMethod curr
 {
 	if (!startAlign())
 		return;
-	uint alignObjectsCount=AObjects.count();
-	int loopStart=0, loopEnd=alignObjectsCount-1;
+	uint alignObjectsCount = AObjects.count();
+	int loopStart = 0, loopEnd = alignObjectsCount - 1;
 	double newX = std::numeric_limits<double>::max();
 	switch ( currAlignTo ) 
 	{
@@ -8493,8 +8497,8 @@ void ScribusDoc::itemSelection_AlignCenterHor(AlignTo currAlignTo, AlignMethod c
 {
 	if (!startAlign())
 		return;
-	uint alignObjectsCount=AObjects.count();
-	int loopStart=0, loopEnd=alignObjectsCount-1;
+	uint alignObjectsCount = AObjects.count();
+	int loopStart = 0, loopEnd = alignObjectsCount - 1;
 	double newX = 0.0;
 	switch ( currAlignTo ) 
 	{
@@ -8547,8 +8551,8 @@ void ScribusDoc::itemSelection_AlignRightIn(AlignTo currAlignTo, AlignMethod cur
 {
 	if (!startAlign())
 		return;
-	uint alignObjectsCount=AObjects.count();
-	int loopStart=0, loopEnd=alignObjectsCount-1;
+	uint alignObjectsCount = AObjects.count();
+	int loopStart = 0, loopEnd = alignObjectsCount - 1;
 	double newX = -std::numeric_limits<double>::max();
 	switch ( currAlignTo ) 
 	{
@@ -8587,8 +8591,8 @@ void ScribusDoc::itemSelection_AlignRightOut(AlignTo currAlignTo, AlignMethod cu
 {
 	if (!startAlign())
 		return;
-	uint alignObjectsCount=AObjects.count();
-	int loopStart=0, loopEnd=alignObjectsCount-1;
+	uint alignObjectsCount = AObjects.count();
+	int loopStart = 0, loopEnd = alignObjectsCount - 1;
 	double newX = -std::numeric_limits<double>::max();
 	switch ( currAlignTo ) 
 	{
@@ -8627,8 +8631,8 @@ void ScribusDoc::itemSelection_AlignTopOut(AlignTo currAlignTo, AlignMethod curr
 {
 	if (!startAlign())
 		return;
-	uint alignObjectsCount=AObjects.count();
-	int loopStart=0, loopEnd=alignObjectsCount-1;
+	uint alignObjectsCount = AObjects.count();
+	int loopStart = 0, loopEnd = alignObjectsCount - 1;
 	double newY = std::numeric_limits<double>::max();
 	switch ( currAlignTo ) 
 	{
@@ -8665,8 +8669,8 @@ void ScribusDoc::itemSelection_AlignTopIn(AlignTo currAlignTo, AlignMethod currA
 {
 	if (!startAlign())
 		return;
-	uint alignObjectsCount=AObjects.count();
-	int loopStart=0, loopEnd=alignObjectsCount-1;
+	uint alignObjectsCount = AObjects.count();
+	int loopStart = 0, loopEnd = alignObjectsCount - 1;
 	double newY = std::numeric_limits<double>::max();
 	switch ( currAlignTo ) 
 	{
@@ -8703,8 +8707,8 @@ void ScribusDoc::itemSelection_AlignCenterVer(AlignTo currAlignTo, AlignMethod c
 {
 	if (!startAlign())
 		return;
-	uint alignObjectsCount=AObjects.count();
-	int loopStart=0, loopEnd=alignObjectsCount-1;
+	uint alignObjectsCount = AObjects.count();
+	int loopStart = 0, loopEnd = alignObjectsCount - 1;
 	double newY = 0.0;
 	switch ( currAlignTo ) 
 	{
@@ -8757,8 +8761,8 @@ void ScribusDoc::itemSelection_AlignBottomIn(AlignTo currAlignTo, AlignMethod cu
 {
 	if (!startAlign())
 		return;
-	uint alignObjectsCount=AObjects.count();
-	int loopStart=0, loopEnd=alignObjectsCount-1;
+	uint alignObjectsCount = AObjects.count();
+	int loopStart = 0, loopEnd = alignObjectsCount - 1;
 	double newY = -std::numeric_limits<double>::max();
 	switch ( currAlignTo ) 
 	{
@@ -8797,8 +8801,8 @@ void ScribusDoc::itemSelection_AlignBottomOut(AlignTo currAlignTo, AlignMethod c
 {
 	if (!startAlign())
 		return;
-	uint alignObjectsCount=AObjects.count();
-	int loopStart=0, loopEnd=alignObjectsCount-1;
+	uint alignObjectsCount = AObjects.count();
+	int loopStart = 0, loopEnd = alignObjectsCount - 1;
 	double newY = -std::numeric_limits<double>::max();
 	switch ( currAlignTo )
 	{
@@ -8835,11 +8839,9 @@ void ScribusDoc::itemSelection_AlignBottomOut(AlignTo currAlignTo, AlignMethod c
 
 void ScribusDoc::itemSelection_DistributeLeft()
 {
-	if (!startAlign())
+	if (!startAlign(2))
 		return;
-	uint alignObjectsCount=AObjects.count();
-	if (alignObjectsCount<=1)
-		return;
+	uint alignObjectsCount = AObjects.count();
 	QMap<double,uint> Xsorted;
 	for (uint a = 0; a < alignObjectsCount; ++a)
 	{
@@ -8875,11 +8877,9 @@ void ScribusDoc::itemSelection_DistributeLeft()
 
 void ScribusDoc::itemSelection_DistributeCenterH()
 {
-	if (!startAlign())
+	if (!startAlign(2))
 		return;
-	uint alignObjectsCount=AObjects.count();
-	if (alignObjectsCount<=1)
-		return;
+	uint alignObjectsCount = AObjects.count();
 	QMap<double,uint> Xsorted;
 	for (uint a = 0; a < alignObjectsCount; ++a)
 	{
@@ -8915,11 +8915,9 @@ void ScribusDoc::itemSelection_DistributeCenterH()
 
 void ScribusDoc::itemSelection_DistributeRight()
 {
-	if (!startAlign())
+	if (!startAlign(2))
 		return;
-	uint alignObjectsCount=AObjects.count();
-	if (alignObjectsCount<=1)
-		return;
+	uint alignObjectsCount = AObjects.count();
 	QMap<double,uint> Xsorted;
 	for (uint a = 0; a < alignObjectsCount; ++a)
 	{
@@ -8955,11 +8953,9 @@ void ScribusDoc::itemSelection_DistributeRight()
 
 void ScribusDoc::itemSelection_DistributeDistH(bool usingDistance, double distance, bool reverseDistribute)
 {
-	if (!startAlign())
+	if (!startAlign(2))
 		return;
-	uint alignObjectsCount=AObjects.count();
-	if (alignObjectsCount<=1)
-		return;
+	uint alignObjectsCount = AObjects.count();
 	QMap<double,uint> X1sorted, X2sorted;
 	for (uint a = 0; a < alignObjectsCount; ++a)
 	{
@@ -9040,11 +9036,9 @@ void ScribusDoc::itemSelection_DistributeDistH(bool usingDistance, double distan
 
 void ScribusDoc::itemSelection_DistributeBottom()
 {
-	if (!startAlign())
+	if (!startAlign(2))
 		return;
-	uint alignObjectsCount=AObjects.count();
-	if (alignObjectsCount<=1)
-		return;
+	uint alignObjectsCount = AObjects.count();
 	QMap<double,uint> Ysorted;
 	for (uint a = 0; a < alignObjectsCount; ++a)
 	{
@@ -9080,11 +9074,9 @@ void ScribusDoc::itemSelection_DistributeBottom()
 
 void ScribusDoc::itemSelection_DistributeCenterV()
 {
-	if (!startAlign())
+	if (!startAlign(2))
 		return;
-	uint alignObjectsCount=AObjects.count();
-	if (alignObjectsCount<=1)
-		return;
+	uint alignObjectsCount = AObjects.count();
 	QMap<double,uint> Ysorted;
 	for (uint a = 0; a < alignObjectsCount; ++a)
 	{
@@ -9120,11 +9112,9 @@ void ScribusDoc::itemSelection_DistributeCenterV()
 
 void ScribusDoc::itemSelection_DistributeTop()
 {
-	if (!startAlign())
+	if (!startAlign(2))
 		return;
-	uint alignObjectsCount=AObjects.count();
-	if (alignObjectsCount<=1)
-		return;
+	uint alignObjectsCount = AObjects.count();
 	QMap<double,uint> Ysorted;
 	for (uint a = 0; a < alignObjectsCount; ++a)
 	{
@@ -9160,11 +9150,9 @@ void ScribusDoc::itemSelection_DistributeTop()
 
 void ScribusDoc::itemSelection_DistributeDistV(bool usingDistance, double distance, bool reverseDistribute)
 {
-	if (!startAlign())
+	if (!startAlign(2))
 		return;
-	uint alignObjectsCount=AObjects.count();
-	if (alignObjectsCount<=1)
-		return;
+	uint alignObjectsCount = AObjects.count();
 	QMap<double,uint> Y1sorted, Y2sorted;
 	for (uint a = 0; a < alignObjectsCount; ++a)
 	{
@@ -9246,11 +9234,9 @@ void ScribusDoc::itemSelection_DistributeDistV(bool usingDistance, double distan
 
 void ScribusDoc::itemSelection_DistributeAcrossPage(bool useMargins)
 {
-	if (!startAlign())
+	if (!startAlign(2))
 		return;
-	uint alignObjectsCount=AObjects.count();
-	if (alignObjectsCount<=1)
-		return;
+	uint alignObjectsCount = AObjects.count();
 	QMap<double,uint> X1sorted, X2sorted;
 	for (uint a = 0; a < alignObjectsCount; ++a)
 	{
@@ -9298,11 +9284,9 @@ void ScribusDoc::itemSelection_DistributeAcrossPage(bool useMargins)
 
 void ScribusDoc::itemSelection_DistributeDownPage(bool useMargins)
 {
-	if (!startAlign())
+	if (!startAlign(2))
 		return;
-	uint alignObjectsCount=AObjects.count();
-	if (alignObjectsCount<=1)
-		return;
+	uint alignObjectsCount = AObjects.count();
 	QMap<double,uint> Y1sorted, Y2sorted;
 	for (uint a = 0; a < alignObjectsCount; ++a)
 	{
@@ -9365,10 +9349,12 @@ void ScribusDoc::changed()
 	// Do not emit docChanged signal() unnecessarily
 	// Processing of that signal is slowwwwwww and
 	// DocUpdater will trigger it when necessary
-	if (!m_docUpdater->inUpdateSession())
+	if (m_docUpdater->inUpdateSession())
 	{
-		emit docChanged();
+		m_docUpdater->setDocChangeNeeded();
+		return;
 	}
+	emit docChanged();
 }
 
 void ScribusDoc::invalidateAll()
@@ -9527,6 +9513,7 @@ void ScribusDoc::itemSelection_MultipleDuplicate(ItemMultipleDuplicateData& mdDa
 				PageItem* bItem = Items->at(as);
 				bItem->setLocked(false);
 				bItem->moveBy(dH2, dV2, true);
+				bItem->setRedrawBounding();
 				m_Selection->addItem(bItem);
 			}
 			m_Selection->delaySignalsOff();
@@ -9555,7 +9542,12 @@ void ScribusDoc::itemSelection_MultipleDuplicate(ItemMultipleDuplicateData& mdDa
 			}
 			m_Selection->clear();
 		}
-		tooltip = tr("Number of copies: %1\nHorizontal shift: %2\nVertical shift: %3\nRotation: %4").arg(mdData.copyCount).arg(dH).arg(dV).arg(dR);
+		QString unitSuffix = unitGetStrFromIndex(this->unitIndex());
+		int unitPrecision = unitGetPrecisionFromIndex(this->unitIndex());
+		QString hString = QString::number(dH * docUnitRatio, 'f', unitPrecision) + " " + unitSuffix;
+		QString vString = QString::number(dV * docUnitRatio, 'f', unitPrecision) + " " + unitSuffix;
+		QString dString = QString::number(dR) + " " + unitGetStrFromIndex(SC_DEGREES);
+		tooltip = tr("Number of copies: %1\nHorizontal shift: %2\nVertical shift: %3\nRotation: %4").arg(mdData.copyCount).arg(hString).arg(vString).arg(dString);
 	}
 	else
 	if (mdData.type==1) // Create a grid of duplicated items
@@ -9579,12 +9571,17 @@ void ScribusDoc::itemSelection_MultipleDuplicate(ItemMultipleDuplicateData& mdDa
 					PageItem* bItem = Items->at(as);
 					bItem->setLocked(false);
 					bItem->moveBy(j*dX, i*dY, true);
+					bItem->setRedrawBounding();
 					bItem->connectToGUI();
 					bItem->emitAllToGUI();
 				}
 			}
 		}
-		tooltip = tr("Number of copies: %1\nHorizontal gap: %2\nVertical gap: %3").arg(copyCount-1).arg(mdData.gridGapH).arg(mdData.gridGapV);
+		QString unitSuffix = unitGetStrFromIndex(this->unitIndex());
+		int unitPrecision = unitGetPrecisionFromIndex(this->unitIndex());
+		QString hString = QString::number(mdData.gridGapH, 'f', unitPrecision) + " " + unitSuffix;
+		QString vString = QString::number(mdData.gridGapV, 'f', unitPrecision) + " " + unitSuffix;
+		tooltip = tr("Number of copies: %1\nHorizontal gap: %2\nVertical gap: %3").arg(copyCount-1).arg(hString).arg(vString);
 	}
 	if (activeTransaction)
 	{
@@ -10671,82 +10668,82 @@ void ScribusDoc::itemSelection_GroupObjects(bool changeLock, bool lock, Selectio
 void ScribusDoc::itemSelection_UnGroupObjects(Selection* customSelection)
 {
 	Selection* itemSelection = (customSelection!=0) ? customSelection : m_Selection;
-	if (itemSelection->count() != 0)
+	if (itemSelection->count() == 0)
+		return;
+
+	uint docSelectionCount = itemSelection->count();
+	PageItem *currItem;
+	QMap<PageItem*, int> toDelete;
+	QMap<int, QList<PageItem*> > groupObjects; 
+	for (uint a=0; a < docSelectionCount; ++a)
 	{
-		uint docSelectionCount = itemSelection->count();
-		PageItem *currItem;
-		QMap<PageItem*, int> toDelete;
-		QMap<int, QList<PageItem*> > groupObjects; 
+		currItem = itemSelection->itemAt(a);
+		if (currItem->Groups.count() != 0)
+		{
+			int groupId = currItem->Groups.pop();
+			if (currItem->isGroupControl && (currItem->Groups.count() == 0))
+				toDelete.insert(currItem, groupId);
+			if (!currItem->isGroupControl)
+				groupObjects[groupId].append(currItem);
+		}
+	}
+	// Remove group control objects
+	itemSelection->delaySignalsOn();
+	QMap<PageItem*, int>::iterator it;
+	for (it = toDelete.begin(); it != toDelete.end(); ++it)
+	{
+		itemSelection->removeItem(it.key());
+		Items->removeOne(it.key());
+	}
+	itemSelection->delaySignalsOff();
+	renumberItemsInListOrder();
+	// Create undo actions
+	UndoTransaction* undoTransaction = NULL;
+	if (UndoManager::undoEnabled() && toDelete.count() > 1)
+	{
+		undoTransaction = new UndoTransaction(undoManager->beginTransaction(Um::SelectionGroup, Um::IGroup, Um::Ungroup, "", Um::IGroup));
+	}
+	QMap<int, QList<PageItem*> >::iterator groupIt;
+	for (it = toDelete.begin(); it != toDelete.end(); ++it)
+	{
+		//PageItem* groupItem = it.key();
+		//int groupId = it.value();
+		groupIt = groupObjects.find(it.value());
+		if (groupIt == groupObjects.end()) 
+			continue;
+		QList<PageItem*> groupItems = groupIt.value();
+
+		docSelectionCount = groupItems.count();
+		SimpleState *ss = new SimpleState(Um::Ungroup);
+		ss->set("UNGROUP", "ungroup");
+		ss->set("itemcount", docSelectionCount);
+		QString tooltip = Um::ItemsInvolved + "\n";
+		if (docSelectionCount > Um::ItemsInvolvedLimit)
+			tooltip = Um::ItemsInvolved2 + "\n";
 		for (uint a=0; a < docSelectionCount; ++a)
 		{
-			currItem = itemSelection->itemAt(a);
-			if (currItem->Groups.count() != 0)
-			{
-				int groupId = currItem->Groups.pop();
-				if (currItem->isGroupControl && (currItem->Groups.count() == 0))
-					toDelete.insert(currItem, groupId);
-				if (!currItem->isGroupControl)
-					groupObjects[groupId].append(currItem);
-			}
+			currItem = groupItems.at(a);
+			ss->set(QString("item%1").arg(a), currItem->uniqueNr);
+			ss->set(QString("tableitem%1").arg(a), currItem->isTableItem);
+			if (docSelectionCount <= Um::ItemsInvolvedLimit)
+				tooltip += "\t" + currItem->getUName() + "\n";
+			currItem->isTableItem = false;
+			currItem->setSelected(true);
 		}
-		// Remove group control objects
-		itemSelection->delaySignalsOn();
-		QMap<PageItem*, int>::iterator it;
-		for (it = toDelete.begin(); it != toDelete.end(); ++it)
-		{
-			itemSelection->removeItem(it.key());
-			Items->removeOne(it.key());
-		}
-		itemSelection->delaySignalsOff();
-		renumberItemsInListOrder();
-		// Create undo actions
-		UndoTransaction* undoTransaction = NULL;
-		if (UndoManager::undoEnabled() && toDelete.count() > 1)
-		{
-			undoTransaction = new UndoTransaction(undoManager->beginTransaction(Um::SelectionGroup, Um::IGroup, Um::Ungroup, "", Um::IGroup));
-		}
-		QMap<int, QList<PageItem*> >::iterator groupIt;
-		for (it = toDelete.begin(); it != toDelete.end(); ++it)
-		{
-			//PageItem* groupItem = it.key();
-			//int groupId = it.value();
-			groupIt = groupObjects.find(it.value());
-			if (groupIt == groupObjects.end()) 
-				continue;
-			QList<PageItem*> groupItems = groupIt.value();
-
-			docSelectionCount = groupItems.count();
-			SimpleState *ss = new SimpleState(Um::Ungroup);
-			ss->set("UNGROUP", "ungroup");
-			ss->set("itemcount", docSelectionCount);
-			QString tooltip = Um::ItemsInvolved + "\n";
-			if (docSelectionCount > Um::ItemsInvolvedLimit)
-				tooltip = Um::ItemsInvolved2 + "\n";
-			for (uint a=0; a < docSelectionCount; ++a)
-			{
-				currItem = groupItems.at(a);
-				ss->set(QString("item%1").arg(a), currItem->uniqueNr);
-				ss->set(QString("tableitem%1").arg(a), currItem->isTableItem);
-				if (docSelectionCount <= Um::ItemsInvolvedLimit)
-					tooltip += "\t" + currItem->getUName() + "\n";
-				currItem->isTableItem = false;
-				currItem->setSelected(true);
-			}
-			undoManager->action(this, ss, Um::SelectionGroup, Um::IGroup);
-		}
-		if (undoTransaction)
-		{
-			undoTransaction->commit();
-			delete undoTransaction;
-			undoTransaction = NULL;
-		}
-		double x, y, w, h;
-		itemSelection->connectItemToGUI();
-		itemSelection->getGroupRect(&x, &y, &w, &h);
-		emit docChanged();
-		m_ScMW->HaveNewSel(itemSelection->itemAt(0)->itemType());
-		regionsChanged()->update(QRectF(x-5, y-5, w+10, h+10));
+		undoManager->action(this, ss, Um::SelectionGroup, Um::IGroup);
 	}
+	if (undoTransaction)
+	{
+		undoTransaction->commit();
+		delete undoTransaction;
+		undoTransaction = NULL;
+	}
+	double x, y, w, h;
+	itemSelection->connectItemToGUI();
+	itemSelection->getGroupRect(&x, &y, &w, &h);
+	emit docChanged();
+	m_ScMW->HaveNewSel(itemSelection->itemAt(0)->itemType());
+	regionsChanged()->update(QRectF(x-5, y-5, w+10, h+10));
 }
 
 void ScribusDoc::itemSelection_UniteItems(Selection* /*customSelection*/)
@@ -10969,13 +10966,14 @@ ClRe(-1), ClRe2(-1), SegP1(-1), SegP2(-1), EdPoints(true), MoveSym(false), SelNo
 
 bool NodeEditContext::hasNodeSelected() 
 { 
-	return ClRe != -1; 
+	return ClRe != -1;
 }
 
 
 void NodeEditContext::deselect() 
 { 
-	ClRe = -1; 
+	ClRe = -1;
+	SelNode.clear();
 }
 
 void NodeEditContext::reset()

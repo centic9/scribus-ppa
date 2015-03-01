@@ -1,0 +1,20 @@
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Compilare Scribus</title>
+</head>
+<body>
+<h2>Di cosa parla questa pagina</h2>
+<p>In generale, questa pagina riguarda coloro che usano qualche variante di Linux, poich&eacute; gli utenti di Linux hanno a disposizione tutti i componenti necessari a compilare il codice sorgente e ricavare il programma eseguibile. Qui ci limitiamo ad alcune brevi note; potete trovare maggiori particolari sul wiki, nell'articolo <a href="http://wiki.scribus.net/canvas/Building_SVN_versions_with_CMake">che spiega la procedura in dettaglio</a>.</p>
+<p>Se non &egrave; superfluo ricordarlo, tutto ci&ograve; che serve &egrave; disponibile gratuitamente per Linux, ma quasi certamente dovrete radunare tutti gli specifici componenti necessari alla procedura. La prima volta pu&ograve; essere un'impresa ardua, ma pensiamo che scoprirete che ne vale la pena.</p>
+<h3>Subversion (SVN)</h3>
+<p>Questo &egrave; il nome del software attualmente usato come &ldquo;deposito&rdquo; per il codice di Scribus, e vi permette di ottenere il codice pi&ugrave; recente sia per la versione stabile sia per quella di sviluppo. Ci&ograve; che Subversion fa non &egrave; altro che scaricare il codice sorgente e le varie istruzioni necessarie per compilare Scribus.</p>
+<h3>Cmake</h3>
+<p>Dopo aver prelevato il codice sorgente, il passaggio successivo consiste nell'eseguire <code>cmake</code>, che controlla se avete tutte le dipendenze (altro codice sorgente e librerie) necessarie per compilare il codice sorgente. Quindi <code>cmake</code> &egrave; un altro programma, oltre a <code>subversion</code>, che dovete avere per poter compilare Scribus. Una caratteristica particolarmente utile di <code>cmake</code> &egrave; che vi permette di personalizzare il procedimento, ad esempio includendo un controllore ortografico personalizzato, o collocando la vostra installazione di Scribus in una directory di vostra scelta (il che permette di installare pi&ugrave; di una versione sullo stesso computer), o anche limitando il numero di lingue disponibili (il che riduce il tempo necessario per la compilazione). Potete trovare maggiori dettagli sul wiki.</p>
+<h3>gcc e gcc++</h3>
+E infine, ma non meno importante, questo &egrave; il software che esegue l'effettiva compilazione. Se <code>cmake</code> dice che avete tutti i componenti, questo dovrebbe funzionare senza problemi.</p>
+<h3>Fatelo e rifatelo</h3>
+Quando avete fatto tutto questo, potete aggiornare il vostro repository personale ogni volta che lo desiderate, e ricompilare Scribus per avere la pi&ugrave; recente versione disponibile. Buon divertimento!</p>
+
+</body>
+</html>

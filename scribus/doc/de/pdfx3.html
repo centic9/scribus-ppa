@@ -1,0 +1,35 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>PDF/X-3</title>
+</head>
+<style>
+@import "manual.css";
+</style>
+<body>
+<h2>PDF/X-3</h2>
+<p>Unterst&uuml;tzung f&uuml;r PDF/X-3 war einer der fr&uuml;hen H&ouml;hepunkte der Scribus-Entwicklung, denn Scribus implementierte diesen anspruchsvollen, aber offenen Standard (ISO 15930-3:2002) als erstes DTP-Programm &uuml;berhaupt.</p>
+
+<h3>Wann sollte man PDF/X-3 verwenden?</h3>
+<p>Wenn <strong>sehr</strong> gro&szlig;e Farbgenauigkeit sichergestellt werden soll <strong>und</strong> Ihre Druckerei PDF/X-3 akzeptiert oder darauf besteht. Ohne kompetente Unterst&uuml;tzung durch Ihre Druckerei sind Farbabweichungen beim Druckergebnis im Vergleich zu traditionellem PDF-Export zu erwarten</p>
+
+<h3>PDF/X-3 und Farbmanagement</h3>
+<p>Der gr&ouml;&szlig;te Vorteil von PDF/X-3 ist die im Normalfall pr&auml;zisere Umwandlung von RGB-Farbwerten in den CMYK-Farbraum einer Druckmaschine. Die gr&ouml;&szlig;ere Pr&auml;zison ergibt sich aus der Tatsache, da&szlig; man so lange wie m&ouml;glich im RGB-Farbraum arbeitet und erst der RIP der Druckerei die RGB&nbsp;&gt;&nbsp;CMYK-Umwandlung vornimmt. Das funktioniert deshalb, weil der PDF/X-3-Standard die Verwendung eines Farbprofils zwingend vorschreibt. Weil der RIP das Farbspektrum der Druckmaschine genau &raquo;kennt&laquo;, kann in den allermeisten F&auml;llen davon ausgegangen werden, da&szlig; die Umwandlung korrekt vonstatten geht. Der PDF/X-3-Standard schlie&szlig;t die Verwendung von CMYK-Farben zwar nicht aus, aber es ist am besten, wenn Sie so lange wie m&ouml;glich mit RGB-Farben arbeiten.</p>
+<p>Bleibt die Frage, welches Farbprofil Sie verwenden sollten. Hier gibt es grunds&auml;tzlich zwei M&ouml;glichkeiten: Entweder Ihre Druckerei stellt Ihnen das passende Profil zur Verf&uuml;gung, oder Sie verwenden (in Absprache mit der Druckerei) ein Standardprofil von Organisationen wie SWOP oder ECI.</p>
+
+<h3>Schnellanleitung zur Ausgabe nach PDF/X-3</h3>
+<p>Aktivieren Sie das Farbmanagement in den <a href="settings1.html">Dokumenteinstellungen</a>, und stellen Sie sicher, da&szlig; Sie das richtige Farbprofil ausgew&auml;hlt haben. Ohne aktiviertes Farbmanagement steht Ihnen die Ausgabeoption &raquo;PDF/X-3&laquo; nicht zur Verf&uuml;gung. Gehen Sie anschlie&szlig;end auf <i> Datei&nbsp;&#062; Exportieren&nbsp;&#062; Als PDF speichern&nbsp;&hellip;</i> oder klicken Sie auf das PDF-Symbol in der Werkzeugleiste.</p>
+<p>Der folgende Reiter wird Ihnen nun als erstes pr&auml;sentiert, und Sie m&uuml;ssen unter &raquo;Kompatibilit&auml;t&laquo; &raquo;PDF/X-3&laquo; ausw&auml;hlen. Dies f&uuml;hrt dazu, da&szlig; einige Grundeinstellungen automatisch angepa&szlig;t werden.</p>
+<table width="100%"><tr><td align="center"><img src="images/pdfx3-1.png" alt="PDF Create Dialog General Tab" /></td></tr></table>
+<p>Klicken Sie nun auf den Reiter &raquo;Farbe&laquo;:</p>
+<table width="100%"><tr><td align="center"><img src="images/pdfxcolor.png" alt="PDF Create Dialog Color Tab" /></td></tr></table>
+<p>Sie sehen, da&szlig; hier die Option &raquo;Ausgabe vorgesehen f&uuml;r:&laquo; ausgegraut ist, denn im Falle von PDF/X-3 wird die Umwandlung in das CMYK-Farbmodell von der Druckerei vorgenommen, nicht von Ihnen.</p>
+<p>Klicken als n&auml;chstes auf den Reiter &raquo;Pre-Press&laquo;:</p>
+<table width="100%"><tr><td align="center"><img src="images/pdfxintent.png" alt="PDF Create Dialog 
+PDF/X-3 Tab" /></td></tr></table>
+<p>Hier k&ouml;nnen Sie die Ausgabebedingung (d.h. das Farbprofil) &auml;ndern, sofern es von den Voreinstellungen f&uuml;r das Dokument abweichen soll. Sie k&ouml;nnen au&szlig;erdem einen Kurzkommentar (&raquo;Infotext&laquo;) zu dem Dokument hinzuf&uuml;gen. Dieses Feld darf laut PDF/X-3-Spezifikation nicht leer bleiben, und Scribus blockiert das Speichern, bis Sie es ausgef&uuml;llt haben. In diesem Reiter k&ouml;nnen Sie zudem weitere Pre-Press-Optionen wie Schneidemarken oder Farbbalken hinzuf&uuml;gen, sollten dies aber nur dann tun, wenn Ihre Druckerei es ausdr&uuml;cklich w&uuml;nscht.<p>
+<p>Beachten Sie, da&szlig; einige PDF-Optionen wie Verschl&uuml;sselung, PDF-Anmerkungen oder Pr&auml;sentationseffekte nicht zur Verf&uuml;gung stehen, weil die PDF/X-3-Spezifikation diese nicht zul&auml;&szlig;t. Au&szlig;erdem werden Schriften automatisch eingebettet bzw. in Kurven umgewandelt, und Transparenzen k&ouml;nnen nicht exportiert werden.</p>
+<br>
+<br>
+</body>
+</html>

@@ -493,12 +493,12 @@ void SMParagraphStyle::setupConnections()
 	connect(pwidget_->lineSpacing_, SIGNAL(valueChanged(double)), this, SLOT(slotLineSpacing()));
 	connect(pwidget_->spaceAbove_, SIGNAL(valueChanged(double)), this, SLOT(slotSpaceAbove()));
 	connect(pwidget_->spaceBelow_, SIGNAL(valueChanged(double)), this, SLOT(slotSpaceBelow()));
-	connect(pwidget_->alignement_->TextL, SIGNAL(clicked()), this, SLOT(slotAlignment()));
-	connect(pwidget_->alignement_->TextR, SIGNAL(clicked()), this, SLOT(slotAlignment()));
-	connect(pwidget_->alignement_->TextC, SIGNAL(clicked()), this, SLOT(slotAlignment()));
-	connect(pwidget_->alignement_->TextB, SIGNAL(clicked()), this, SLOT(slotAlignment()));
-	connect(pwidget_->alignement_->TextF, SIGNAL(clicked()), this, SLOT(slotAlignment()));
-	connect(pwidget_->alignement_->parentButton, SIGNAL(clicked()), this, SLOT(slotAlignment()));
+	connect(pwidget_->alignment_->TextL, SIGNAL(clicked()), this, SLOT(slotAlignment()));
+	connect(pwidget_->alignment_->TextR, SIGNAL(clicked()), this, SLOT(slotAlignment()));
+	connect(pwidget_->alignment_->TextC, SIGNAL(clicked()), this, SLOT(slotAlignment()));
+	connect(pwidget_->alignment_->TextB, SIGNAL(clicked()), this, SLOT(slotAlignment()));
+	connect(pwidget_->alignment_->TextF, SIGNAL(clicked()), this, SLOT(slotAlignment()));
+	connect(pwidget_->alignment_->parentButton, SIGNAL(clicked()), this, SLOT(slotAlignment()));
 //	connect(pwidget_->optMarginCombo, SIGNAL(activated(int)), this, SLOT(slotOpticalMargin(int)));
 	connect(pwidget_->optMarginRadioNone, SIGNAL(clicked()), this, SLOT(slotOpticalMarginSelector()));
 	connect(pwidget_->optMarginRadioLeft, SIGNAL(clicked()), this, SLOT(slotOpticalMarginSelector()));
@@ -552,7 +552,6 @@ void SMParagraphStyle::setupConnections()
 	connect(pwidget_->cpage->tracking_, SIGNAL(valueChanged(double)), this, SLOT(slotTracking()));
 	connect(pwidget_->cpage->widthSpaceSpin, SIGNAL(valueChanged(double)), this, SLOT(slotWordTracking()));
 	connect(pwidget_->cpage->baselineOffset_, SIGNAL(valueChanged(double)), this, SLOT(slotBaselineOffset()));
-	connect(pwidget_->cpage->fontFace_, SIGNAL(fontSelected(QString)), this, SLOT(slotFont(QString)));
 	connect(pwidget_->cpage->parentCombo, SIGNAL(activated(const QString&)),
 			this, SLOT(slotCharParentChanged(const QString&)));
 }
@@ -566,12 +565,12 @@ void SMParagraphStyle::removeConnections()
 	disconnect(pwidget_->lineSpacing_, SIGNAL(valueChanged(double)), this, SLOT(slotLineSpacing()));
 	disconnect(pwidget_->spaceAbove_, SIGNAL(valueChanged(double)), this, SLOT(slotSpaceAbove()));
 	disconnect(pwidget_->spaceBelow_, SIGNAL(valueChanged(double)), this, SLOT(slotSpaceBelow()));
-	disconnect(pwidget_->alignement_->TextL, SIGNAL(clicked()), this, SLOT(slotAlignment()));
-	disconnect(pwidget_->alignement_->TextR, SIGNAL(clicked()), this, SLOT(slotAlignment()));
-	disconnect(pwidget_->alignement_->TextC, SIGNAL(clicked()), this, SLOT(slotAlignment()));
-	disconnect(pwidget_->alignement_->TextB, SIGNAL(clicked()), this, SLOT(slotAlignment()));
-	disconnect(pwidget_->alignement_->TextF, SIGNAL(clicked()), this, SLOT(slotAlignment()));
-	disconnect(pwidget_->alignement_->parentButton, SIGNAL(clicked()), this, SLOT(slotAlignment()));
+	disconnect(pwidget_->alignment_->TextL, SIGNAL(clicked()), this, SLOT(slotAlignment()));
+	disconnect(pwidget_->alignment_->TextR, SIGNAL(clicked()), this, SLOT(slotAlignment()));
+	disconnect(pwidget_->alignment_->TextC, SIGNAL(clicked()), this, SLOT(slotAlignment()));
+	disconnect(pwidget_->alignment_->TextB, SIGNAL(clicked()), this, SLOT(slotAlignment()));
+	disconnect(pwidget_->alignment_->TextF, SIGNAL(clicked()), this, SLOT(slotAlignment()));
+	disconnect(pwidget_->alignment_->parentButton, SIGNAL(clicked()), this, SLOT(slotAlignment()));
 //	disconnect(pwidget_->optMarginCombo, SIGNAL(activated(int)), this, SLOT(slotOpticalMargin(int)));
 	disconnect(pwidget_->optMarginRadioNone, SIGNAL(clicked()), this, SLOT(slotOpticalMarginSelector()));
 	disconnect(pwidget_->optMarginRadioLeft, SIGNAL(clicked()), this, SLOT(slotOpticalMarginSelector()));
@@ -622,7 +621,6 @@ void SMParagraphStyle::removeConnections()
 	disconnect(pwidget_->cpage->tracking_, SIGNAL(valueChanged(double)), this, SLOT(slotTracking()));
 	disconnect(pwidget_->cpage->widthSpaceSpin, SIGNAL(valueChanged(double)), this, SLOT(slotWordTracking()));
 	disconnect(pwidget_->cpage->baselineOffset_, SIGNAL(valueChanged(double)), this, SLOT(slotBaselineOffset()));
-	disconnect(pwidget_->cpage->fontFace_, SIGNAL(fontSelected(QString)), this, SLOT(slotFont(QString)));
 	disconnect(pwidget_->cpage->parentCombo, SIGNAL(activated(const QString&)),
 			this, SLOT(slotCharParentChanged(const QString&)));
 }
@@ -713,8 +711,8 @@ void SMParagraphStyle::slotSpaceBelow()
 
 void SMParagraphStyle::slotAlignment()
 {
-	ParagraphStyle::AlignmentType style = static_cast<ParagraphStyle::AlignmentType>(pwidget_->alignement_->getStyle());
-	if (pwidget_->alignement_->useParentValue())
+	ParagraphStyle::AlignmentType style = static_cast<ParagraphStyle::AlignmentType>(pwidget_->alignment_->getStyle());
+	if (pwidget_->alignment_->useParentValue())
 		for (int i = 0; i < selection_.count(); ++i)
 			selection_[i]->resetAlignment();
 	else 
@@ -1875,7 +1873,6 @@ void SMCharacterStyle::setupConnections()
 	connect(page_->tracking_, SIGNAL(valueChanged(double)), this, SLOT(slotTracking()));
 	connect(page_->widthSpaceSpin, SIGNAL(valueChanged(double)), this, SLOT(slotWordTracking()));
 	connect(page_->baselineOffset_, SIGNAL(valueChanged(double)), this, SLOT(slotBaselineOffset()));
-	connect(page_->fontFace_, SIGNAL(fontSelected(QString)), this, SLOT(slotFont(QString)));
 	connect(page_->parentCombo, SIGNAL(activated(const QString&)),
 	        this, SLOT(slotParentChanged(const QString&)));
 }
@@ -1912,7 +1909,6 @@ void SMCharacterStyle::removeConnections()
 	disconnect(page_->tracking_, SIGNAL(valueChanged(double)), this, SLOT(slotTracking()));
 	disconnect(page_->widthSpaceSpin, SIGNAL(valueChanged(double)), this, SLOT(slotWordTracking()));
 	disconnect(page_->baselineOffset_, SIGNAL(valueChanged(double)), this, SLOT(slotBaselineOffset()));
-	disconnect(page_->fontFace_, SIGNAL(fontSelected(QString)), this, SLOT(slotFont(QString)));
 	disconnect(page_->parentCombo, SIGNAL(activated(const QString&)),
 			this, SLOT(slotParentChanged(const QString&)));
 }
@@ -2273,12 +2269,11 @@ void SMCharacterStyle::slotBaselineOffset()
 
 void SMCharacterStyle::slotFont(QString s)
 {
-	ScFace sf;
 	if (page_->fontFace_->useParentFont())
 		for (int i = 0; i < selection_.count(); ++i)
 			selection_[i]->resetFont();
 	else {
-		sf = PrefsManager::instance()->appPrefs.AvailFonts[s];
+		ScFace sf = PrefsManager::instance()->appPrefs.AvailFonts[s];
 
 		for (int i = 0; i < selection_.count(); ++i)
 			selection_[i]->setFont(sf);
