@@ -39,6 +39,7 @@ for which a new license (GPL+exception) is in place.
 
 #include "gtgettext.h" //CB For the ImportSetup struct and itemadduserframe
 #include "scribusapi.h"
+#include "undostate.h"
 #include "observable.h"
 #include "prefsstructs.h"
 #include "documentinformation.h"
@@ -790,7 +791,7 @@ public:
 	typedef enum {alignFirst, alignLast, alignPage, alignMargins, alignGuide, alignSelection } AlignTo;
 	typedef enum {alignByMoving, alignByResizing } AlignMethod;
 	void buildAlignItemList(Selection* customSelection=0);
-	bool startAlign();
+	bool startAlign(uint minObjects = 1);
 	void endAlign();
 	/**
 	 * \brief Insert a color into the documents color list

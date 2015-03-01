@@ -114,9 +114,9 @@ About::About( QWidget* parent, AboutMode diaMode ) : QDialog( parent )
 	buildID = new QLabel( tab );
 	buildID->setAlignment(Qt::AlignCenter);
 	buildID->setTextInteractionFlags(Qt::TextSelectableByMouse);
-	QString BUILD_DAY = "25";
-	QString BUILD_MONTH = CommonStrings::may;
-	QString BUILD_YEAR = "2014";
+	QString BUILD_DAY = "26";
+	QString BUILD_MONTH = CommonStrings::january;
+	QString BUILD_YEAR = "2015";
 	QString BUILD_TIME = "";
 	QString BUILD_TZ = "";
 	QString BUILD_NAME = "";
@@ -250,6 +250,8 @@ About::About( QWidget* parent, AboutMode diaMode ) : QDialog( parent )
 	else
 	{
 		QTextStream inTS(&licenceFile);
+		inTS.setAutoDetectUnicode(true);
+		inTS.setCodec("UTF-8");
 		QString licenceText = inTS.readAll();
 		textViewLicence->setText(licenceText);
 	} 

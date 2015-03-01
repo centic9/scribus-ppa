@@ -51,6 +51,10 @@ ScrSpinBox::~ScrSpinBox()
 {
 }
 
+double ScrSpinBox::unitRatio() const
+{
+	return unitGetRatioFromIndex(m_unitIndex); 
+}
 
 void ScrSpinBox::setParameters( int s )
 {
@@ -191,7 +195,7 @@ double ScrSpinBox::valueFromText ( const QString & text ) const
 		ts.replace(CommonStrings::trStrIN, CommonStrings::strIN);
 	if (CommonStrings::trStrCM.localeAwareCompare(CommonStrings::strCM)!=0)
 		ts.replace(CommonStrings::trStrCM, CommonStrings::strCM);
-	if (CommonStrings::trStrC.localeAwareCompare(CommonStrings::trStrC)!=0)
+	if (CommonStrings::trStrC.localeAwareCompare(CommonStrings::strC)!=0)
 		ts.replace(CommonStrings::trStrC, CommonStrings::strC);
 	//Replace in our typed text all of the units strings with *unitstring
 	QRegExp rx("\\b(\\d+)\\s*("+CommonStrings::strPT+"|"+CommonStrings::strMM+"|"+CommonStrings::strC+"|"+CommonStrings::strCM+"|"+CommonStrings::strIN+")\\b");
@@ -369,12 +373,6 @@ bool ScrSpinBox::eventFilter( QObject* watched, QEvent* event )
 		return QDoubleSpinBox::eventFilter(watched, event);
 	return retval;
 }
-
-// void ScrSpinBox::setSingleStepM(int val)
-// {
-// 	QDoubleSpinBox::setSingleStep( val );
-// //	currLineStep = val * Decimals;
-// }
 
 void ScrSpinBox::setTabAdvance(bool enable)
 {

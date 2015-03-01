@@ -368,10 +368,10 @@ bool AIPlug::extractFromPDF(QString infile, QString outfile)
 	try
 	{
 		PoDoFo::PdfError::EnableDebug( false );
-#if (PODOFO_VERSION == 0 && PODOFO_MINOR > 6)
+#if (PODOFO_VERSION >= PODOFO_MAKE_VERSION(0, 7, 0))
 		PoDoFo::PdfError::EnableLogging( false );
 #endif
-#if (PODOFO_VERSION == 0 && PODOFO_MINOR == 5 && PODOFO_REVISION == 99) || PODOFO_MINOR > 5
+#if (PODOFO_VERSION >= PODOFO_MAKE_VERSION(0, 5, 99))
 		PoDoFo::PdfMemDocument doc( infile.toLocal8Bit().data() );
 #else
 		PoDoFo::PdfDocument doc( infile.toLocal8Bit().data() );
@@ -411,7 +411,7 @@ bool AIPlug::extractFromPDF(QString infile, QString outfile)
 							data = priv->GetIndirectKey(PoDoFo::PdfName(Key.toUtf8().data()));
 							PoDoFo::PdfStream const *stream = data->GetStream();
 							char *Buffer;
-#if (PODOFO_MAJOR == 0 && PODOFO_MINOR >= 8)
+#if (PODOFO_VERSION >= PODOFO_MAKE_VERSION(0, 8, 0))
 							PoDoFo::pdf_long bLen = 0;
 #elif defined(pdf_long)
 							pdf_long bLen = 0;
@@ -432,7 +432,7 @@ bool AIPlug::extractFromPDF(QString infile, QString outfile)
 									break;
 								PoDoFo::PdfStream const *stream = data->GetStream();
 								char *Buffer;
-#if (PODOFO_MAJOR == 0 && PODOFO_MINOR >= 8)
+#if (PODOFO_VERSION >= PODOFO_MAKE_VERSION(0, 8, 0))
 								PoDoFo::pdf_long bLen = 0;
 #elif defined(pdf_long)
 								pdf_long bLen = 0;

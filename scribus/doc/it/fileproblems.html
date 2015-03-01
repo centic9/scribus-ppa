@@ -1,0 +1,82 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Problemi con l'apertura di file di Scribus</title>
+</head>
+<body>
+<h2>Problemi con l'apertura di file di Scribus</h2>
+
+<h3>File danneggiati</h3>
+
+<h4>Errori di analisi dei file</h4>
+<p>Una delle cause principali che possono portare a file danneggiati (qualunque file, non soltanto file di Scribus) &egrave; una procedura di salvataggio interrotta, ad esempio per un'interruzione dell'alimentazione elettrica, o per un blocco del sistema mentre il programma stava scrivendo i dati sul supporto di salvataggio (come un disco fisso o una memoria USB). Altre cause possono essere errori del file system o un supporto di salvataggio danneggiato. Inoltre, poich&eacute; i file SLA (e anche quelli nel formato pi&ugrave; vecchio SCD) sono file di testo basati su XML, essi possono essere danneggiati dagli utenti stessi, se li aprono e li modificano in un editor di testo.</p>
+<p>Qualunque sia la causa del danno sub&igrave;to da un certo file, la conseguenza sar&agrave; che Scribus non riuscir&agrave; ad analizzare (cio&egrave; a leggere e interpretare) il contenuto del file, ad esempio per la mancanza di determinati marcatori XML o per la presenza di dati non validi. In queste situazioni, Scribus mostra un avviso che indica il numero della riga all'interno del file in cui ha incontrato l'errore:</p>
+
+<table width="100%"><tr><td align="center"><img src="images/file-error3.png" title="Indicatore di un errore di analisi" alt="Indicatore di un errore di analisi"/></td></tr></table>
+
+<p>Per riparare file SLA e SCD danneggiati basta un semplice editor di testo. Per praticit&agrave; &egrave; meglio che l'editor di testo utilizzato abbia pi&ugrave; funzioni di quelle fornite, ad esempio, dal Blocco Note di Windows. Al minimo, l'editor di testo dovrebbe mostrare i numeri di riga ed essere dotato di evidenziazione della sintassi XML. Se i concetti base dell'XML (marcatori, ecc.) non vi sono familiari, potete inviare una <a href="bugreport.html">segnalazione di errore</a> e allegarvi il file danneggiato. In generale, potete aspettarvi che il file venga riparato dagli sviluppatori entro 48 ore. Ma tenete presente che non tutto il contenuto potrebbe essere recuperato, poich&eacute; potrebbe essere stato salvato solo in parte prima del verificarsi dell'errore. Quindi il risultato della riparazione potrebbe essere soltanto un file di nuovo apribile da Scribus.</p>
+
+<h4>Altri errori dei file</h4>
+<p>Anche se &egrave; relativamente facile riparare file SLA e SCD, le cose sono pi&ugrave; complicate se stavate salvando una versione compressa (SLA.GZ o SCD.GZ). In tal caso dovrete usare uno strumento in grado di riparare un archivio gzip danneggiato, o, se ci&ograve; &egrave; impossibile, recuperare per quanto possibile il contenuto dell'archivio.</p>
+
+<h3>Documenti creati con un'altra versione di Scribus</h3>
+
+<h4>File creati con una versione precedente di Scribus</h4>
+<p>Quando aprite un file creato con una versione precedente di Scribus, vedrete un avviso che sta a voi decidere se ignorare oppure no. Potete ignorarlo se siete certi che il file non dovr&agrave; pi&ugrave; essere aperto con una versione precedente, ad esempio se il file &egrave; stato creato da voi e se siete passati a una versione pi&ugrave; recente di Scribus. Ma se lavorate con altre persone, dovreste <b>sempre</b> assicurarvi che tutti usino la stessa versione di Scribus.</p>
+
+<table width="100%"><tr><td align="center"><img src="images/file-error2.png" title="Avviso sull'assenza di retrocompatibilit&agrave; del formato di file" alt="Avviso sull'assenza di retrocompatibilit&agrave; del formato di file"/></td></tr></table>
+
+<p>Ma supponiamo che abbiate ignorato l'avviso, o che abbiate salvato il file senza volerlo, sapendo che le altre persone che lavorano con voi devono o vogliono usare una versione precedente. Come rimediare? Salvare in un formato di file precedente non &egrave; possibile. Ci&ograve; che potete fare in questa situazione &egrave; <i>raggruppare</i> tutti gli oggetti contenuti in ciascuna pagina e copiare ciascun gruppo nella Biblioteca, pagina per pagina. Potrete poi mandare la Biblioteca alla persona che usa la versione precedente, poich&eacute; il suo formato non &egrave; cambiato da una versione all'altra. Tuttavia le <i>cornici di testo collegate</i> su pagine diverse non possono essere ricreate in questo modo: dovrete ricollegarle manualmente nella versione pi&ugrave; vecchia.</p>
+<p>Anche se ogni versione di Scribus &egrave; in grado di aprire i file creati in quelle precedenti, compresi i file SCD e SCD.GZ generati dalle versioni 0.x che risalgono a pi&ugrave; di dieci anni fa, dovreste <b>sempre</b> controllare la disposizione del testo sulla pagina, perch&eacute; gli algoritmi di layout del testo di Scribus sono molto cambiati nel corso del tempo. Questa precauzione &egrave; importante soprattutto con le versioni pi&ugrave; vecchie dei file, ma &egrave; consigliabile anche controllare sempre l'aspetto del testo se aprite il file su un altro computer dopo un aggiornamento dei tipi di carattere. Scribus esegue sempre una <a href="fonts2.html">verifica dei tipi di carattere</a> all'avvio, ma non controlla se sono state usate diverse versioni di uno stesso carattere quando apre un file. Quindi, l'uso di diverse versioni di un certo carattere o di caratteri con lo stesso nome PostScript, ma provenienti da diversi rivenditori/fonti, pu&ograve; risultare in una disposizione del testo alterata o errata.</p>
+<table border="1" align="center">
+  <tbody>
+    <tr>
+      <td><span style="color: red;"><i><b>Avviso importante per i file creati con le versioni di Scribus dalla 1.3.5 alla 1.4 Release Candidate 5:</b> in Scribus 1.4 Release Candidate 6 &egrave; stata apportata una modifica al componente che provvede alla disposizione del testo sulla pagina; essa pu&ograve; provocare rilevanti cambiamenti nella disposizione del testo in cornici di testo che usano certe caratteristiche del testo (ad esempio lo spostamento della prima riga). Questo potrebbe rendere necessaria la riformattazione del testo contenuto in file creati in versioni precedenti alla 1.4RC6.</i></span></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h4>File creati con una versione successiva di Scribus o file non creati da Scribus</h4>
+<p>I file creati da versioni successive di Scribus non possono essere aperti dalle versioni precedenti. Questo accade anche quando entrambe le versioni utilizzano lo stesso formato di file, ad esempio la 1.3.9 e la 1.4.0. Se si tenta di aprire un file creato in una versione precedente, viene visualizzato l'avviso mostrato qui sotto. Questo stesso avviso appare anche se si apre un file con estensione SLA, SLA.GZ, SCD o SCD.GZ che non &egrave; un file di Scribus (potrebbero esistere altri programmi che usano queste estensioni). Naturalmente, questo vale anche per gli altri formati di file che Scribus pu&ograve; aprire direttamente.</p>
+
+<table width="100%"><tr><td align="center"><img src="images/file-error1.png" title="Avviso per un file creato con una versione successiva di Scribus o che non &egrave; un file di Scribus" alt="Avviso per un file creato con una versione successiva di Scribus o che non &egrave; un file di Scribus"/></td></tr></table>
+<p>Se, per qualche motivo, non potete usare la pi&ugrave; recente versione stabile di Scribus, e la vostra versione pu&ograve; utilizzare lo stesso formato di file, potete aprire il file SLA in un editor di testo e modificare la versione di Scribus nell'intestazione del file:</p>
+<p>Esempio:</p>
+<p><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+&lt;SCRIBUSUTF8NEW Version="1.4.0"&gt;</code></p>
+<p>potrebbe essere modificato cos&igrave;:</p>
+<p><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br>
+&lt;SCRIBUSUTF8NEW Version="1.3.9"&gt;</code></p>
+<p>Tuttavia, lo fate a vostro rischio e pericolo, specialmente dopo le modifiche apportate al componente di impaginazione del testo nella versione 1.4RC6.</p>
+<h3>Misure di sicurezza</h3>
+<p>Pu&ograve; apparire un avvertimento banale e noioso, ma ogni programma e ogni sistema operativo pu&ograve; bloccarsi o interrompersi, e provocare cos&igrave; la perdita di parte o tutto il vostro lavoro. Allo stesso modo, nessun computer funzioner&agrave; perfettamente per sempre, e come ogni cosa materiale, cesser&agrave; di funzionare un giorno. Dunque, l'eterno consiglio &ldquo;salvate il file regolarmente&rdquo; vale anche per Scribus. Fortunatamente Scribus d&agrave; la possibilit&agrave; di rendere automatico il salvataggio, permettendovi di concentrarvi sul lavoro di impaginazione.</p>
+<h4>Salvataggio automatico</h4>
+<p>Per far s&igrave; che Scribus salvi il vostro lavoro a intervalli regolari, potete attivare il &ldquo;salvataggio automatico&rdquo; e impostare l'intervallo nella <a href="settings1.html#2">sezione Documento</a> delle Preferenze/Impostazioni documento. Oltre a salvare automaticamente il documento, Scribus ne crea anche una copia. Il nome del file della copia consiste del nome del file originale con l'aggiunta dell'estensione &ldquo;.autosave&rdquo;. Quindi, la copia  salvata automaticamente di <code>ilmiofile.sla</code> si chiamer&agrave; <code>ilmiofile.sla.autosave</code>. Se un file SLA fosse danneggiato, potreste rimuovere l'estensione &ldquo;.autosave&rdquo; e poi aprire questa versione in Scribus. In questo modo avrete l'ultima versione salvata automaticamente del vostro documento.</p>
+<h4>Copie di emergenza</h4>
+<p>Se il salvataggio automatico non &egrave; abilitato o se si verifica un errore che provoca la chiusura del programma tra un salvataggio automatico e il successivo, non tutto &egrave; perduto, perch&eacute; Scribus tenta di salvare una copia di emergenza del file prima di uscire. Se questo meccanismo funziona, troverete la copia di emergenza nella stessa directory del file originario, con in pi&ugrave; l'estensione &ldquo;.emergency&rdquo;. Quindi la copia di emergenza di <code>ilmiofile.sla</code> verr&agrave; salvata come <code>ilmiofile.sla.emergency</code>.</p>
+<p>Prima di rinominare un file salvato automaticamente o una copia di emergenza, ridandogli il nome di un normale file di Scribus nella stessa directory (che provocherebbe la sovrascrittura/cancellazione dell'originale), dovreste confrontare le dimensioni dei file. Ad esempio, se il file originale &egrave; di 5 MB, ma il file *.autosave o *.emergency &egrave; di soli 40 KB, certamente il meccanismo non ha funzionato correttamente.</p>
+
+<h3>Altre potenziali cause di errore</h3>
+
+<h4>Immagini mancanti</h4>
+<p>Le immagini caricate in una <a href="WwImages.html">cornice immagine</a> non vengono inserite nel file di Scribus. Invece, Scribus salva il percorso dell'immagine relativo rispetto al file di Scribus. Quando aprite il file di Scribus, il programma ricerca le immagini usate nel documento nei percorsi salvati nel file e nella directory in cui il file stesso si trova. Se avete spostato in una diversa directory il file di Scribus oppure le immagini, probabilmente queste non saranno trovate, e le cornici immagine saranno vuote. Per rimediare, potete usare <i>Utilit&agrave;&nbsp;&gt; Gestione immagini</i> per far s&igrave; che Scribus cerchi le nuove posizioni delle immagini.</p>
+<p>Se prevedete di trasferire file di Scribus contenenti immagini da un computer all'altro, dovreste sempre usare la funzione <a href="collect4output.html">Raggruppa per l'output</a> per fare in modo che tutte le immagini siano sempre incluse.</p>
+<p>Notate che i <a href="WwFill.html">motivi</a> bitmap devono essere trattati come immagini.</p>
+
+<h4>Sostituzione di file</h4>
+<p>Scribus salva non solo i percorsi dei file immagine, ma anche di altri tipi di file usati in collegamento al documento: i tipi di carattere e i profili colore. Quando si apre un documento, viene chiesto di sostituire entrambi i tipi di file. Maggiori informazioni si trovano nelle pagine sui <a href="fonts1.html">caratteri</a> e sulla <a href="cms.html">gestione del colore</a>. La sostituzione dei tipi di carattere e/o dei profili colore pu&ograve; avere conseguenze sgradite sull'impaginazione o sulla correttezza dei colori. Per evitare errori, anche in questo caso dovreste esportare caratteri e profili colore insieme al documento con la funzione <a href="collect4output.html">Raggruppa per l'output</a>.</p>
+
+<h4>Cornici rendering</h4>
+<p>Poich&eacute; il contenuto delle <a href="WwRenderframes.html">cornici rendering</a> viene ricreato ogni volta che si apre un file, dovreste assicurarvi che le applicazioni esterne che generano il contenuto delle cornici rendering siano installate e configurate correttamente, se scambiate file tra computer e/o piattaforme. Altrimenti le cornici resteranno vuote.</p>
+
+<h4>Impostazioni/Preferenze</h4>
+<p>Se un'installazione di Scribus che funzionava senza problemi inizia, senza ovvie ragioni, a comportarsi in modo strano o non funziona affatto, ci&ograve; potrebbe essere dovuto a file delle <a href="settings1.html#20">preferenze</a> danneggiati. Se Scribus si comporta in modo strano, potete tentare di <b>rinominare</b> la directory nascosta <code>.scribus</code> che contiene questi file, e riavviare Scribus. Il programma crea allora nuovi file di configurazione &ldquo;da zero&rdquo;. Non &egrave; detto che questo risolva il vostro problema. Se non lo fa, probabilmente la causa non dipende da Scribus: potrebbe essere, ad esempio, un problema hardware o un problema di compatibilit&agrave; dopo un aggiornamento di altri componenti del vostro sistema, come un aggiornamento di Windows, o di Qt4 in ambiente Linux/UNIX. In tal caso potete cancellare la nuova  directory <code>./scribus</code> e ripristinare quella che avevate rinominato. Naturalmente questo non risolver&agrave; il vostro problema, ma almeno non perderete le vostre impostazioni.</p>
+<!--<hr>
+See also:
+<ul>
+<li><a href="scribus-files.html">Scribus Files and File Formats</a></li>
+</ul>-->
+<br>
+</body>
+</html>

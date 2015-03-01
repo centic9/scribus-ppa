@@ -13,12 +13,27 @@ ELSE (WANT_NOTEMPLATES)
 	)
 
 	INSTALL(FILES
+	template.ca.xml
+	  DESTINATION ${TEMPLATEDIR}
+	)
+	
+	INSTALL(FILES
 	template.de.xml
 	  DESTINATION ${TEMPLATEDIR}
 	)
 
 	INSTALL(FILES
+	template.es.xml
+	  DESTINATION ${TEMPLATEDIR}
+	)
+
+	INSTALL(FILES
 	template.hu.xml
+	  DESTINATION ${TEMPLATEDIR}
+	)
+
+	INSTALL(FILES
+	template.it.xml
 	  DESTINATION ${TEMPLATEDIR}
 	)
 
@@ -43,7 +58,7 @@ ELSE (WANT_NOTEMPLATES)
 	nl2/nl2.png
 	nl2/nl2tn.png
 	nl2/nl2.sla.gz
-	  DESTINATION ${TEMPLATEDIR}nl1
+	  DESTINATION ${TEMPLATEDIR}nl2
 	)
 
 	INSTALL(FILES
@@ -355,4 +370,45 @@ ELSE (WANT_NOTEMPLATES)
 	buscard_coll/Business_Card_Collection.png
 	  DESTINATION ${TEMPLATEDIR}buscard_coll
 	)
+	
+	INSTALL(FILES
+	Business_Card_EU_Green/Business_Card_Waves.sla.gz
+	Business_Card_EU_Green/Business_Card_Wavestn.png
+	Business_Card_EU_Green/Business_Card_Waves.png
+	Business_Card_EU_Green/Line1.png
+	  DESTINATION ${TEMPLATEDIR}Business_Card_EU_Green
+	)
+	
+	INSTALL(FILES
+	3Fold_Wave_Style/3Fold_Waves_Style.sla.gz
+	3Fold_Wave_Style/3Fold_Waves_Styletn.png
+	3Fold_Wave_Style/3Fold_Waves_Style.png
+	3Fold_Wave_Style/IMAGES_SML.png
+	3Fold_Wave_Style/IMAGES_BG.png
+	3Fold_Wave_Style/3Fold_Waves_Style.jpeg
+	  DESTINATION ${TEMPLATEDIR}3Fold_Wave_Style
+	)
+	
+	INSTALL(FILES
+	Flyer_Waves_A5_DoubleSided/Waves_Flyer.sla.gz
+	Flyer_Waves_A5_DoubleSided/Waves_Flyer_tn.png
+	Flyer_Waves_A5_DoubleSided/Waves_Flyer.png
+	  DESTINATION ${TEMPLATEDIR}Flyer_Waves_A5_DoubleSided
+	)
+	
+	INSTALL(FILES
+	Layout_Informer_A4/Layout_Informer.sla.gz
+	Layout_Informer_A4/Layout_Informer.png
+	Layout_Informer_A4/Layout_Informertn.png
+	  DESTINATION ${TEMPLATEDIR}Layout_Informer_A4
+	)
+	
+	INSTALL(FILES
+	Newsletter_Layout/Newsletter_Wavestyle.sla.gz
+	Newsletter_Layout/Newsletter_Wavestyletn.png
+	Newsletter_Layout/Newsletter_Wavestyle.png
+	Newsletter_Layout/path9902.png
+	  DESTINATION ${TEMPLATEDIR}Newsletter_Layout
+	)
+	  
 ENDIF (WANT_NOTEMPLATES)

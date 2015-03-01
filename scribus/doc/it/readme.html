@@ -1,0 +1,224 @@
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Le novit&agrave; di Scribus 1.4.4</title>
+</head>
+<body>
+<h2>Le novit&agrave; di Scribus 1.4.4</h2>
+<p>Questa &egrave; una rapida panoramica dei cambiamenti in Scribus rispetto alla precedente versione stabile della serie 1.3.3.x (la 1.3.3.14).</p>
+
+<p><b><i>Attenzione: il formato dei file di Scribus &egrave; cambiato tra la versione 1.3.3.x e la 1.4.x e non &egrave; retrocompatibile con alcuna precedente versione stabile (1.3.3.14 o precedenti). Per essere pi&ugrave; chiari, i file generati dalla versione 1.4.x non possono essere aperti con la versione 1.3.3.14 n&eacute; con alcuna delle precedenti.</i></b></p>
+<h3>Indicazioni generali</h3>
+<ol>
+<li>Quando viene lanciato per la prima volta, Scribus 1.4.x d&agrave; la possibilit&agrave; di importare i dati di configurazione da una eventuale versione precedente; tuttavia essi vengono salvati separatamente, quindi sar&agrave; possibile eseguire la versione 1.3.3.x in parallelo con la 1.4.x</li>
+<li><b>Potete</b> installare entrambe le versioni in parallelo ed eseguirle contemporaneamente. L'unica condizione &egrave; quella di installarle in directory diverse, ad esempio la 1.3.3.x in <code>/usr/local</code> e la 1.4.x in <code>/opt</code> o <code>$home/bin</code> su Linux/UNIX. Se compilate Scribus dal codice sorgente, potete usare l'argomento <code>-DCMAKE_INSTALL_PREFIX:PATH=</code> per configurare la directory di installazione di Scribus. Sulle altre piattaforme potete stabilire la posizione durante il processo di installazione.</li>
+</ol>
+<h3>Novit&agrave; della versione 1.4.4</h3>
+
+<h4>Passaggio a Qt4</h4>
+<p>Uno degli aspetti pi&ugrave; impegnativi del processo che ha portato dalla versione 1.3.3.x alla 1.4.x &egrave; stato il passaggio al toolkit Qt4. Fra l'altro, questo ha portato a un grande miglioramento delle prestazioni in ambiente Mac OS&nbsp;X, e ha reso possibile la creazione di file DMG nativi per OS&nbsp;X. I DMG di Scribus 1.4.x sono compatibili con OS&nbsp;X 10.5 o successivo. Ha reso possibile anche la creazione di una versione per il <a href="readme-haiku.html">sistema operativo Haiku</a>.</p>
+
+<h4>Pi&ugrave; piattaforme</h4>
+<p>Scribus ora pu&ograve; essere installato sulle seguenti piattaforme: Linux, FreeBSD, PC-BSD, NetBSD, OpenBSD, Solaris, OpenIndiana, Debian GNU/Hurd, Mac&nbsp;OS&nbsp;X, OS/2&nbsp;Warp&nbsp;4, eComStation, Windows&nbsp;2000 SP&nbsp;4 o versioni successive (a 32 bit), Windows Vista o versioni successive (a 64 bit). &Egrave; disponibile anche in formato Scribus Portable per Windows.</p>
+
+<h4>Manipolazione degli oggetti</h4>
+<ul>
+<li>significativi miglioramenti alla duplicazione multipla</li>
+<li>strumenti di trasformazione simili a quelli presenti in Illustrator</li>
+<li>nuove opzioni per l'allineamento e la distribuzione degli oggetti nella pagina</li>
+<li>selezione multipla avanzata degli oggetti</li>
+</ul>
+
+<h4>Testo e tipografia</h4>
+<h5><b>Tipografia:</b></h5>
+<ul>
+<li>estensione dei glifi</li>
+<li>spostamento verticale variabile della prima riga nelle cornici di testo</li>
+<li>stili di carattere</li>
+<li>nuovo gestore degli stili, che permette di creare gerarchie di stili, stili clonati ed ereditariet&agrave; degli stili</li>
+<li>nuovo selettore di glifi che permette la creazione di insiemi di glifi che possono essere condivisi con altri utenti</li>
+<li>importanti miglioramenti nella sillabazione</li>
+<li>margini ottici, per dare l'impressione di un bordo pi&ugrave; regolare con il testo giustificato, mediante un lieve spostamento verso il margine di trattini, virgole e parti di alcuni glifi:</li>
+</ul>
+<br>
+<table width="100%">
+  <tbody>
+    <tr>
+      <td align="center"><img src="images/new1.png" title="Margini ottici" alt="Margini ottici" /></td>
+    </tr>
+    <tr>
+      <td><div align="center"><i>Margini ottici</i></div></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h5><b>Testo:</b></h5>
+<ul>
+<li>controllo ortografico per mezzo di Hunspell</li>
+<li>nuova variabile di testo: numero di pagine</li>
+<li>annulla/ripristina per le azioni sul testo</li>
+</ul>
+
+<h4>Strumenti vettoriali</h4>
+
+<ul>
+<li>nuove forme predefinite</li>
+<li>nuovi strumenti per il tracciato, tra cui operazioni booleane sul tracciato, effetti lente e griglia di distorsione</li>
+<li>maggiori opzioni per il testo su tracciato</li>
+</ul>
+<br>
+<table width="100%">
+  <tbody>
+    <tr>
+      <td align="center"><img src="images/new2.png" title="Operazioni booleane sul tracciato" alt="Operazioni booleane sul tracciato" /></td>
+    </tr>
+    <tr>
+      <td><div align="center"><i>Operazioni booleane sul tracciato</i></div></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<h4>Linee</h4>
+<ul>
+<li>nuovi stili di linea</li>
+<li>editor degli stili di linea</li>
+</ul>
+
+<h4>Colori a tinta unita, sfumature e motivi</h4>
+<ul>
+<li>importanti miglioramenti alla mappa cromatica (con la possibilit&agrave; di utilizzare pi&ugrave; modelli di colore)</li>
+<li>funzione per la sostituzione dei colori a tinta unita nell'intero documento</li>
+<li>possibilit&agrave; di utilizzare formati esterni di raccolte di colori (EPS, AI, PS, SOC, GPL)</li>
+<li>le raccolte di colori standard sono bloccate</li>
+<li>aggiunta di molte nuove raccolte di colori, tra cui gli standard nazionali di colore di Australia, Francia, Giappone, Regno Unito e Stati Uniti, e inoltre le raccolte di colori Resene&#0174; e dtp studio,  GiveLife Color System&reg;, Galaxy Gauge&trade; e colori NAA 10-2006.</li>
+<li>nuovi tipi di sfumature</li>
+<li>possibilit&agrave; di usare i motivi come riempimento: tutti i formati grafici che Scribus &egrave; in grado di utilizzare possono essere usati come motivi</li>
+<li>emulazione del daltonismo per tutti i colori compresi nel documento</li>
+</ul>
+<br>
+<table width="100%">
+  <tbody>
+    <tr>
+      <td align="center"><img src="images/new5.png" title="Sostituzione dei colori a tinta unita" alt="Sostituzione dei colori a tinta unita" /></td>
+    </tr>
+    <tr>
+      <td><div align="center"><i>Sostituzione dei colori a tinta unita</i></div></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<h4>Trasparenze</h4>
+<ul>
+<li>i modi fusione, simili a quelli presenti in Photoshop o GIMP, sono disponibili per tutti gli oggetti  dei documenti di Scribus e possono anche essere applicati ai livelli</li>
+</ul>
+
+<h4>Cornici rendering</h4>
+<ul>
+<li>una delle pi&ugrave; importanti nuove caratteristiche &egrave; l'aggiunta delle cornici rendering, uno speciale tipo di cornice che permette di visualizzare all'interno di Scribus l'output di programmi come LaTeX, Lilypond o POV-Ray</li></ul>
+<br>
+<table width="100%">
+  <tbody>
+    <tr>
+      <td align="center"><img src="images/new3.png" title="L'editor delle cornici rendering" alt="L'editor delle cornici rendering" /></td>
+    </tr>
+    <tr>
+      <td><div align="center"><i>L'editor delle cornici rendering</i></div></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<h4>Generatore di codici a barre</h4>
+<ul>
+<li>Il generatore di codici a barre &egrave; stato rivisto in profondit&agrave; e ora &egrave; in grado di creare codici a barre in tutti i principali formati, compreso il QR.</li>
+</ul>
+
+<h4>Filtri d'importazione</h4>
+<ul>
+<li>una notevole quantit&agrave; di lavoro &egrave; stata impiegata per la realizzazione di nuovi filtri d'importazione per formati vettoriali, tra cui per il formato Adobe Illustrator (AI). Scribus ora pu&ograve; importare file AI basati sia su EPS sia su PDF. Gli altri filtri sono: Windows Metafile (WMF), Xfig (FIG), Calamus Vector Graphics (CVG), Macintosh PICT (PICT), Kivio Stencils (SML) e Dia Shapes (SHAPE)</li></ul>
+
+<br>
+<table width="100%">
+  <tbody>
+    <tr>
+      <td align="center"><img src="images/new4.png" title="Importazione da Adobe Illustrator" alt="Importazione da Adobe Illustrator" /></td>
+    </tr>
+    <tr>
+      <td><div align="center"><i>Importazione da Adobe Illustrator</i></div></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<h4>Trattamento delle immagini</h4>
+<ul>
+<li>nuovi effetti immagine non distruttivi</li>
+<li>migliore gestione di certe caratteristiche specifiche del formato PSD, come tracciati di ritaglio e livelli</li>
+<li>importanti miglioramenti al gestore di immagini</li>
+</ul>
+<br>
+<table width="100%">
+  <tbody>
+    <tr>
+      <td align="center"><img src="images/new6.png" title="Il nuovo gestore di immagini" alt="Il nuovo gestore di immagini" /></td>
+    </tr>
+    <tr>
+      <td><div align="center"><i>Il nuovo gestore di immagini</i></div></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<h4>Livelli</h4>
+<ul>
+<li>i livelli di Scribus possono essere esportati come livelli PDF (solo per PDF 1.5)</li>
+<li>possibilit&agrave; di duplicare livelli</li>
+<li>modalit&agrave; &ldquo;scheletro&rdquo; per i livelli per rendere pi&ugrave; veloce la visualizzazione</li>
+<li>possibilit&agrave; di forzare il flusso del testo intorno agli oggetti situati su un livello inferiore</li>
+</ul>
+
+<h4>Prestampa</h4>
+<ul>
+<li>miglioramenti all'anteprima di stampa, tra cui l'indicazione della copertura dell'inchiostro</li>
+<li>miglioramenti alla verifica preliminare</li>
+<li>nuove funzionalit&agrave; per la prestampa, come segni di pagina al vivo e segni stampante</li>
+<li>possibilit&agrave; di convertire i colori spot in colori di processo</li>
+</ul>
+
+<h4>Esportazione PDF</h4>
+<ul>
+<li>esportazione in PDF/X-1a</li>
+<li>possibilit&agrave; di utilizzare le caratteristiche del PDF 1.5, come effetti di presentazione o livelli PDF</li>
+<li>possibilit&agrave; di incorporare file EPS e PDF nei documenti PDF</li>
+<li>migliore incorporamento dei caratteri come sottoinsieme</li>
+</ul>
+
+<h4>Usabilit&agrave;</h4>
+<p>Molti sforzi sono stati rivolti a grandi e piccoli miglioramenti dell'usabilit&agrave; in ogni parte del programma, ad esempio:</p>
+<ul>
+<li>possibilit&agrave; di eseguire ricerche nello Schema documento</li>
+<li>molte pi&ugrave; opzioni di visualizzazione, tra cui l'anteprima del documento senza guide e bordi delle cornici</li>
+<li>attivazione della gestione del colore con un solo clic</li>
+<li>men&ugrave; contestuale dello spazio di lavoro, con la possibilit&agrave; di inserire direttamente immagini vettoriali o di attivare varie opzioni di visualizzazione</li>
+<li>molte pi&ugrave; opzioni per automatizzare e rendere pi&ugrave; veloce l'inserimento di cornici (ad esempio la finestra di dialogo Inserisci cornici, l'opzione &ldquo;Strumenti adesivi&rdquo;)</li>
+<li>miglioramenti alla biblioteca</li>
+</ul>
+
+<h4>Modelli</h4>
+<ul>
+<li>sono stati aggiunti molti modelli donati da artisti</li>
+<li>&egrave; stata avviata la traduzione in altre lingue delle categorie e delle descrizioni dei modelli</li>
+</ul>
+
+<h4>Guida in linea</h4>
+<ul>
+<li>il contenuto della guida in linea &egrave; quasi raddoppiato rispetto alla precedente versione stabile 1.3.3.14. Inoltre molte parti della documentazione esistente sono state aggiornate o completamente riscritte per descrivere le pi&ugrave; ampie capacit&agrave; della versione 1.4+</li>
+<li>molti suggerimenti sono stati aggiunti, e quelli esistenti sono stati ampliati</li>
+<li>la guida in linea &egrave; direttamente accessibile dal men&ugrave; <i>Aiuto</i></li>
+</ul>
+<br>
+<br>
+</body>
+</html>
