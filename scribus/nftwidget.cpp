@@ -36,11 +36,11 @@ void nftwidget::setupSettings(QString lang)
 	toolBox->setItemIcon(2, loadIcon("16/help-browser.png"));
 	tnailGrid->setIconSize(QSize(60, 60));
 	// Signals and Slots Connections
-	connect(categoryList, SIGNAL(itemSelectionChanged()), this, SLOT(setTNails()));
+	connect(categoryList, SIGNAL(itemSelectionChanged()), this, SLOT(setThumbnails()));
+	connect(tnailGrid, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SIGNAL(leaveOK()));
 	connect(tnailGrid, SIGNAL(itemSelectionChanged()), this, SLOT(setInfo()));
 	connect(removeAction, SIGNAL(triggered()), this, SLOT(removeTemplate()));
 	connect(openAction, SIGNAL(triggered()), this, SIGNAL(leaveOK()));
-	connect(tnailGrid, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SIGNAL(leaveOK()));
 	setupListItems();
 	setupCategories();
 }
@@ -70,13 +70,13 @@ void nftwidget::setupListItems()
 	{
 		if (!settings->templates[i]->isDeleted)
 		{
-			ListItem* tmp = new ListItem(settings->templates[i], NULL);
+			ListItem* tmp = new ListItem(settings->templates[i], (QListWidgetItem *) NULL);
 			iconItems.push_back(tmp);
 		}
 	}
 }
 
-void nftwidget::setTNails()
+void nftwidget::setThumbnails()
 {
 	if (categoryList->currentRow() == 0)
 	{
@@ -205,7 +205,7 @@ void nftwidget::removeTemplate()
 	emit ButtonBoxEnable(false);
 	setupListItems();
 	setupCategories();
-	setTNails();
+	setThumbnails();
 }
 
 void nftwidget::getCurrentDocumentTemplate(QListWidgetItem* item)

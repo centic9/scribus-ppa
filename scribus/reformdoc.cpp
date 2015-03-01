@@ -166,16 +166,14 @@ void ReformDoc::restoreDefaults()
 
 void ReformDoc::unitChange()
 {
-	double oldUnitRatio = unitRatio;
 	docUnitIndex = tabPage->unitCombo->currentIndex();
 	unitRatio = unitGetRatioFromIndex(docUnitIndex);
-	QString suffix = unitGetSuffixFromIndex(docUnitIndex);
-	double invUnitConversion = 1.0 / oldUnitRatio * unitRatio;
+
 	tabPage->unitChange();
-	tabGuides->unitChange(suffix, docUnitIndex, invUnitConversion);
+	tabGuides->unitChange(docUnitIndex);
 	tabView->unitChange(docUnitIndex);
 	tabTools->unitChange(docUnitIndex);
-	tabPDF->unitChange(suffix, docUnitIndex, invUnitConversion);
+	tabPDF->unitChange(docUnitIndex);
 }
 
 void ReformDoc::setDS(int layout)
@@ -465,7 +463,7 @@ void ReformDoc::updateDocumentSettings()
 			ScMW->mainWindowProgressBar->reset();
 			int cc = currDoc->PageColors.count() + currDoc->Items->count();
 			ScMW->mainWindowProgressBar->setMaximum(cc);
-			qApp->changeOverrideCursor(QCursor(Qt::WaitCursor));
+			qApp->setOverrideCursor(QCursor(Qt::WaitCursor));
 			bool newCM  = currDoc->CMSSettings.CMSinUse;
 			bool updCol = false;
 			currDoc->CMSSettings.CMSinUse = oldCM;
@@ -506,7 +504,7 @@ void ReformDoc::updateDocumentSettings()
 				currDoc->RecalcPictures(&ScCore->InputProfiles, &ScCore->InputProfilesCMYK, ScMW->mainWindowProgressBar);
 			}
 			ScMW->mainWindowProgressBar->setValue(cc);
-			qApp->changeOverrideCursor(QCursor(Qt::ArrowCursor));
+			qApp->restoreOverrideCursor();
 			ScMW->setStatusBarInfoText("");
 			ScMW->mainWindowProgressBar->reset();
 		}

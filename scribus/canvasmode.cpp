@@ -37,6 +37,7 @@
 #ifdef GESTURE_FRAME_PREVIEW
 #include "pageitempreview.h"
 #endif
+#include "prefsmanager.h"
 #include "selection.h"
 #include "scpainter.h"
 #include "scresizecursor.h"
@@ -56,20 +57,20 @@ CanvasMode::CanvasMode (ScribusView* view) :
 {
 	m_pen["outline"]	= QPen(Qt::gray, 1.0 , Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
 	m_pen["outline"].setCosmetic(true);
-	m_pen["selection"]	= QPen(Qt::red, 1.0, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
+	m_pen["selection"]	= QPen(PrefsManager::instance()->appPrefs.DFrameColor, 1.0, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
 	m_pen["selection"].setCosmetic(true);
 	m_pen["selection-group"] = QPen(Qt::red, 1.0 , Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
 	m_pen["selection-group"].setCosmetic(true);
-	m_pen["selection-group-inside"] = QPen(Qt::red, 1.0 , Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
+	m_pen["selection-group-inside"] = QPen(PrefsManager::instance()->appPrefs.DFrameGroupColor, 1.0 , Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
 	m_pen["selection-group-inside"].setCosmetic(true);
-	m_pen["handle"]		= QPen(Qt::red, 1.0, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
+	m_pen["handle"]		= QPen(PrefsManager::instance()->appPrefs.DFrameColor, 1.0, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin);
 	m_pen["handle"].setCosmetic(true);
 	
 	m_brush["outline"]	= Qt::NoBrush;
 	m_brush["selection"]	= Qt::NoBrush;
 	m_brush["selection-group"] = QColor(255,0,0,10);
 	m_brush["selection-group-inside"] = Qt::NoBrush;
-	m_brush["handle"]	= Qt::red;
+	m_brush["handle"]	= PrefsManager::instance()->appPrefs.DFrameColor;
 }
 
 CanvasMode::~CanvasMode()
@@ -248,8 +249,8 @@ void CanvasMode::drawSelection(QPainter* psx, bool drawHandles)
 					psx->setRenderHint(QPainter::Antialiasing);
 					psx->translate(currItem->xPos(), currItem->yPos());
 					psx->rotate(currItem->rotation());
-					x = currItem->asLine() ? 0 : (currItem->lineWidth() / -2.0);
-					y = currItem->asLine() ? (h / -2.0) : (currItem->lineWidth() / -2.0);
+					x = currItem->asLine() ? 0 : (currItem->visualXPos() - currItem->xPos() - lineAdjust);
+					y = currItem->asLine() ? (h / -2.0) : (currItem->visualYPos() - currItem->yPos() - lineAdjust);
 				}
 				else
 				{
@@ -292,8 +293,8 @@ void CanvasMode::drawSelection(QPainter* psx, bool drawHandles)
 				psx->setRenderHint(QPainter::Antialiasing);
 				psx->translate(currItem->xPos(), currItem->yPos());
 				psx->rotate(currItem->rotation());
-				x = currItem->asLine() ? 0 : (currItem->lineWidth() / -2.0);
-				y = currItem->asLine() ? (h / -2.0) : (currItem->lineWidth( ) / -2.0);
+				x = currItem->asLine() ? 0 : (currItem->visualXPos() - currItem->xPos() - lineAdjust);
+				y = currItem->asLine() ? (h / -2.0) : (currItem->visualYPos() - currItem->yPos() - lineAdjust);
 			}
 			else
 			{
@@ -574,6 +575,9 @@ QCursor CanvasMode::modeCursor()
 		case modeEyeDropper:
 			cursor = QCursor(loadIcon("colorpickercursor.png"), 0, 32);
 			break;
+		case modeLinkFrames:
+			cursor = QCursor(loadIcon("LinkTextFrame.png"), 0, 31);
+			break;
 		case modeMeasurementTool:
 		case modeEditGradientVectors:
 		case modeInsertPDFButton:
@@ -595,7 +599,7 @@ QCursor CanvasMode::modeCursor()
 void CanvasMode::setModeCursor()
 {
 	QCursor cursor = modeCursor();
-	qApp->changeOverrideCursor(cursor);
+	m_view->setCursor(cursor);
 }
 
 #ifdef GESTURE_FRAME_PREVIEW
@@ -621,22 +625,22 @@ void CanvasMode::setResizeCursor(int how, double rot)
 	{
 		case 1:
 		case 2:
-			qApp->changeOverrideCursor(ScResizeCursor(135 + rot));// Qt::SizeFDiagCursor
+			m_view->setCursor(ScResizeCursor(135 + rot));// Qt::SizeFDiagCursor
 			break;
 		case 3:
 		case 4:
-			qApp->changeOverrideCursor(ScResizeCursor(45 + rot));// Qt::SizeBDiagCursor
+			m_view->setCursor(ScResizeCursor(45 + rot));// Qt::SizeBDiagCursor
 			break;
 		case 5:
 		case 8:
-			qApp->changeOverrideCursor(ScResizeCursor(0 + rot));// Qt::SizeVerCursor
+			m_view->setCursor(ScResizeCursor(0 + rot));// Qt::SizeVerCursor
 			break;
 		case 6:
 		case 7:
-			qApp->changeOverrideCursor(ScResizeCursor(90 + rot));// Qt::SizeHorCursor
+			m_view->setCursor(ScResizeCursor(90 + rot));// Qt::SizeHorCursor
 			break;
 		default:
-			qApp->changeOverrideCursor(QCursor(Qt::SizeAllCursor));
+			m_view->setCursor(QCursor(Qt::SizeAllCursor));
 			break;
 	}
 }

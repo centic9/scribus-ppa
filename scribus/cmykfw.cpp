@@ -23,7 +23,6 @@ for which a new license (GPL+exception) is in place.
 #include <QDir>
 #include <QFileInfo>
 #include <QMessageBox>
-#include <QDomDocument>
 #include <QToolTip>
 #include <QTextStream>
 #include <QSpacerItem>
@@ -432,7 +431,6 @@ void CMYKChoose::setValSLiders(double value)
 void CMYKChoose::slotRightClick()
 {
 	QMenu *pmen = new QMenu();
-	qApp->changeOverrideCursor(QCursor(Qt::ArrowCursor));
 	QAction* dynAct;
 	if (dynamic)
 		dynAct = pmen->addAction( tr("Static Color Bars"));
