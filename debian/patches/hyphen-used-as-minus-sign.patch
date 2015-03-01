@@ -3,8 +3,10 @@ Author: Mattia Rizzolo <mattia@mapreri.org>
 Forwarded: no
 Last-Update: 2014-05-21
 
---- a/scribus/manpages/scribus.1
-+++ b/scribus/manpages/scribus.1
+Index: git/scribus/manpages/scribus.1
+===================================================================
+--- git.orig/scribus/manpages/scribus.1	2015-03-01 16:34:01.707544276 +0100
++++ git/scribus/manpages/scribus.1	2015-03-01 16:34:01.703544244 +0100
 @@ -2,7 +2,7 @@
  .SH NAME
  scribus - cross platform WYSIWYG desktop publishing app
@@ -95,8 +97,10 @@ Last-Update: 2014-05-21
  .B If you intend to submit a bug report or feature request, please search the bug database first.
  .SH AUTHORS
  Please see the About Scribus option in the Help menu for a list of authors, translators, and contributors.
---- a/scribus/manpages/scribus.1.de
-+++ b/scribus/manpages/scribus.1.de
+Index: git/scribus/manpages/scribus.1.de
+===================================================================
+--- git.orig/scribus/manpages/scribus.1.de	2015-03-01 16:34:01.707544276 +0100
++++ git/scribus/manpages/scribus.1.de	2015-03-01 16:34:01.703544244 +0100
 @@ -1,8 +1,8 @@
  .TH scribus "1" "Aktualisiert am 1. oktober 2007"
  .SH NAME
@@ -175,7 +179,7 @@ Last-Update: 2014-05-21
  .B PATH
  ignorieren lassen.
  .PP
-@@ -121,4 +121,4 @@
+@@ -123,4 +123,4 @@
  ist der Scribus-Bugtracker, der zum Verfolgen von Fehlerberichten und Erweiterungswünschen dient.
  .B Falls Sie einen Fehlerbericht oder einen Erweiterungswunsch eintragen möchten, durchsuchen Sie bitte erst die Datenbank des Bugtrackers.
  .SH AUTHORS

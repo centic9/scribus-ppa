@@ -9,9 +9,11 @@ Bug-Debian: https://bugs.debian.org/533081
 Bug-Debian: https://bugs.debian.org/762942
 Last-Update: 2014-10-11
 
---- a/scribus/scribus.cpp
-+++ b/scribus/scribus.cpp
-@@ -7935,7 +7935,7 @@
+Index: git/scribus/scribus.cpp
+===================================================================
+--- git.orig/scribus/scribus.cpp	2015-03-01 16:33:59.031526812 +0100
++++ git/scribus/scribus.cpp	2015-03-01 16:33:59.027526785 +0100
+@@ -7944,7 +7944,7 @@
  		delete dia;
  		QFile::remove(prefsManager->preferencesLocation()+"/tmp.ps");
  		QFile::remove(prefsManager->preferencesLocation()+"/sc.png");

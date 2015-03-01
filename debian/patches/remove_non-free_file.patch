@@ -7,8 +7,10 @@ Bug-Debian: https://bugs.debian.org/741666
 Forwarded: not-needed
 Last-Update: 2014-07-27
 
---- a/resources/editorconfig/CMakeLists.txt
-+++ b/resources/editorconfig/CMakeLists.txt
+Index: git/resources/editorconfig/CMakeLists.txt
+===================================================================
+--- git.orig/resources/editorconfig/CMakeLists.txt	2015-03-01 16:34:00.003533161 +0100
++++ git/resources/editorconfig/CMakeLists.txt	2015-03-01 16:33:59.999533129 +0100
 @@ -12,7 +12,6 @@
  300_lilypond.xml
  lilypond.png
@@ -17,8 +19,10 @@ Last-Update: 2014-07-27
  500_povray.xml
  povray_32.png
  
---- a/scribus/profiles/CMakeLists.txt
-+++ b/scribus/profiles/CMakeLists.txt
+Index: git/scribus/profiles/CMakeLists.txt
+===================================================================
+--- git.orig/scribus/profiles/CMakeLists.txt	2015-03-01 16:34:00.003533161 +0100
++++ git/scribus/profiles/CMakeLists.txt	2015-03-01 16:33:59.999533129 +0100
 @@ -3,10 +3,7 @@
  )
  
@@ -30,8 +34,10 @@ Last-Update: 2014-07-27
 -srgb.license
    DESTINATION ${SHAREDIR}profiles
  )
---- a/scribus/CMakeLists.txt
-+++ b/scribus/CMakeLists.txt
+Index: git/scribus/CMakeLists.txt
+===================================================================
+--- git.orig/scribus/CMakeLists.txt	2015-03-01 16:34:00.003533161 +0100
++++ git/scribus/CMakeLists.txt	2015-03-01 16:33:59.999533129 +0100
 @@ -2,7 +2,6 @@
    ADD_DEFINITIONS(-DQT_DLL)
  ENDIF(WIN32)
@@ -40,9 +46,11 @@ Last-Update: 2014-07-27
  ADD_SUBDIRECTORY(dtd)
  ADD_SUBDIRECTORY(manpages)
  ADD_SUBDIRECTORY(colormgmt)
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -804,7 +804,6 @@
+Index: git/CMakeLists.txt
+===================================================================
+--- git.orig/CMakeLists.txt	2015-03-01 16:34:00.003533161 +0100
++++ git/CMakeLists.txt	2015-03-01 16:34:00.003533161 +0100
+@@ -873,7 +873,6 @@
  
  #Add our source subdirs
  ADD_SUBDIRECTORY(scribus)

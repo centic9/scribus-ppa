@@ -4,8 +4,10 @@ Author: Mattia Rizzolo <mattia@mapreri.org>
 Forwarded: no
 Last-Update: 2014-07-25
 
---- a/scribus/tabprinter.cpp
-+++ b/scribus/tabprinter.cpp
+Index: git/scribus/tabprinter.cpp
+===================================================================
+--- git.orig/scribus/tabprinter.cpp	2015-03-01 16:34:05.639569925 +0100
++++ git/scribus/tabprinter.cpp	2015-03-01 16:34:05.335567934 +0100
 @@ -35,7 +35,7 @@
  	doGCR->setToolTip( "<qt>" + tr( "A way of switching off some of the gray shades which are composed of cyan, yellow and magenta and using black instead. UCR most affects parts of images which are neutral and/or dark tones which are close to the gray. Use of this may improve printing some images and some experimentation and testing is need on a case by case basis. UCR reduces the possibility of over saturation with CMY inks." ) + "</qt>");
  	convertSpots->setToolTip("<qt>" + tr( "Enables Spot Colors to be converted to composite colors. Unless you are planning to print spot colors at a commercial printer, this is probably best left enabled." ) + "</qt>");
@@ -15,8 +17,10 @@ Last-Update: 2014-07-25
  	connect(useAltPrintCommand, SIGNAL(clicked()), this, SLOT(selOtherComm()));
  }
  
---- a/Scribus.pot
-+++ b/Scribus.pot
+Index: git/Scribus.pot
+===================================================================
+--- git.orig/Scribus.pot	2015-03-01 16:34:05.639569925 +0100
++++ git/Scribus.pot	2015-03-01 16:34:05.339567963 +0100
 @@ -4035,7 +4035,7 @@
  
  #: Scribus/scribus/tabprinter.cpp:39 Scribus/scribus/printdialog.cpp:385
@@ -26,9 +30,11 @@ Last-Update: 2014-07-25
  "Not recommended unless requested by your printer."
  msgstr ""
  
---- a/resources/translations/po/scribus.ca.ts
-+++ b/resources/translations/po/scribus.ca.ts
-@@ -27110,7 +27110,7 @@
+Index: git/resources/translations/po/scribus.ca.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.ca.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.ca.ts	2015-03-01 16:34:05.347568016 +0100
+@@ -27189,7 +27189,7 @@
          <translation type="obsolete">Permet fer servir perfils ICC en la impressió si està activada la gestió de color</translation>
      </message>
      <message>
@@ -37,8 +43,8 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Això permmet especificar la mida de full del fitxer PostScript. No es recomana si no ho demana l&apos;impressor.</translation>
      </message>
      <message>
-@@ -27296,7 +27296,7 @@
-         <translation type="unfinished">Enmiralla la pàgina(es) verticalment</translation>
+@@ -27375,7 +27375,7 @@
+         <translation>Emmiralla la pàgina(es) verticalment</translation>
      </message>
      <message>
 -        <source>This enables you to explicitely set the media size of the PostScript file. Not recommended unless requested by your printer.</source>
@@ -46,18 +52,20 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Això permmet especificar la mida de full del fitxer PostScript. No es recomana si no ho demana l&apos;impressor.</translation>
      </message>
      <message>
-@@ -42931,7 +42931,7 @@
+@@ -43078,7 +43078,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
 -        <source>This enables you to explicitely set the media size of the PostScript file. Not recommended unless requested by your printer.</source>
 +        <source>This enables you to explicitly set the media size of the PostScript file. Not recommended unless requested by your printer.</source>
-         <translation type="unfinished">Això permmet especificar la mida de full del fitxer PostScript. No es recomana si no ho demana l&apos;impressor.</translation>
+         <translation>Això permet especificar la mida de full del fitxer PostScript. No es recomana si no ho demana l&apos;impressor.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.fi.ts
-+++ b/resources/translations/po/scribus.fi.ts
-@@ -19618,7 +19618,7 @@
+Index: git/resources/translations/po/scribus.fi.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.fi.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.fi.ts	2015-03-01 16:34:05.355568069 +0100
+@@ -19661,7 +19661,7 @@
          <translation type="unfinished">Peilaa sivut pystysuunnassa</translation>
      </message>
      <message>
@@ -66,7 +74,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Aseta PostScript-tiedoston median koko eksplisiittisesti. Käyttö on suositeltavaa ainoastaan jos paino pyysi sitä.</translation>
      </message>
      <message>
-@@ -30845,7 +30845,7 @@
+@@ -30936,7 +30936,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -75,9 +83,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished">Aseta PostScript-tiedoston median koko eksplisiittisesti. Käyttö on suositeltavaa ainoastaan jos paino pyysi sitä.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.fr.ts
-+++ b/resources/translations/po/scribus.fr.ts
-@@ -19464,7 +19464,7 @@
+Index: git/resources/translations/po/scribus.fr.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.fr.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.fr.ts	2015-03-01 16:34:05.359568100 +0100
+@@ -19507,7 +19507,7 @@
          <translation type="obsolete">Permet d&apos;incorporer des profils colorimétriques ICC dans votre processus d&apos;impression lorsque la gestion des couleurs est active.</translation>
      </message>
      <message>
@@ -86,7 +96,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Vous pouvez ici définir le format de média sur lequel votre fichier PostScript sera imprimé. Ceci n&apos;est pas recommandé à moins que votre imprimeur n&apos;en ait besoin.</translation>
      </message>
      <message>
-@@ -19734,7 +19734,7 @@
+@@ -19777,7 +19777,7 @@
          <translation>Miroir vertical des pages</translation>
      </message>
      <message>
@@ -95,7 +105,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Vous pouvez ici définir le format de média sur lequel votre fichier PostScript sera imprimé. Ceci n&apos;est pas recommandé à moins que votre imprimeur n&apos;en ait besoin.</translation>
      </message>
      <message>
-@@ -32418,7 +32418,7 @@
+@@ -32509,7 +32509,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -104,9 +114,11 @@ Last-Update: 2014-07-25
          <translation>Vous pouvez définir ici le format de média sur lequel votre fichier PostScript sera imprimé. Ceci n’est pas recommandé à moins que votre imprimeur n’en ait besoin.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.et.ts
-+++ b/resources/translations/po/scribus.et.ts
-@@ -18016,7 +18016,7 @@
+Index: git/resources/translations/po/scribus.et.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.et.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.et.ts	2015-03-01 16:34:05.367568145 +0100
+@@ -18059,7 +18059,7 @@
          <translation type="obsolete">Võimaldab värvihalduse korral põimida trükkimisandmetesse ICC profiilid</translation>
      </message>
      <message>
@@ -115,7 +127,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Võimaldab konkreetselt määrata kindlaks PostScript-faili andmekandja (paberi, kile vms.) suuruse. Kui printer seda otseselt ei nõua, ei ole seda mõtet sisse lülitada.</translation>
      </message>
      <message>
-@@ -18198,7 +18198,7 @@
+@@ -18241,7 +18241,7 @@
          <translation>Lehekülgede peegeldamine püstiselt</translation>
      </message>
      <message>
@@ -124,7 +136,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Võimaldab konkreetselt määrata kindlaks PostScript-faili andmekandja (paberi, kile vms.) suuruse. Kui printer seda otseselt ei nõua, ei ole seda mõtet sisse lülitada.</translation>
      </message>
      <message>
-@@ -31247,7 +31247,7 @@
+@@ -31338,7 +31338,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -133,9 +145,11 @@ Last-Update: 2014-07-25
          <translation>Võimaldab konkreetselt määrata kindlaks PostScript-faili trükimaterjali (paberi, kile vms.) suuruse. Kui printer seda otseselt ei nõua, ei ole seda mõtet sisse lülitada.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.lt_LT.ts
-+++ b/resources/translations/po/scribus.lt_LT.ts
-@@ -19970,7 +19970,7 @@
+Index: git/resources/translations/po/scribus.lt_LT.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.lt_LT.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.lt_LT.ts	2015-03-01 16:34:05.371568177 +0100
+@@ -20009,7 +20009,7 @@
          <translation type="obsolete">Leidžia įdėti spalvų profilius (ICC) į spausdinimo srautą, kuriame leidžiamas spalvų valdymas</translation>
      </message>
      <message>
@@ -144,7 +158,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Tai leidžia tiesiogiai nurodyti popieriaus (ar kitos medžiagos), ant kurios bus spausdinama, formatą pačiame postskriptiniame faile. Nerekomenduojama šios funkcijos naudoti tol, kol nepareikalaus spausdintuvas.</translation>
      </message>
      <message>
-@@ -33039,7 +33039,7 @@
+@@ -33134,7 +33134,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -153,9 +167,11 @@ Last-Update: 2014-07-25
          <translation>Tai leidžia tiesiogiai nurodyti popieriaus (ar kitos medžiagos), ant kurios bus spausdinama, formatą pačiame postskriptiniame faile. Nerekomenduojama šios funkcijos naudoti tol, kol nepareikalaus spausdintuvas.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.uk.ts
-+++ b/resources/translations/po/scribus.uk.ts
-@@ -22403,7 +22403,7 @@
+Index: git/resources/translations/po/scribus.uk.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.uk.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.uk.ts	2015-03-01 16:34:05.379568221 +0100
+@@ -22442,7 +22442,7 @@
          <translation type="obsolete">Дозволяє вставку кольорових профілів в потік даних для друку при ввімкненому управлінні кольорами</translation>
      </message>
      <message>
@@ -164,7 +180,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Дозволяє явну установку розміру паперу для ПостСкрипт файла. Не рекомендується без запиту від професійного друкаря.</translation>
      </message>
      <message>
-@@ -22584,7 +22584,7 @@
+@@ -22623,7 +22623,7 @@
          <translation type="unfinished">Віддзеркалити сторінку(и) вертикально</translation>
      </message>
      <message>
@@ -173,7 +189,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Дозволяє явну установку розміру паперу для ПостСкрипт файла. Не рекомендується без запиту від професійного друкаря.</translation>
      </message>
      <message>
-@@ -35248,7 +35248,7 @@
+@@ -35331,7 +35331,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -182,9 +198,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished">Дозволяє явну установку розміру паперу для ПостСкрипт файла. Не рекомендується без запиту від професійного друкаря.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.ko.ts
-+++ b/resources/translations/po/scribus.ko.ts
-@@ -25198,7 +25198,7 @@
+Index: git/resources/translations/po/scribus.ko.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.ko.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.ko.ts	2015-03-01 16:34:05.387568282 +0100
+@@ -25273,7 +25273,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -193,9 +211,11 @@ Last-Update: 2014-07-25
          <translation>이것은 분명히 포스트스크립트 파일의 미디어 크기를 설정할 수 있게 합니다. 프린터에 의해 요청되지 않는다면 추천하지 않습니다.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.th_TH.ts
-+++ b/resources/translations/po/scribus.th_TH.ts
-@@ -36971,7 +36971,7 @@
+Index: git/resources/translations/po/scribus.th_TH.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.th_TH.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.th_TH.ts	2015-03-01 16:34:05.391568303 +0100
+@@ -37057,7 +37057,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -204,9 +224,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.tr.ts
-+++ b/resources/translations/po/scribus.tr.ts
-@@ -22441,8 +22441,8 @@
+Index: git/resources/translations/po/scribus.tr.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.tr.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.tr.ts	2015-03-01 16:34:05.399568355 +0100
+@@ -22480,8 +22480,8 @@
          <translation type="obsolete">Allows you to embed ICC profiles in the print stream when colour management is enabled</translation>
      </message>
      <message>
@@ -217,7 +239,7 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <location filename="../../../scribus/printdialog.cpp" line="312"/>
-@@ -22594,8 +22594,8 @@
+@@ -22633,8 +22633,8 @@
          <translation type="unfinished">Mirror Page(s) Vertical</translation>
      </message>
      <message>
@@ -228,7 +250,7 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <location filename="../../../scribus/printdialogbase.ui" line="364"/>
-@@ -35239,8 +35239,8 @@
+@@ -35326,8 +35326,8 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -239,9 +261,11 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="76"/>
---- a/resources/translations/po/scribus.nl.ts
-+++ b/resources/translations/po/scribus.nl.ts
-@@ -25326,7 +25326,7 @@
+Index: git/resources/translations/po/scribus.nl.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.nl.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.nl.ts	2015-03-01 16:34:05.403568386 +0100
+@@ -25417,7 +25417,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -250,9 +274,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished">Geef hiermee het papierformaat in het PostScript/bestand aan. Wordt niet aanbevolen tenzij de drukker hier uitdrukkelijk om vraagt.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.en_US.ts
-+++ b/resources/translations/po/scribus.en_US.ts
-@@ -24854,7 +24854,7 @@
+Index: git/resources/translations/po/scribus.en_US.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.en_US.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.en_US.ts	2015-03-01 16:34:05.407568404 +0100
+@@ -24916,7 +24916,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -261,9 +287,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.sq.ts
-+++ b/resources/translations/po/scribus.sq.ts
-@@ -44695,7 +44695,7 @@
+Index: git/resources/translations/po/scribus.sq.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.sq.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.sq.ts	2015-03-01 16:34:05.415568464 +0100
+@@ -44773,7 +44773,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -272,9 +300,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.de_CH.ts
-+++ b/resources/translations/po/scribus.de_CH.ts
-@@ -23862,7 +23862,7 @@
+Index: git/resources/translations/po/scribus.de_CH.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.de_CH.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.de_CH.ts	2015-03-01 16:34:05.423568511 +0100
+@@ -23905,7 +23905,7 @@
          <translation type="obsolete">Wenn das Farbmanagement aktiviert ist, werden die ICC-Profile mit in den Druckstream eingebettet</translation>
      </message>
      <message>
@@ -283,7 +313,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Legen Sie die Druckgrösse der PostScript-Datei explizit fest. Nur aktivieren, wenn ihre Druckerei das verlangt.</translation>
      </message>
      <message>
-@@ -24140,7 +24140,7 @@
+@@ -24183,7 +24183,7 @@
          <translation>Seite(n) vertikal spiegeln</translation>
      </message>
      <message>
@@ -292,7 +322,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Legen Sie die Druckgrösse der PostScript-Datei explizit fest. Nur aktivieren, wenn ihre Druckerei das verlangt.</translation>
      </message>
      <message>
-@@ -37035,7 +37035,7 @@
+@@ -37126,7 +37126,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -301,9 +331,11 @@ Last-Update: 2014-07-25
          <translation>Legen Sie die Druckgrösse der PostScript-Datei explizit fest. Nur aktivieren, wenn ihre Druckerei das verlangt.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.it.ts
-+++ b/resources/translations/po/scribus.it.ts
-@@ -21397,8 +21397,8 @@
+Index: git/resources/translations/po/scribus.it.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.it.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.it.ts	2015-03-01 16:34:05.431568560 +0100
+@@ -21440,8 +21440,8 @@
          <translation type="obsolete">Enables Spot Colours to be converted to composite colours. Unless you are planning to print spot colours at a commercial printer, this is probably best left enabled.</translation>
      </message>
      <message>
@@ -314,7 +346,7 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <location filename="../../../scribus/printdialog.cpp" line="312"/>
-@@ -21670,7 +21670,7 @@
+@@ -21713,7 +21713,7 @@
          <translation>Ribalta pagina/e</translation>
      </message>
      <message>
@@ -323,7 +355,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">This enables you to explicitly set the media size of the PostScript file. Not recommended unless requested by your printer.</translation>
      </message>
      <message>
-@@ -33392,7 +33392,7 @@
+@@ -33483,7 +33483,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -332,9 +364,11 @@ Last-Update: 2014-07-25
          <translation>Abilita l&apos;impostazione delle dimensioni del supporto del file PostScript. Non è raccomandato se non richiesto dalla vostra stampante.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.af.ts
-+++ b/resources/translations/po/scribus.af.ts
-@@ -33213,7 +33213,7 @@
+Index: git/resources/translations/po/scribus.af.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.af.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.af.ts	2015-03-01 16:34:05.435568587 +0100
+@@ -33299,7 +33299,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -343,8 +377,10 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.pt_BR.ts
-+++ b/resources/translations/po/scribus.pt_BR.ts
+Index: git/resources/translations/po/scribus.pt_BR.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.pt_BR.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.pt_BR.ts	2015-03-01 16:34:05.443568641 +0100
 @@ -8701,7 +8701,7 @@
          <translation type="obsolete">Antigos formatos de .sla suportados</translation>
      </message>
@@ -354,7 +390,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Isto permite que você definaexplicitamente o tamanho da mídia do arquivo postscript.Não é recomendável, a menosque tenha sido requisitado porsua impressora.</translation>
      </message>
      <message>
-@@ -30212,7 +30212,7 @@
+@@ -30255,7 +30255,7 @@
          <translation type="obsolete">Permite-lhe incorporar perfis ICC no fluxo de impressão quando a gestão de cor está activada</translation>
      </message>
      <message>
@@ -363,7 +399,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Isto permite que defina explicitamente o tamanho da mídia do arquivo postscript. Não é recomendável, a menos que tenha sido requisitado pelo seu impressor.</translation>
      </message>
      <message>
-@@ -42981,7 +42981,7 @@
+@@ -43072,7 +43072,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -372,9 +408,11 @@ Last-Update: 2014-07-25
          <translation>Isto permite que defina explicitamente o tamanho da mídia do arquivo postscript. Não é recomendável, a menos que tenha sido requisitado pelo seu impressor.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.pl_PL.ts
-+++ b/resources/translations/po/scribus.pl_PL.ts
-@@ -24384,7 +24384,7 @@
+Index: git/resources/translations/po/scribus.pl_PL.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.pl_PL.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.pl_PL.ts	2015-03-01 16:34:05.451568699 +0100
+@@ -24428,7 +24428,7 @@
          <translation type="obsolete">Pozwala na osadzanie profili ICC w strumieniu danych do druku, jeśli włączone jest zarządzanie kolorami</translation>
      </message>
      <message>
@@ -383,7 +421,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Pozwala na podanie rozmiaru nośnika dla pliku Postscriptowego. Niezalecane, chyba że poprosi o to drukarnia.</translation>
      </message>
      <message>
-@@ -24662,7 +24662,7 @@
+@@ -24706,7 +24706,7 @@
          <translation>Odwróć strony w pionie</translation>
      </message>
      <message>
@@ -392,7 +430,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Pozwala na podanie rozmiaru nośnika dla pliku Postscriptowego. Niezalecane, chyba że poprosi o to drukarnia.</translation>
      </message>
      <message>
-@@ -39506,7 +39506,7 @@
+@@ -39599,7 +39599,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -401,9 +439,11 @@ Last-Update: 2014-07-25
          <translation>Pozwala na podanie rozmiaru nośnika dla pliku Postscriptowego. Niezalecane, chyba że poprosi o to drukarnia.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.es_ES.ts
-+++ b/resources/translations/po/scribus.es_ES.ts
-@@ -19247,7 +19247,7 @@
+Index: git/resources/translations/po/scribus.es_ES.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.es_ES.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.es_ES.ts	2015-03-01 16:34:05.459568745 +0100
+@@ -19290,7 +19290,7 @@
          <translation type="obsolete">Activa la conversión de colores de tinta plana a colores de composición. A menos que estés planeando imprimir colores planos en una impresora comercial, probablemente es mejor dejarlo marcado.</translation>
      </message>
      <message>
@@ -412,7 +452,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Te permite indicar el tamaño del medio del archivo PostScript explícitamente. No recomendado a menos que sea requerido por la imprenta.</translation>
      </message>
      <message>
-@@ -19520,7 +19520,7 @@
+@@ -19563,7 +19563,7 @@
          <translation type="unfinished">Reflejar página/s verticales</translation>
      </message>
      <message>
@@ -421,7 +461,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Te permite indicar el tamaño del medio del archivo PostScript explícitamente. No recomendado a menos que sea requerido por la imprenta.</translation>
      </message>
      <message>
-@@ -30835,7 +30835,7 @@
+@@ -30926,7 +30926,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -430,8 +470,10 @@ Last-Update: 2014-07-25
          <translation>Te permite indicar el tamaño del medio del archivo PostScript explícitamente. No recomendado a menos que sea requerido por la imprenta.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.eo.po
-+++ b/resources/translations/po/scribus.eo.po
+Index: git/resources/translations/po/scribus.eo.po
+===================================================================
+--- git.orig/resources/translations/po/scribus.eo.po	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.eo.po	2015-03-01 16:34:05.459568745 +0100
 @@ -4482,7 +4482,7 @@
  
  #: Scribus/scribus/tabprinter.cpp:39 Scribus/scribus/printdialog.cpp:385
@@ -441,9 +483,11 @@ Last-Update: 2014-07-25
  "Not recommended unless requested by your printer."
  msgstr ""
  
---- a/resources/translations/po/scribus.sa.ts
-+++ b/resources/translations/po/scribus.sa.ts
-@@ -25071,7 +25071,7 @@
+Index: git/resources/translations/po/scribus.sa.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.sa.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.sa.ts	2015-03-01 16:34:05.467568804 +0100
+@@ -25158,7 +25158,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -452,9 +496,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished">पोस्ट्स्क्रिप्ट् फैल् मीडियापरिमाणं स्थापनम् अनेन शक्यते। तव मुद्रकेण प्रार्थितञ्चेदेव उपदिष्टम्।</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.zh_CN.ts
-+++ b/resources/translations/po/scribus.zh_CN.ts
-@@ -25053,7 +25053,7 @@
+Index: git/resources/translations/po/scribus.zh_CN.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.zh_CN.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.zh_CN.ts	2015-03-01 16:34:05.471568824 +0100
+@@ -25160,7 +25160,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -463,8 +509,10 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.gl.ts
-+++ b/resources/translations/po/scribus.gl.ts
+Index: git/resources/translations/po/scribus.gl.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.gl.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.gl.ts	2015-03-01 16:34:05.479568875 +0100
 @@ -9480,7 +9480,7 @@
          <translation type="obsolete">Indicar o Tamaño do Medio</translation>
      </message>
@@ -474,7 +522,7 @@ Last-Update: 2014-07-25
  the media size of the postscript file.
  Not recommended unless
   requested by your printer.</source>
-@@ -30251,7 +30251,7 @@
+@@ -30294,7 +30294,7 @@
          <translation type="obsolete">Permite incorporar perfís ICC no fluxo de impresión se está habilitada a xestión de cor</translation>
      </message>
      <message>
@@ -483,7 +531,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Permite indicar explicitamente o tamaño do medio do ficheiro PostScript. Non se recomenda a non ser que llo pida a súa imprenta.</translation>
      </message>
      <message>
-@@ -30524,7 +30524,7 @@
+@@ -30567,7 +30567,7 @@
          <translation>Reflectir a(s) páxina(s) verticalmente</translation>
      </message>
      <message>
@@ -492,7 +540,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Permite indicar explicitamente o tamaño do medio do ficheiro PostScript. Non se recomenda a non ser que llo pida a imprenta.</translation>
      </message>
      <message>
-@@ -46573,7 +46573,7 @@
+@@ -46664,7 +46664,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -501,9 +549,11 @@ Last-Update: 2014-07-25
          <translation>Permite indicar explicitamente o tamaño do medio do ficheiro PostScript. Non se recomenda a non ser que o pida a imprenta.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.ja.ts
-+++ b/resources/translations/po/scribus.ja.ts
-@@ -25377,7 +25377,7 @@
+Index: git/resources/translations/po/scribus.ja.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.ja.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.ja.ts	2015-03-01 16:34:05.483568908 +0100
+@@ -25468,7 +25468,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -512,9 +562,11 @@ Last-Update: 2014-07-25
          <translation>これを有効にすると、PostScriptファイルのサイズを明確に設定できます。プリンタにとって必要なければ推奨しません。</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.eu.ts
-+++ b/resources/translations/po/scribus.eu.ts
-@@ -22662,7 +22662,7 @@
+Index: git/resources/translations/po/scribus.eu.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.eu.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.eu.ts	2015-03-01 16:34:05.491568955 +0100
+@@ -22701,7 +22701,7 @@
  kolore-kudeaketa gaituta dagoenean</translation>
      </message>
      <message>
@@ -523,7 +575,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Postscript fitxategiaren euskarriaren tamaina esplizitoki ezartzea gaitzen du. Ez da gomendagarria, erabili soilik zure 
  inprimagailuak eskatzen badu.</translation>
      </message>
-@@ -22844,7 +22844,7 @@
+@@ -22883,7 +22883,7 @@
          <translation type="unfinished">Ispilatu orria(k) bertikalki</translation>
      </message>
      <message>
@@ -532,7 +584,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Postscript fitxategiaren euskarriaren tamaina esplizitoki ezartzea gaitzen du. Ez da gomendagarria, erabili soilik zure 
  inprimagailuak eskatzen badu.</translation>
      </message>
-@@ -35569,7 +35569,7 @@
+@@ -35648,7 +35648,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -541,9 +593,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished">Postscript fitxategiaren euskarriaren tamaina esplizitoki ezartzea gaitzen du. Ez da gomendagarria, erabili soilik zure 
  inprimagailuak eskatzen badu.</translation>
      </message>
---- a/resources/translations/po/scribus.sv.ts
-+++ b/resources/translations/po/scribus.sv.ts
-@@ -21616,7 +21616,7 @@
+Index: git/resources/translations/po/scribus.sv.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.sv.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.sv.ts	2015-03-01 16:34:05.499569004 +0100
+@@ -21655,7 +21655,7 @@
          <translation type="obsolete">Gör det möjligt att bädda in ICC-profiler i utskriftsströmmen när färghantering är aktiverad</translation>
      </message>
      <message>
@@ -552,7 +606,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Möjliggör för dig att uttryckligen ange mediastorlek för PostScript-filen. Bör ej användas om det inte uttryckligen krävs av tryckeriet.</translation>
      </message>
      <message>
-@@ -21809,7 +21809,7 @@
+@@ -21848,7 +21848,7 @@
          <translation type="unfinished">Spegelvänd sida(or) vertikalt</translation>
      </message>
      <message>
@@ -561,7 +615,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Möjliggör för dig att uttryckligen ange mediastorlek för PostScript-filen. Bör ej användas om det inte uttryckligen krävs av tryckeriet.</translation>
      </message>
      <message>
-@@ -36737,7 +36737,7 @@
+@@ -36823,7 +36823,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -570,8 +624,10 @@ Last-Update: 2014-07-25
          <translation type="unfinished">Möjliggör för dig att uttryckligen ange mediastorlek för PostScript-filen. Bör ej användas om det inte uttryckligen krävs av tryckeriet.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.bn.po
-+++ b/resources/translations/po/scribus.bn.po
+Index: git/resources/translations/po/scribus.bn.po
+===================================================================
+--- git.orig/resources/translations/po/scribus.bn.po	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.bn.po	2015-03-01 16:34:05.499569004 +0100
 @@ -4280,7 +4280,7 @@
  
  #: Scribus/scribus/tabprinter.cpp:39
@@ -581,9 +637,11 @@ Last-Update: 2014-07-25
  msgstr "এর সাহায্যে আপনি পোস্টস্ক্রিপ্ট ফাইলের মিডিয়ার আয়তন স্থাপন করতে পারবেন. ছাপকল না চাইলে এটি ব্যবহার করবেন না."
  
  #: Scribus/scribus/cupsoptions.cpp:52
---- a/resources/translations/po/scribus.ar.ts
-+++ b/resources/translations/po/scribus.ar.ts
-@@ -25832,7 +25832,7 @@
+Index: git/resources/translations/po/scribus.ar.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.ar.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.ar.ts	2015-03-01 16:34:05.507569064 +0100
+@@ -25894,7 +25894,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -592,9 +650,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.da_DK.ts
-+++ b/resources/translations/po/scribus.da_DK.ts
-@@ -23465,7 +23465,7 @@
+Index: git/resources/translations/po/scribus.da_DK.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.da_DK.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.da_DK.ts	2015-03-01 16:34:05.511569086 +0100
+@@ -23508,7 +23508,7 @@
          <translation type="obsolete">Tillader dig at indlejre ICC profiler i udskrift-data når farvestyring er aktiveret </translation>
      </message>
      <message>
@@ -603,7 +663,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Dette gør dig i stand til direkte at sætte medie størrelse i PostScript-filen. Anbefales ikke medmindre det kræves af dit trykkeri.</translation>
      </message>
      <message>
-@@ -23734,7 +23734,7 @@
+@@ -23777,7 +23777,7 @@
          <translation>Spejl side(r) vertikalt</translation>
      </message>
      <message>
@@ -612,7 +672,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Dette gør dig i stand til direkte at sætte medie størrelse i PostScript-filen. Anbefales ikke medmindre det kræves af dit trykkeri.</translation>
      </message>
      <message>
-@@ -36399,7 +36399,7 @@
+@@ -36490,7 +36490,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -621,9 +681,11 @@ Last-Update: 2014-07-25
          <translation>Dette gør dig i stand til direkte at sætte medie størrelse i PostScript-filen. Anbefales ikke medmindre det kræves af dit trykkeri.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.de_1901.ts
-+++ b/resources/translations/po/scribus.de_1901.ts
-@@ -23862,7 +23862,7 @@
+Index: git/resources/translations/po/scribus.de_1901.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.de_1901.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.de_1901.ts	2015-03-01 16:34:05.519569143 +0100
+@@ -23905,7 +23905,7 @@
          <translation type="obsolete">Wenn das Farbmanagement aktiviert ist, werden die ICC-Profile mit in den Druckstream eingebettet</translation>
      </message>
      <message>
@@ -632,7 +694,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Legen Sie die Druckgröße der PostScript-Datei explizit fest. Nur aktivieren, wenn ihre Druckerei das verlangt.</translation>
      </message>
      <message>
-@@ -24140,7 +24140,7 @@
+@@ -24183,7 +24183,7 @@
          <translation>Seite(n) vertikal spiegeln</translation>
      </message>
      <message>
@@ -641,7 +703,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Legen Sie die Druckgröße der PostScript-Datei explizit fest. Nur aktivieren, wenn ihre Druckerei das verlangt.</translation>
      </message>
      <message>
-@@ -37035,7 +37035,7 @@
+@@ -37126,7 +37126,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -650,8 +712,10 @@ Last-Update: 2014-07-25
          <translation>Legen Sie die Druckgröße der PostScript-Datei explizit fest. Nur aktivieren, wenn ihre Druckerei das verlangt.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.es_LA.po
-+++ b/resources/translations/po/scribus.es_LA.po
+Index: git/resources/translations/po/scribus.es_LA.po
+===================================================================
+--- git.orig/resources/translations/po/scribus.es_LA.po	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.es_LA.po	2015-03-01 16:34:05.523569161 +0100
 @@ -4448,7 +4448,7 @@
  
  #: Scribus/scribus/tabprinter.cpp:39 Scribus/scribus/printdialog.cpp:385
@@ -661,9 +725,11 @@ Last-Update: 2014-07-25
  "Not recommended unless requested by your printer."
  msgstr ""
  
---- a/resources/translations/po/scribus.bg.ts
-+++ b/resources/translations/po/scribus.bg.ts
-@@ -26266,7 +26266,7 @@
+Index: git/resources/translations/po/scribus.bg.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.bg.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.bg.ts	2015-03-01 16:34:05.527569189 +0100
+@@ -26328,7 +26328,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -672,8 +738,10 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.bg_BG.po
-+++ b/resources/translations/po/scribus.bg_BG.po
+Index: git/resources/translations/po/scribus.bg_BG.po
+===================================================================
+--- git.orig/resources/translations/po/scribus.bg_BG.po	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.bg_BG.po	2015-03-01 16:34:05.531569221 +0100
 @@ -4839,7 +4839,7 @@
  
  #: Scribus/scribus/tabprinter.cpp:39 Scribus/scribus/printdialog.cpp:385
@@ -683,9 +751,11 @@ Last-Update: 2014-07-25
  "Not recommended unless requested by your printer."
  msgstr ""
  
---- a/resources/translations/po/scribus.en_GB.ts
-+++ b/resources/translations/po/scribus.en_GB.ts
-@@ -21408,8 +21408,8 @@
+Index: git/resources/translations/po/scribus.en_GB.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.en_GB.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.en_GB.ts	2015-03-01 16:34:05.535569241 +0100
+@@ -21451,8 +21451,8 @@
          <translation type="obsolete">Enables Spot Colours to be converted to composite colours. Unless you are planning to print spot colours at a commercial printer, this is probably best left enabled.</translation>
      </message>
      <message>
@@ -696,7 +766,7 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <location filename="../../../scribus/printdialog.cpp" line="312"/>
-@@ -21681,7 +21681,7 @@
+@@ -21724,7 +21724,7 @@
          <translation>Mirror Page(s) Vertical</translation>
      </message>
      <message>
@@ -705,7 +775,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">This enables you to explicitly set the media size of the PostScript file. Not recommended unless requested by your printer.</translation>
      </message>
      <message>
-@@ -33381,8 +33381,8 @@
+@@ -33472,8 +33472,8 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -716,9 +786,11 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="76"/>
---- a/resources/translations/po/scribus.id.ts
-+++ b/resources/translations/po/scribus.id.ts
-@@ -26992,7 +26992,7 @@
+Index: git/resources/translations/po/scribus.id.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.id.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.id.ts	2015-03-01 16:34:05.543569298 +0100
+@@ -27074,7 +27074,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -727,9 +799,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.en_AU.ts
-+++ b/resources/translations/po/scribus.en_AU.ts
-@@ -21408,8 +21408,8 @@
+Index: git/resources/translations/po/scribus.en_AU.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.en_AU.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.en_AU.ts	2015-03-01 16:34:05.547569316 +0100
+@@ -21451,8 +21451,8 @@
          <translation type="obsolete">Enables Spot Colours to be converted to composite colours. Unless you are planning to print spot colours at a commercial printer, this is probably best left enabled.</translation>
      </message>
      <message>
@@ -740,7 +814,7 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <location filename="../../../scribus/printdialog.cpp" line="312"/>
-@@ -21681,7 +21681,7 @@
+@@ -21724,7 +21724,7 @@
          <translation>Mirror Page(s) Vertical</translation>
      </message>
      <message>
@@ -749,7 +823,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">This enables you to explicitly set the media size of the PostScript file. Not recommended unless requested by your printer.</translation>
      </message>
      <message>
-@@ -33381,8 +33381,8 @@
+@@ -33472,8 +33472,8 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -760,9 +834,11 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="76"/>
---- a/resources/translations/po/scribus.cs_CZ.ts
-+++ b/resources/translations/po/scribus.cs_CZ.ts
-@@ -11950,7 +11950,7 @@
+Index: git/resources/translations/po/scribus.cs_CZ.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.cs_CZ.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.cs_CZ.ts	2015-03-01 16:34:05.555569378 +0100
+@@ -11993,7 +11993,7 @@
          <translation type="obsolete">Pokud je povolena správa barev, umožní vložit do tiskového proudu ICC profily</translation>
      </message>
      <message>
@@ -771,7 +847,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Povolí výluční nastavení velikosti média v PostScriptu. Nedoporučuje se, pokud to nevyžaduje vaše tiskárna.</translation>
      </message>
      <message>
-@@ -21657,7 +21657,7 @@
+@@ -21700,7 +21700,7 @@
          <translation>Zrcadlit stránky svisle</translation>
      </message>
      <message>
@@ -780,7 +856,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Povolí výluční nastavení velikosti média v PostScriptu. Nedoporučuje se, pokud to nevyžaduje vaše tiskárna.</translation>
      </message>
      <message>
-@@ -33832,7 +33832,7 @@
+@@ -33923,7 +33923,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -789,9 +865,11 @@ Last-Update: 2014-07-25
          <translation>Povolí výluční nastavení velikosti média v PostScriptu. Nedoporučuje se, pokud to nevyžaduje vaše tiskárna.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.el.ts
-+++ b/resources/translations/po/scribus.el.ts
-@@ -24906,7 +24906,7 @@
+Index: git/resources/translations/po/scribus.el.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.el.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.el.ts	2015-03-01 16:34:05.559569399 +0100
+@@ -25009,7 +25009,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -800,8 +878,10 @@ Last-Update: 2014-07-25
          <translation type="unfinished">Αυτός σας επιτρέπει να ορίσετε άμεσα το μέγεθος χαρτιού του αρχείου PostScript. Δεν προτείνεται εκτός και αν απαιτείται από τον εκτυπωτή σας.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.pt.ts
-+++ b/resources/translations/po/scribus.pt.ts
+Index: git/resources/translations/po/scribus.pt.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.pt.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.pt.ts	2015-03-01 16:34:05.567569452 +0100
 @@ -8701,7 +8701,7 @@
          <translation type="obsolete">Antigos formatos de .sla suportados</translation>
      </message>
@@ -811,7 +891,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Isto permite que você definaexplicitamente o tamanho da mídia do ficheiro postscript.Não é recomendável, a menosque tenha sido requisitado porsua impressora.</translation>
      </message>
      <message>
-@@ -30197,7 +30197,7 @@
+@@ -30236,7 +30236,7 @@
          <translation type="obsolete">Permite-lhe incorporar perfis ICC no fluxo de impressão quando a gestão de cor está activada</translation>
      </message>
      <message>
@@ -820,7 +900,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Isto permite que defina explicitamente o tamanho da mídia do ficheiro postscript. Não é recomendável, a menos que tenha sido requisitado pelo seu impressor.</translation>
      </message>
      <message>
-@@ -42964,7 +42964,7 @@
+@@ -43051,7 +43051,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -829,9 +909,11 @@ Last-Update: 2014-07-25
          <translation>Isto permite que defina explicitamente o tamanho da mídia do ficheiro postscript. Não é recomendável, a menos que tenha sido requisitado pelo seu impressor.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.sl.ts
-+++ b/resources/translations/po/scribus.sl.ts
-@@ -25022,7 +25022,7 @@
+Index: git/resources/translations/po/scribus.sl.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.sl.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.sl.ts	2015-03-01 16:34:05.575569501 +0100
+@@ -25065,7 +25065,7 @@
          <translation type="obsolete">Omogoča vključevanje profilov ICC v pogovorno okno tiskanja, če je upravljalnik barv vključen</translation>
      </message>
      <message>
@@ -840,7 +922,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">To omogoča natančno določitev velikosti datoteke PostScript. Ni priporočeno, razen če to zahteva vaš tiskalnik.</translation>
      </message>
      <message>
-@@ -25299,7 +25299,7 @@
+@@ -25342,7 +25342,7 @@
          <translation>Navpično prezrcali stran(i)</translation>
      </message>
      <message>
@@ -849,7 +931,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">To omogoča natančno določitev velikosti datoteke PostScript. Ni priporočeno, razen če to zahteva vaš tiskalnik.</translation>
      </message>
      <message>
-@@ -40850,7 +40850,7 @@
+@@ -40941,7 +40941,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -858,19 +940,23 @@ Last-Update: 2014-07-25
          <translation>To omogoča natančno določitev velikosti datoteke PostScript. Ni priporočeno, razen če to zahteva vaš tiskalnik.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.br.ts
-+++ b/resources/translations/po/scribus.br.ts
-@@ -25075,7 +25075,7 @@
+Index: git/resources/translations/po/scribus.br.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.br.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.br.ts	2015-03-01 16:34:05.579569528 +0100
+@@ -25283,7 +25283,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
 -        <source>This enables you to explicitely set the media size of the PostScript file. Not recommended unless requested by your printer.</source>
 +        <source>This enables you to explicitly set the media size of the PostScript file. Not recommended unless requested by your printer.</source>
-         <translation type="unfinished">Despizet e vez amañ kefluniadur ment ar media eus ar restr Postscript. N&apos;eo ket erbedet anez ma vefe goulennet gant ho mouller.</translation>
+         <translation>Despizet e vez amañ kefluniadur ment ar media eus ar restr Postscript. N&apos;eo ket erbedet anez ma vefe goulennet gant ho mouller.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.dz.po
-+++ b/resources/translations/po/scribus.dz.po
+Index: git/resources/translations/po/scribus.dz.po
+===================================================================
+--- git.orig/resources/translations/po/scribus.dz.po	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.dz.po	2015-03-01 16:34:05.587569581 +0100
 @@ -7758,7 +7758,7 @@
  #: Scribus/scribus/tabprinter.cpp:39 Scribus/scribus/printdialog.cpp:385
  #, fuzzy
@@ -880,9 +966,11 @@ Last-Update: 2014-07-25
  "Not recommended unless requested by your printer."
  msgstr ""
  "\340\275\240\340\275\221\340\275\262\340\274\213\340\275\202\340\275\262\340"
---- a/resources/translations/po/scribus.hu.ts
-+++ b/resources/translations/po/scribus.hu.ts
-@@ -25192,7 +25192,7 @@
+Index: git/resources/translations/po/scribus.hu.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.hu.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.hu.ts	2015-03-01 16:34:05.591569607 +0100
+@@ -25275,7 +25275,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -891,9 +979,11 @@ Last-Update: 2014-07-25
          <translation>Lehetővé teszi a PostScript fájl médiaméretének explicit megadását. Nem javasolt, hacsak nem a nyomtató kéri.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.de.ts
-+++ b/resources/translations/po/scribus.de.ts
-@@ -23865,7 +23865,7 @@
+Index: git/resources/translations/po/scribus.de.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.de.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.de.ts	2015-03-01 16:34:05.599569666 +0100
+@@ -23908,7 +23908,7 @@
          <translation type="obsolete">Wenn das Farbmanagement aktiviert ist, werden die ICC-Profile mit in den Druckstream eingebettet</translation>
      </message>
      <message>
@@ -902,7 +992,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Legen Sie die Druckgröße der PostScript-Datei explizit fest. Nur aktivieren, wenn ihre Druckerei das verlangt.</translation>
      </message>
      <message>
-@@ -24143,7 +24143,7 @@
+@@ -24186,7 +24186,7 @@
          <translation>Seite(n) vertikal spiegeln</translation>
      </message>
      <message>
@@ -911,7 +1001,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Legen Sie die Druckgröße der PostScript-Datei explizit fest. Nur aktivieren, wenn ihre Druckerei das verlangt.</translation>
      </message>
      <message>
-@@ -37039,7 +37039,7 @@
+@@ -37130,7 +37130,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -920,9 +1010,11 @@ Last-Update: 2014-07-25
          <translation>Legen Sie die Druckgröße der PostScript-Datei explizit fest. Nur aktivieren, wenn ihre Druckerei das verlangt.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.cy.ts
-+++ b/resources/translations/po/scribus.cy.ts
-@@ -33244,7 +33244,7 @@
+Index: git/resources/translations/po/scribus.cy.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.cy.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.cy.ts	2015-03-01 16:34:05.603569683 +0100
+@@ -33330,7 +33330,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -931,9 +1023,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.sr.ts
-+++ b/resources/translations/po/scribus.sr.ts
-@@ -16570,7 +16570,7 @@
+Index: git/resources/translations/po/scribus.sr.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.sr.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.sr.ts	2015-03-01 16:34:05.611569743 +0100
+@@ -16609,7 +16609,7 @@
          <translation type="obsolete">Омогућава да спот боје буду преведене у композитне боје. Ако није планирано да се спот боје штампају у комерцијалној штампи, најбоље је оставити ово поље укључено.</translation>
      </message>
      <message>
@@ -942,7 +1036,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Омогућава да се назначи величина медијума штампе у ПостСкрипт фајлу. Ноје препоручљино уколико није захтевано од стране штампара.</translation>
      </message>
      <message>
-@@ -16787,7 +16787,7 @@
+@@ -16826,7 +16826,7 @@
          <translation type="unfinished">Изврни страну(е) усправно</translation>
      </message>
      <message>
@@ -951,7 +1045,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">Омогућава да се назначи величина медијума штампе у ПостСкрипт фајлу. Ноје препоручљино уколико није захтевано од стране штампара.</translation>
      </message>
      <message>
-@@ -28888,7 +28888,7 @@
+@@ -28975,7 +28975,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -960,9 +1054,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished">Омогућава да се назначи величина медијума штампе у ПостСкрипт фајлу. Ноје препоручљино уколико није захтевано од стране штампара.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.zh_TW.ts
-+++ b/resources/translations/po/scribus.zh_TW.ts
-@@ -12797,8 +12797,8 @@
+Index: git/resources/translations/po/scribus.zh_TW.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.zh_TW.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.zh_TW.ts	2015-03-01 16:34:05.615569763 +0100
+@@ -12836,8 +12836,8 @@
          <translation type="obsolete">設置印表機</translation>
      </message>
      <message>
@@ -973,7 +1069,7 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <source>Use an alternative print manager, such as kprinter or gtklp, to utilize additional printing options</source>
-@@ -22643,8 +22643,8 @@
+@@ -22682,8 +22682,8 @@
          <translation type="obsolete">設置印表機</translation>
      </message>
      <message>
@@ -984,7 +1080,7 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <source>Use an alternative print manager, such as kprinter or gtklp, to utilize additional printing options</source>
-@@ -22952,8 +22952,8 @@
+@@ -22991,8 +22991,8 @@
          <translation type="unfinished"></translation>
      </message>
      <message>
@@ -995,7 +1091,7 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <location filename="../../../scribus/printdialogbase.ui" line="521"/>
-@@ -35313,8 +35313,8 @@
+@@ -35400,8 +35400,8 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -1006,9 +1102,11 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.ui" line="248"/>
---- a/resources/translations/po/scribus.ru.ts
-+++ b/resources/translations/po/scribus.ru.ts
-@@ -25283,7 +25283,7 @@
+Index: git/resources/translations/po/scribus.ru.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.ru.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.ru.ts	2015-03-01 16:34:05.623569815 +0100
+@@ -25374,7 +25374,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -1017,9 +1115,11 @@ Last-Update: 2014-07-25
          <translation>Напрямую указать размер носителя в PostScript-файле. Не рекомендуется использовать эту функцию, пока этого не потребует принтер.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.sk_SK.ts
-+++ b/resources/translations/po/scribus.sk_SK.ts
-@@ -21411,8 +21411,8 @@
+Index: git/resources/translations/po/scribus.sk_SK.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.sk_SK.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.sk_SK.ts	2015-03-01 16:34:05.627569848 +0100
+@@ -21454,8 +21454,8 @@
          <translation type="obsolete">Enables Spot Colours to be converted to composite colours. Unless you are planning to print spot colours at a commercial printer, this is probably best left enabled.</translation>
      </message>
      <message>
@@ -1030,7 +1130,7 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <location filename="../../../scribus/printdialog.cpp" line="312"/>
-@@ -21684,7 +21684,7 @@
+@@ -21727,7 +21727,7 @@
          <translation>Vertikálne zrkadlenie strán</translation>
      </message>
      <message>
@@ -1039,7 +1139,7 @@ Last-Update: 2014-07-25
          <translation type="obsolete">This enables you to explicitly set the media size of the PostScript file. Not recommended unless requested by your printer.</translation>
      </message>
      <message>
-@@ -33360,7 +33360,7 @@
+@@ -33451,7 +33451,7 @@
      </message>
      <message>
          <location filename="../../../scribus/tabprinter.cpp" line="38"/>
@@ -1048,9 +1148,11 @@ Last-Update: 2014-07-25
          <translation>Toto povolí explicitné nastavenie veľkosti média v  Poscritovom súbore. Nie je to odporúčané, pokiaľ to nevyžaduje vaša tlačiareň.</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.nb_NO.ts
-+++ b/resources/translations/po/scribus.nb_NO.ts
-@@ -30167,7 +30167,7 @@
+Index: git/resources/translations/po/scribus.nb_NO.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.nb_NO.ts	2015-03-01 16:34:05.639569925 +0100
++++ git/resources/translations/po/scribus.nb_NO.ts	2015-03-01 16:34:05.635569894 +0100
+@@ -30254,7 +30254,7 @@
              </translation>
      </message>
      <message>

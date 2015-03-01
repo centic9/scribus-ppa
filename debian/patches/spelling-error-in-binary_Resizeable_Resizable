@@ -4,8 +4,10 @@ Author: Mattia Rizzolo <mattia@mapreri.org>
 Forwarded: no
 Last-Update: 2014-07-25
 
---- a/scribus/selectobjects.ui
-+++ b/scribus/selectobjects.ui
+Index: git/scribus/selectobjects.ui
+===================================================================
+--- git.orig/scribus/selectobjects.ui	2015-03-01 16:34:02.703550773 +0100
++++ git/scribus/selectobjects.ui	2015-03-01 16:34:02.423548941 +0100
 @@ -258,7 +258,7 @@
           <string>Select items based on whether they have their size locked or not</string>
          </property>
@@ -15,9 +17,24 @@ Last-Update: 2014-07-25
          </property>
         </widget>
        </item>
---- a/resources/translations/po/scribus.ca.ts
-+++ b/resources/translations/po/scribus.ca.ts
-@@ -46671,7 +46671,7 @@
+Index: git/resources/translations/po/scribus.ca.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.ca.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.ca.ts	2015-03-01 16:34:02.431548994 +0100
+@@ -46831,7 +46831,7 @@
+     </message>
+     <message>
+         <location filename="../../../scribus/selectobjects.ui" line="261"/>
+-        <source>Resizeable</source>
++        <source>Resizable</source>
+         <translation>Redimensionable</translation>
+     </message>
+     <message>
+Index: git/resources/translations/po/scribus.fi.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.fi.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.fi.ts	2015-03-01 16:34:02.439549043 +0100
+@@ -33925,7 +33925,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -26,20 +43,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.fi.ts
-+++ b/resources/translations/po/scribus.fi.ts
-@@ -33829,7 +33829,7 @@
-     </message>
-     <message>
-         <location filename="../../../scribus/selectobjects.ui" line="261"/>
--        <source>Resizeable</source>
-+        <source>Resizable</source>
-         <translation type="unfinished"></translation>
-     </message>
-     <message>
---- a/resources/translations/po/scribus.fr.ts
-+++ b/resources/translations/po/scribus.fr.ts
-@@ -35981,7 +35981,7 @@
+Index: git/resources/translations/po/scribus.fr.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.fr.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.fr.ts	2015-03-01 16:34:02.447549103 +0100
+@@ -36081,7 +36081,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -48,9 +56,11 @@ Last-Update: 2014-07-25
          <translation>Redimensionnable</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.et.ts
-+++ b/resources/translations/po/scribus.et.ts
-@@ -34703,7 +34703,7 @@
+Index: git/resources/translations/po/scribus.et.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.et.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.et.ts	2015-03-01 16:34:02.451549124 +0100
+@@ -34803,7 +34803,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -59,9 +69,11 @@ Last-Update: 2014-07-25
          <translation>Muudetav suurus</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.lt_LT.ts
-+++ b/resources/translations/po/scribus.lt_LT.ts
-@@ -36574,7 +36574,7 @@
+Index: git/resources/translations/po/scribus.lt_LT.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.lt_LT.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.lt_LT.ts	2015-03-01 16:34:02.459549181 +0100
+@@ -36674,7 +36674,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -70,9 +82,11 @@ Last-Update: 2014-07-25
          <translation>Keičiamo dydžio</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.uk.ts
-+++ b/resources/translations/po/scribus.uk.ts
-@@ -38643,7 +38643,7 @@
+Index: git/resources/translations/po/scribus.uk.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.uk.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.uk.ts	2015-03-01 16:34:02.463549199 +0100
+@@ -38731,7 +38731,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -81,9 +95,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.ko.ts
-+++ b/resources/translations/po/scribus.ko.ts
-@@ -28158,7 +28158,7 @@
+Index: git/resources/translations/po/scribus.ko.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.ko.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.ko.ts	2015-03-01 16:34:02.471549259 +0100
+@@ -28242,7 +28242,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -92,9 +108,11 @@ Last-Update: 2014-07-25
          <translation>크기 재조정 가능여부</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.th_TH.ts
-+++ b/resources/translations/po/scribus.th_TH.ts
-@@ -40431,7 +40431,7 @@
+Index: git/resources/translations/po/scribus.th_TH.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.th_TH.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.th_TH.ts	2015-03-01 16:34:02.475549280 +0100
+@@ -40522,7 +40522,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -103,9 +121,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.tr.ts
-+++ b/resources/translations/po/scribus.tr.ts
-@@ -38583,7 +38583,7 @@
+Index: git/resources/translations/po/scribus.tr.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.tr.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.tr.ts	2015-03-01 16:34:02.483549337 +0100
+@@ -38675,7 +38675,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -114,9 +134,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.nl.ts
-+++ b/resources/translations/po/scribus.nl.ts
-@@ -28313,7 +28313,7 @@
+Index: git/resources/translations/po/scribus.nl.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.nl.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.nl.ts	2015-03-01 16:34:02.487549355 +0100
+@@ -28413,7 +28413,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -125,9 +147,11 @@ Last-Update: 2014-07-25
          <translation>Schaalbaar</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.en_US.ts
-+++ b/resources/translations/po/scribus.en_US.ts
-@@ -27759,7 +27759,7 @@
+Index: git/resources/translations/po/scribus.en_US.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.en_US.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.en_US.ts	2015-03-01 16:34:02.491549382 +0100
+@@ -27826,7 +27826,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -136,9 +160,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.sq.ts
-+++ b/resources/translations/po/scribus.sq.ts
-@@ -48296,7 +48296,7 @@
+Index: git/resources/translations/po/scribus.sq.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.sq.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.sq.ts	2015-03-01 16:34:02.499549436 +0100
+@@ -48379,7 +48379,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -147,9 +173,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.de_CH.ts
-+++ b/resources/translations/po/scribus.de_CH.ts
-@@ -40631,7 +40631,7 @@
+Index: git/resources/translations/po/scribus.de_CH.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.de_CH.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.de_CH.ts	2015-03-01 16:34:02.507549494 +0100
+@@ -40731,7 +40731,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -158,9 +186,11 @@ Last-Update: 2014-07-25
          <translation>Grössenänderung möglich</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.it.ts
-+++ b/resources/translations/po/scribus.it.ts
-@@ -36570,7 +36570,7 @@
+Index: git/resources/translations/po/scribus.it.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.it.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.it.ts	2015-03-01 16:34:02.515549540 +0100
+@@ -36670,7 +36670,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -169,9 +199,11 @@ Last-Update: 2014-07-25
          <translation>Ridimensionabile</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.af.ts
-+++ b/resources/translations/po/scribus.af.ts
-@@ -36688,7 +36688,7 @@
+Index: git/resources/translations/po/scribus.af.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.af.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.af.ts	2015-03-01 16:34:02.519549568 +0100
+@@ -36779,7 +36779,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -180,9 +212,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.pt_BR.ts
-+++ b/resources/translations/po/scribus.pt_BR.ts
-@@ -46486,7 +46486,7 @@
+Index: git/resources/translations/po/scribus.pt_BR.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.pt_BR.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.pt_BR.ts	2015-03-01 16:34:02.527549619 +0100
+@@ -46586,7 +46586,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -191,9 +225,11 @@ Last-Update: 2014-07-25
          <translation>Redimensionável</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.pl_PL.ts
-+++ b/resources/translations/po/scribus.pl_PL.ts
-@@ -43294,7 +43294,7 @@
+Index: git/resources/translations/po/scribus.pl_PL.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.pl_PL.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.pl_PL.ts	2015-03-01 16:34:02.535549669 +0100
+@@ -43396,7 +43396,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -202,9 +238,11 @@ Last-Update: 2014-07-25
          <translation>Zmiana rozmiaru dozwolona</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.es_ES.ts
-+++ b/resources/translations/po/scribus.es_ES.ts
-@@ -33829,7 +33829,7 @@
+Index: git/resources/translations/po/scribus.es_ES.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.es_ES.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.es_ES.ts	2015-03-01 16:34:02.543549723 +0100
+@@ -33929,7 +33929,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -213,9 +251,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.sa.ts
-+++ b/resources/translations/po/scribus.sa.ts
-@@ -28028,7 +28028,7 @@
+Index: git/resources/translations/po/scribus.sa.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.sa.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.sa.ts	2015-03-01 16:34:02.547549749 +0100
+@@ -28120,7 +28120,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -224,9 +264,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.zh_CN.ts
-+++ b/resources/translations/po/scribus.zh_CN.ts
-@@ -27998,7 +27998,7 @@
+Index: git/resources/translations/po/scribus.zh_CN.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.zh_CN.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.zh_CN.ts	2015-03-01 16:34:02.551549780 +0100
+@@ -28114,7 +28114,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -235,9 +277,11 @@ Last-Update: 2014-07-25
          <translation>可调整大小</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.gl.ts
-+++ b/resources/translations/po/scribus.gl.ts
-@@ -50607,7 +50607,7 @@
+Index: git/resources/translations/po/scribus.gl.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.gl.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.gl.ts	2015-03-01 16:34:02.559549825 +0100
+@@ -50707,7 +50707,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -246,9 +290,11 @@ Last-Update: 2014-07-25
          <translation>Pódeselle mudar o tamaño</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.ja.ts
-+++ b/resources/translations/po/scribus.ja.ts
-@@ -28167,7 +28167,7 @@
+Index: git/resources/translations/po/scribus.ja.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.ja.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.ja.ts	2015-03-01 16:34:02.567549880 +0100
+@@ -28267,7 +28267,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -257,9 +303,11 @@ Last-Update: 2014-07-25
          <translation>リサイズ可能</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.eu.ts
-+++ b/resources/translations/po/scribus.eu.ts
-@@ -38995,7 +38995,7 @@
+Index: git/resources/translations/po/scribus.eu.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.eu.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.eu.ts	2015-03-01 16:34:02.571549905 +0100
+@@ -39079,7 +39079,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -268,9 +316,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.sv.ts
-+++ b/resources/translations/po/scribus.sv.ts
-@@ -40345,7 +40345,7 @@
+Index: git/resources/translations/po/scribus.sv.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.sv.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.sv.ts	2015-03-01 16:34:02.579549965 +0100
+@@ -40436,7 +40436,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -279,9 +329,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.ar.ts
-+++ b/resources/translations/po/scribus.ar.ts
-@@ -28793,7 +28793,7 @@
+Index: git/resources/translations/po/scribus.ar.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.ar.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.ar.ts	2015-03-01 16:34:02.583549984 +0100
+@@ -28860,7 +28860,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -290,9 +342,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.da_DK.ts
-+++ b/resources/translations/po/scribus.da_DK.ts
-@@ -39954,7 +39954,7 @@
+Index: git/resources/translations/po/scribus.da_DK.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.da_DK.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.da_DK.ts	2015-03-01 16:34:02.591550035 +0100
+@@ -40054,7 +40054,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -301,9 +355,11 @@ Last-Update: 2014-07-25
          <translation>Størrelse kan ændres</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.de_1901.ts
-+++ b/resources/translations/po/scribus.de_1901.ts
-@@ -40631,7 +40631,7 @@
+Index: git/resources/translations/po/scribus.de_1901.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.de_1901.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.de_1901.ts	2015-03-01 16:34:02.599550090 +0100
+@@ -40731,7 +40731,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -312,9 +368,11 @@ Last-Update: 2014-07-25
          <translation>Größenänderung möglich</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.bg.ts
-+++ b/resources/translations/po/scribus.bg.ts
-@@ -29194,7 +29194,7 @@
+Index: git/resources/translations/po/scribus.bg.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.bg.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.bg.ts	2015-03-01 16:34:02.603550116 +0100
+@@ -29261,7 +29261,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -323,9 +381,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.en_GB.ts
-+++ b/resources/translations/po/scribus.en_GB.ts
-@@ -36559,8 +36559,8 @@
+Index: git/resources/translations/po/scribus.en_GB.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.en_GB.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.en_GB.ts	2015-03-01 16:34:02.607550147 +0100
+@@ -36659,8 +36659,8 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -336,9 +396,11 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <source>Select All Objects</source>
---- a/resources/translations/po/scribus.id.ts
-+++ b/resources/translations/po/scribus.id.ts
-@@ -30085,7 +30085,7 @@
+Index: git/resources/translations/po/scribus.id.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.id.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.id.ts	2015-03-01 16:34:02.615550190 +0100
+@@ -30172,7 +30172,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -347,9 +409,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.en_AU.ts
-+++ b/resources/translations/po/scribus.en_AU.ts
-@@ -36559,8 +36559,8 @@
+Index: git/resources/translations/po/scribus.en_AU.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.en_AU.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.en_AU.ts	2015-03-01 16:34:02.619550224 +0100
+@@ -36659,8 +36659,8 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -360,9 +424,11 @@ Last-Update: 2014-07-25
      </message>
      <message>
          <source>Select All Objects</source>
---- a/resources/translations/po/scribus.cs_CZ.ts
-+++ b/resources/translations/po/scribus.cs_CZ.ts
-@@ -37055,7 +37055,7 @@
+Index: git/resources/translations/po/scribus.cs_CZ.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.cs_CZ.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.cs_CZ.ts	2015-03-01 16:34:02.627550272 +0100
+@@ -37155,7 +37155,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -371,9 +437,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.el.ts
-+++ b/resources/translations/po/scribus.el.ts
-@@ -27839,7 +27839,7 @@
+Index: git/resources/translations/po/scribus.el.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.el.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.el.ts	2015-03-01 16:34:02.631550299 +0100
+@@ -27947,7 +27947,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -382,9 +450,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.pt.ts
-+++ b/resources/translations/po/scribus.pt.ts
-@@ -46469,7 +46469,7 @@
+Index: git/resources/translations/po/scribus.pt.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.pt.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.pt.ts	2015-03-01 16:34:02.639550347 +0100
+@@ -46565,7 +46565,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -393,9 +463,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.sl.ts
-+++ b/resources/translations/po/scribus.sl.ts
-@@ -44584,7 +44584,7 @@
+Index: git/resources/translations/po/scribus.sl.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.sl.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.sl.ts	2015-03-01 16:34:02.647550407 +0100
+@@ -44684,7 +44684,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -404,20 +476,24 @@ Last-Update: 2014-07-25
          <translation>Spremenljive velikosti</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.br.ts
-+++ b/resources/translations/po/scribus.br.ts
-@@ -28035,7 +28035,7 @@
+Index: git/resources/translations/po/scribus.br.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.br.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.br.ts	2015-03-01 16:34:02.651550428 +0100
+@@ -28263,7 +28263,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
 -        <source>Resizeable</source>
 +        <source>Resizable</source>
-         <translation type="unfinished"></translation>
+         <translation>Adventadus</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.hu.ts
-+++ b/resources/translations/po/scribus.hu.ts
-@@ -28155,7 +28155,7 @@
+Index: git/resources/translations/po/scribus.hu.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.hu.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.hu.ts	2015-03-01 16:34:02.659550484 +0100
+@@ -28247,7 +28247,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -426,9 +502,11 @@ Last-Update: 2014-07-25
          <translation>Átméretezhető</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.de.ts
-+++ b/resources/translations/po/scribus.de.ts
-@@ -40633,7 +40633,7 @@
+Index: git/resources/translations/po/scribus.de.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.de.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.de.ts	2015-03-01 16:34:02.663550505 +0100
+@@ -40733,7 +40733,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -437,9 +515,11 @@ Last-Update: 2014-07-25
          <translation>Größenänderung möglich</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.cy.ts
-+++ b/resources/translations/po/scribus.cy.ts
-@@ -36732,7 +36732,7 @@
+Index: git/resources/translations/po/scribus.cy.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.cy.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.cy.ts	2015-03-01 16:34:02.671550562 +0100
+@@ -36823,7 +36823,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -448,9 +528,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.sr.ts
-+++ b/resources/translations/po/scribus.sr.ts
-@@ -32256,7 +32256,7 @@
+Index: git/resources/translations/po/scribus.sr.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.sr.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.sr.ts	2015-03-01 16:34:02.675550581 +0100
+@@ -32348,7 +32348,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -459,9 +541,11 @@ Last-Update: 2014-07-25
          <translation type="unfinished"></translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.zh_TW.ts
-+++ b/resources/translations/po/scribus.zh_TW.ts
-@@ -38322,7 +38322,7 @@
+Index: git/resources/translations/po/scribus.zh_TW.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.zh_TW.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.zh_TW.ts	2015-03-01 16:34:02.683550633 +0100
+@@ -38418,7 +38418,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -470,9 +554,11 @@ Last-Update: 2014-07-25
          <translation>可縮放</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.ru.ts
-+++ b/resources/translations/po/scribus.ru.ts
-@@ -28268,7 +28268,7 @@
+Index: git/resources/translations/po/scribus.ru.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.ru.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.ru.ts	2015-03-01 16:34:02.687550662 +0100
+@@ -28368,7 +28368,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -481,9 +567,11 @@ Last-Update: 2014-07-25
          <translation>Изменяемость размера:</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.sk_SK.ts
-+++ b/resources/translations/po/scribus.sk_SK.ts
-@@ -36538,7 +36538,7 @@
+Index: git/resources/translations/po/scribus.sk_SK.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.sk_SK.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.sk_SK.ts	2015-03-01 16:34:02.695550716 +0100
+@@ -36638,7 +36638,7 @@
      </message>
      <message>
          <location filename="../../../scribus/selectobjects.ui" line="261"/>
@@ -492,9 +580,11 @@ Last-Update: 2014-07-25
          <translation>Meniteľná veľkosť</translation>
      </message>
      <message>
---- a/resources/translations/po/scribus.nb_NO.ts
-+++ b/resources/translations/po/scribus.nb_NO.ts
-@@ -33262,7 +33262,7 @@
+Index: git/resources/translations/po/scribus.nb_NO.ts
+===================================================================
+--- git.orig/resources/translations/po/scribus.nb_NO.ts	2015-03-01 16:34:02.703550773 +0100
++++ git/resources/translations/po/scribus.nb_NO.ts	2015-03-01 16:34:02.699550742 +0100
+@@ -33357,7 +33357,7 @@
          <translation>Låst</translation>
      </message>
      <message>
